@@ -1,22 +1,22 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-
+import { StyledNav } from "./styled"
 
 
 
 function Nav() {
-
-  
-  return (
-
-      <nav>
-
-        <Link to="/">Home</Link>
-
-      </nav>
-
-  );
-}
+    return (  
+      <StyledNav>
+        <div className="left">
+          <div>Holidaze</div>
+        </div>
+        <div className="right">
+          <Link to="/">Log in</Link>
+          <Link to="/">Create account</Link>
+        </div>
+      </StyledNav>
+    );
+  }
 
 
 function Checkout() {

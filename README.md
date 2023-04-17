@@ -32,6 +32,8 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ### `npm install react-router-dom`
 
+### `npm install styled-components`
+
 # User Stories
 The client has specified the following requirements in the form of User Stories:
 
