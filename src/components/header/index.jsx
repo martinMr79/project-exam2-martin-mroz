@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { StyledNav } from "./styled";
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -12,8 +12,8 @@ function Nav() {
         </div>
         <MenuIcon className="menu-icon" />
         <div className="right">      
-          <a href="#">Log in</a>
-          <a href="#">Create account</a>
+          <a href="/">Log in</a>
+          <a href="/">Create account</a>
         </div>
       </StyledNav>
     );

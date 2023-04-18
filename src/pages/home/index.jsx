@@ -1,12 +1,12 @@
 import { baseURL } from "../../utilities/constants";
 import { useAPI } from "../../hooks/api";
-
-
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 
 export function Home() {
     const { data, isLoading, isError } = useAPI(baseURL + "venues");
-    console.log(data)
 
     if (isLoading) {
         return <div>Loading</div>;
@@ -20,14 +20,24 @@ export function Home() {
 
           <h1>Venues</h1>
           
-          {data.map((venue) => (
+          {data && data.map((venue) => (
 
-            <>
-            <h2 key={venue.id}>{venue.name}</h2>        
-            <p >{venue.price}</p>
-            <p >{venue.description}</p>
-           
-            </>
+            <Card sx={{ maxWidth: 345 }}>
+                
+                <CardMedia
+                  component="img"
+                  image={venue.media }
+                  title={venue.name}
+                  alt={venue.name}
+                />
+                
+                <CardContent>      
+                 <h2 key={venue.id}>{venue.name}</h2>        
+                 <p >{venue.price} Nok pr night</p>
+                 <p >{venue.description}</p>
+                
+                </CardContent>
+            </Card>
 
         ))}
           
