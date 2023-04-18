@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import MenuIcon from '@mui/icons-material/Menu';
 
 export const StyledNav = styled.nav`
   border: 0;
