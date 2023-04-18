@@ -8,9 +8,10 @@ function Nav() {
       <StyledNav>
         <div className="left">
           <div>Holidaze</div>
-          <MenuIcon className="menu-icon" />
+          
         </div>
-        <div className="right" >
+        <MenuIcon className="menu-icon" />
+        <div className="right">      
           <a href="#">Log in</a>
           <a href="#">Create account</a>
         </div>
