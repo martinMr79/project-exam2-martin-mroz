@@ -1,28 +1,26 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { StyledNav } from "./styled"
-
-
+import { StyledNav } from "./styled";
+import MenuIcon from '@mui/icons-material/Menu';
 
 function Nav() {
-    return (  
+    return (
       <StyledNav>
         <div className="left">
           <div>Holidaze</div>
+          <MenuIcon className="menu-icon" />
         </div>
-        <div className="right">
-          <Link to="/">Log in</Link>
-          <Link to="/">Create account</Link>
+        <div className="right" >
+          <a href="#">Log in</a>
+          <a href="#">Create account</a>
         </div>
       </StyledNav>
     );
-  }
-
+}
 
 function Checkout() {
   return <div>Checkout</div>;
 }
-
 
 function Product() {
   let params = useParams();
