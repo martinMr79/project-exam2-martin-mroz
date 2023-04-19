@@ -1,9 +1,11 @@
 import { baseURL } from "../../utilities/constants";
 import { useAPI } from "../../hooks/api";
+import { Link } from "react-router-dom";
+import { Container, CardContainer } from "./styled";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { Container, CardContainer } from "./styled";
+
 
 export function Home() {
     const { data, isLoading, isError } = useAPI(baseURL + "venues");
@@ -24,11 +26,12 @@ export function Home() {
           <CardContainer>
           
           {data && data.map((venue) => (
-
+        
+        <Link to={`/venue/${venue.id}`}>
         <Card 
           sx={{ 
-          maxWidth: 345
-      
+          maxWidth: 345,
+          minHeight: 600  
 
             }}
 >
@@ -48,7 +51,7 @@ export function Home() {
    
                 </CardContent>
             </Card>
-            
+            </Link>
 
         ))}
           
