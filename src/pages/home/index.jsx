@@ -27,7 +27,7 @@ export function Home() {
           
           {data && data.map((venue) => (
         
-        <Link to={`/venue/${venue.id}`}>
+        <Link to={`/venues/${venue.id}`}>
         <Card 
           sx={{ 
           maxWidth: 345,

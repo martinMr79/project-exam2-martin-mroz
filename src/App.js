@@ -9,11 +9,7 @@ function App() {
       <Nav />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="venue/:id" element={<VenuePage />} />
-        {/*  <Route path="Contact" element={<ContactPage />} />
-        <Route path="product/:id" element={<ProductPage />} />
-        <Route path="Checkout" element={<Checkout />} />
-  <Route path="CheckoutSuccess" element={<CheckoutSuccess />} />   */}
+        <Route path="venues/:id" element={<VenuePage />} />
       </Routes>
     </BrowserRouter>
   );
