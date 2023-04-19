@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Nav } from "./components/header/index";
-import { Home } from "./pages";
+import { Home, VenuePage } from "./pages";
+
 
 function App() {
   return (
@@ -8,10 +9,7 @@ function App() {
       <Nav />
       <Routes>
         <Route index element={<Home />} />
-        {/*  <Route path="Contact" element={<ContactPage />} />
-        <Route path="product/:id" element={<ProductPage />} />
-        <Route path="Checkout" element={<Checkout />} />
-  <Route path="CheckoutSuccess" element={<CheckoutSuccess />} />   */}
+        <Route path="venues/:id" element={<VenuePage />} />
       </Routes>
     </BrowserRouter>
   );
