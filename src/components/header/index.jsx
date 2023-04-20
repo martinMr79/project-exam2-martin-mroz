@@ -13,7 +13,7 @@ function Nav() {
         <MenuIcon className="menu-icon" />
         <div className="right">      
           <a href="/">Log in</a>
-          <a href="/">Create account</a>
+          <a href="register">Create account</a>
         </div>
       </StyledNav>
     );
