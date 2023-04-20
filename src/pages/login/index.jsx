@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../utilities/constants";
+import { LoginContainer } from "./styled";
 
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
@@ -35,7 +36,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <LoginContainer>
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}
       {response && (
@@ -56,7 +57,7 @@ const LoginForm = () => {
         <br />
         <Button variant="contained" type="submit" style={{ marginTop: '10px' }}>Log in</Button>
       </form>
-    </div>
+      </LoginContainer>
   );
 };
 
