@@ -7,13 +7,13 @@ function Nav() {
     return (
       <StyledNav>
         <div className="left">
-          <div>Holidaze</div>
+          <a href="/"><div>Holidaze</div></a>
           
         </div>
         <MenuIcon className="menu-icon" />
         <div className="right">      
           <a href="/">Log in</a>
-          <a href="/">Create account</a>
+          <a href="register">Create account</a>
         </div>
       </StyledNav>
     );

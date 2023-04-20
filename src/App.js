@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Nav } from "./components/header/index";
-import { Home, VenuePage } from "./pages";
+import { Home, VenuePage, RegisterCustomerForm } from "./pages";
 
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="venues/:id" element={<VenuePage />} />
+        <Route path="register/" element={<RegisterCustomerForm />} />
       </Routes>
     </BrowserRouter>
   );
