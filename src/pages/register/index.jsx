@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../utilities/constants";
+import Alert from "@mui/material/Alert";
 
 const RegisterCustomerForm = () => {
   const [name, setName] = useState("");
@@ -9,6 +10,8 @@ const RegisterCustomerForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [avatar, setAvatar] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [warning, setWarning] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,21 +20,18 @@ const RegisterCustomerForm = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        baseURL + "auth/register",
-        {
-          name,
-          email,
-          password,
-          avatar,
-          venueManager: false,
-        }
-      );
+      const response = await axios.post(baseURL + "auth/register", {
+        name,
+        email,
+        password,
+        avatar,
+        venueManager: false,
+      });
       console.log(response.data);
-      alert("Registration successful!");
+      setSuccess("Registration successful!");
     } catch (error) {
       setError(error.response.data.message);
-      alert(`Registration failed: ${error.response.data.message}`);
+      setWarning(`Registration failed: ${error.response.data.message}`);
     }
   };
 
@@ -62,7 +62,21 @@ const RegisterCustomerForm = () => {
         <input type="url" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
       </label>
       <br />
-      {error && <div>{error}</div>}
+      {error && (
+        <Alert severity="error" onClose={() => setError("")}>
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert severity="success" onClose={() => setSuccess("")}>
+          {success}
+        </Alert>
+      )}
+      {warning && (
+        <Alert severity="warning" onClose={() => setWarning("")}>
+          {warning}
+        </Alert>
+      )}
       <button type="submit">Register</button>
     </form>
   );
