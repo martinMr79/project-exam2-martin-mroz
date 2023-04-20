@@ -7,7 +7,7 @@ function Nav() {
     return (
       <StyledNav>
         <div className="left">
-          <div>Holidaze</div>
+          <a href="/"><div>Holidaze</div></a>
           
         </div>
         <MenuIcon className="menu-icon" />
