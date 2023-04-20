@@ -28,15 +28,15 @@ const RegisterCustomerForm = () => {
         }
       );
       console.log(response.data);
-      // Do something with the response
+      alert("Registration successful!");
     } catch (error) {
       setError(error.response.data.message);
+      alert(`Registration failed: ${error.response.data.message}`);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <div>{error}</div>}
       <label>
         Name:
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
@@ -62,6 +62,7 @@ const RegisterCustomerForm = () => {
         <input type="url" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
       </label>
       <br />
+      {error && <div>{error}</div>}
       <button type="submit">Register</button>
     </form>
   );
