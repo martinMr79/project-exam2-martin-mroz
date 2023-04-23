@@ -30,6 +30,7 @@ const LoginForm = () => {
       localStorage.setItem("accessToken", response.data.accessToken);
       setResponse(response.data);
       setSuccess("Log in successful!");
+      window.location.reload(); // Refresh the page after login is successful
     } catch (error) {
       setError(`Log in failed: ${error.response.data.message}`);
     }

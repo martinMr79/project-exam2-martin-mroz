@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { StyledNav } from "./styled";
 
@@ -7,12 +7,17 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
 function Nav() {
-  const accessToken = localStorage.getItem("accessToken"); // Get the access token from local storage
-  const isLoggedIn = accessToken != null; // Check if the access token is present or not
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken"); // Get the access token from local storage
+    setIsLoggedIn(accessToken != null); // Check if the access token is present or not
+  }, []);
 
   function handleLogout() {
     localStorage.removeItem("accessToken"); // Remove the access token from local storage
+    setIsLoggedIn(false); // Update isLoggedIn state to false
     navigate("/login"); // Redirect the user to the login page
   }
 
