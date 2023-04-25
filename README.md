@@ -51,3 +51,5 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ### `npm install react-router-dom`
 
 ### `npm install @mui/material @mui/styled-engine-sc styled-components`
+
+### `npm i zustand`
