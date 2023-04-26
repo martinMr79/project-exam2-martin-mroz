@@ -4,48 +4,46 @@ import axios from "axios";
 import useAuthStore from "../../hooks/useAuthStore";
 import { baseURL } from "../../utilities/constants";
 import { LoginContainer } from "./styled";
-import Alert from '@mui/material/Alert';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
+import Alert from "@mui/material/Alert";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const { accessToken, setAccessToken, clearAccessToken } = useAuthStore();
+  const { setAccessToken, clearAccessToken, accessToken } = useAuthStore();
   const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post(
-        baseURL + "auth/login",
-        {
-          email,
-          password,
-        }
-      );
-      setAccessToken(response.data.accessToken); // Set the access token in the global store
-      setSuccess("Log in successful!");
-      navigate("/dashboard"); // Redirect the user to the dashboard page
-
-    } catch (error) {
-      setError(`Log in failed: ${error.response.data.message}`);
-    }
-  };
 
   const handleLogout = () => {
     clearAccessToken(); // Clear the access token from the global store
     navigate("/login"); // Redirect the user to the login page
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(baseURL + "auth/login", {
+        email,
+        password,
+      });
+      console.log(response); // add this line
+      const { email: userEmail, accessToken } = response.data;
+      setEmail(userEmail);
+      setAccessToken(accessToken); // Set the access token in the global store
+      setSuccess("Log in successful!");
+    } catch (error) {
+      setError(`Log in failed: ${error.response.data.message}`);
+    }
+  };
+
   return (
     <LoginContainer>
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}
-      {accessToken && (
+      {accessToken ? (
         <div>
           <h2>Welcome {accessToken.name}</h2>
           <p>Email: {accessToken.email}</p>
@@ -54,11 +52,13 @@ const LoginForm = () => {
             src={accessToken.avatar}
             sx={{ width: 200, height: 200 }}
           />
-          <p>Venue Manager: {accessToken.venueManager ? "Yes" : "No"}</p>
+          <p>
+            Venue Manager:{" "}
+            {accessToken.venueManager ? "Yes" : "No"}
+          </p>
           <Button onClick={handleLogout}>Logout</Button>
         </div>
-      )}
-      {!accessToken && (
+      ) : (
         <form id="login-form" onSubmit={handleSubmit}>
           <TextField
             type="email"
@@ -92,3 +92,5 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+
