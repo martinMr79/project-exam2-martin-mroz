@@ -6,7 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
-function Nav() {
+function Nav({ decodedToken }) {
   const { accessToken, clearAccessToken } = useAuthStore();
   const navigate = useNavigate();
 
@@ -26,7 +26,9 @@ function Nav() {
       <div className="right">
         {accessToken ? (
           <div>
-            <Avatar alt="User Avatar" src="/static/images/avatar/1.jpg" />
+            {decodedToken && decodedToken.avatar && (
+              <Avatar alt="User Avatar" src={decodedToken.avatar} />
+            )}
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         ) : (
