@@ -4,6 +4,7 @@ import axios from "axios";
 import useAuthStore from "../../hooks/useAuthStore";
 import { baseURL } from "../../utilities/constants";
 import { LoginContainer } from "./styled";
+import jwt_decode from "jwt-decode";
 import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -14,13 +15,9 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const { setAccessToken, clearAccessToken, accessToken } = useAuthStore();
+  const { setAccessToken, clearAccessToken } = useAuthStore();
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    clearAccessToken(); // Clear the access token from the global store
-    navigate("/login"); // Redirect the user to the login page
-  };
+  const [decodedToken, setDecodedToken] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,32 +30,36 @@ const LoginForm = () => {
       const { email: userEmail, accessToken } = response.data;
       setEmail(userEmail);
       setAccessToken(accessToken); // Set the access token in the global store
+      const decodedToken = jwt_decode(accessToken);
       setSuccess("Log in successful!");
+      setDecodedToken(decodedToken);
     } catch (error) {
       setError(`Log in failed: ${error.response.data.message}`);
     }
+  };
+
+  const handleLogout = () => {
+    clearAccessToken(); // Clear the access token from the global store
+    navigate("/login"); // Redirect the user to the login page
   };
 
   return (
     <LoginContainer>
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}
-      {accessToken ? (
-        <div>
-          <h2>Welcome {accessToken.name}</h2>
-          <p>Email: {accessToken.email}</p>
-          <Avatar
-            alt={accessToken.name}
-            src={accessToken.avatar}
-            sx={{ width: 200, height: 200 }}
-          />
-          <p>
-            Venue Manager:{" "}
-            {accessToken.venueManager ? "Yes" : "No"}
-          </p>
-          <Button onClick={handleLogout}>Logout</Button>
-        </div>
-      ) : (
+      {decodedToken && decodedToken.name && (
+  <div>
+    <h2>Welcome {decodedToken.name}</h2>
+    <p>Email: {decodedToken.email}</p>
+    <Avatar
+      alt={decodedToken.name}
+      src={decodedToken.avatar}
+      sx={{ width: 200, height: 200 }}
+    />
+    <p>Venue Manager: {decodedToken.venueManager ? "Yes" : "No"}</p>
+    <Button onClick={handleLogout}>Logout</Button>
+  </div>
+)}
         <form id="login-form" onSubmit={handleSubmit}>
           <TextField
             type="email"
@@ -92,5 +93,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
 
