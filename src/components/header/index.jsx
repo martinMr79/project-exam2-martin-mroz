@@ -14,7 +14,7 @@ function Nav({ decodedToken }) {
     clearAccessToken(); // Clear the access token from the global store
     navigate("/login"); // Redirect the user to the login page
   }
-
+  console.log(decodedToken)
   return (
     <StyledNav>
       <div className="left">
@@ -41,5 +41,5 @@ function Nav({ decodedToken }) {
     </StyledNav>
   );
 }
-
+  
 export { Nav };
