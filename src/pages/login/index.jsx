@@ -41,6 +41,7 @@ const LoginForm = () => {
   const handleLogout = () => {
     clearAccessToken(); // Clear the access token from the global store
     navigate("/login"); // Redirect the user to the login page
+    window.location.reload(); 
   };
 
   return (
@@ -56,6 +57,7 @@ const LoginForm = () => {
           />
           <p>Venue Manager: {decodedToken.venueManager ? "Yes" : "No"}</p>
           <Button onClick={handleLogout}>Logout</Button>
+          
         </div>
       ) : (
         <form id="login-form" onSubmit={handleSubmit}>
