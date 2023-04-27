@@ -1,32 +1,35 @@
-import { useState, useEffect } from "react";
+import create from "zustand";
+import { useEffect } from 'react';
+
+const useAPIStore = create((set) => ({
+  data: [],
+  isLoading: false,
+  hasError: false,
+  fetchData: async (url) => {
+    try {
+      set({ isLoading: true, hasError: false });
+      const response = await fetch(url);
+      const json = await response.json();
+      set({ data: json });
+    } catch (error) {
+      set({ hasError: true });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+}));
 
 export function useAPI(url) {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const { data, isLoading, hasError, fetchData } = useAPIStore();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        setHasError(false);
-        const response = await fetch(url);
-        console.log(response)
-        const json = await response.json();
-        setData(json);
-      } catch (error) {
-        setHasError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchData();
-  }, [url]);
+    fetchData(url);
+  }, [fetchData, url]);
 
   return {
     data,
     isLoading,
-    hasError
+    hasError,
   };
 }
+
