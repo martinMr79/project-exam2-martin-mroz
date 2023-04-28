@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
+import Profile from "../../components/profile";
 import { LoginContainer } from "./styled";
 
 const LoginForm = () => {
@@ -41,24 +41,13 @@ const LoginForm = () => {
   const handleLogout = () => {
     clearAccessToken(); // Clear the access token from the global store
     navigate("/login"); // Redirect the user to the login page
-    window.location.reload(); 
+    window.location.reload();
   };
 
   return (
     <LoginContainer>
       {decodedToken ? (
-        <div>
-          <h2>Welcome {decodedToken.name}</h2>
-          <p>Email: {decodedToken.email}</p>
-          <Avatar
-            alt={decodedToken.name}
-            src={decodedToken.avatar}
-            sx={{ width: 200, height: 200 }}
-          />
-          <p>Venue Manager: {decodedToken.venueManager ? "Yes" : "No"}</p>
-          <Button onClick={handleLogout}>Logout</Button>
-          
-        </div>
+        <Profile decodedToken={decodedToken} handleLogout={handleLogout} />
       ) : (
         <form id="login-form" onSubmit={handleSubmit}>
           {error && <Alert severity="error">{error}</Alert>}
