@@ -13,9 +13,8 @@ function Nav({ decodedToken }) {
   function handleLogout() {
     clearAccessToken(); // Clear the access token from the global store
     navigate("/login"); // Redirect the user to the login page
-    window.location.reload()
   }
-  console.log(decodedToken)
+
   return (
     <StyledNav>
       <div className="left">
