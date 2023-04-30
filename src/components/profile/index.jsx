@@ -4,16 +4,25 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { baseURL } from "../../utilities/constants";
+import { useAuthStore } from "../../hooks/useAuthStore";
 
-const Profile = ({ decodedToken, handleLogout }) => {
+const Profile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
+  const { decodedToken, accessToken, setAccessToken } = useAuthStore();
 
   const handleAvatarUpdate = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(baseURL + `profiles/${decodedToken.name}/media`, {
-        avatar: avatarURL,
-      });
+      await axios.put(
+        baseURL + `profiles/${decodedToken.name}/media`,
+        {
+          avatar: avatarURL,
+        },
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      setAccessToken(accessToken); // Update the access token in the global store
       window.location.reload(); // Reload the page to display the updated avatar
     } catch (error) {
       console.error(error);

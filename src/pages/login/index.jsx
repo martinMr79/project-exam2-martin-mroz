@@ -26,17 +26,18 @@ const LoginForm = () => {
         email,
         password,
       });
-      console.log(response); // add this line
+      console.log(response); 
       const { email: userEmail, accessToken } = response.data;
       setEmail(userEmail);
       setAccessToken(accessToken); // Set the access token in the global store
+      localStorage.setItem('accessToken', accessToken); // Store the access token in local storage
       const decodedToken = jwt_decode(accessToken);
       setSuccess("Log in successful!");
       setDecodedToken(decodedToken);
     } catch (error) {
       setError(`Log in failed: ${error.response.data.message}`);
     }
-  };
+  }
 
   const handleLogout = () => {
     clearAccessToken(); // Clear the access token from the global store
