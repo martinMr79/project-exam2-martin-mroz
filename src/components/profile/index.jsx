@@ -31,11 +31,11 @@ const Profile = ({ handleLogout }) => {
 
   return (
     <div>
-      <h2>Welcome {decodedToken.name}</h2>
-      <p>Email: {decodedToken.email}</p>
+      <h2>Welcome {decodedToken ? decodedToken.name : ""}</h2>
+      <p>Email: {decodedToken ? decodedToken.email : ""}</p>
       <Avatar
-        alt={decodedToken.name}
-        src={decodedToken.avatar}
+        alt={decodedToken ? decodedToken.name : ""}
+        src={decodedToken ? decodedToken.avatar : ""}
         sx={{ width: 200, height: 200 }}
       />
       <form onSubmit={handleAvatarUpdate}>
@@ -51,8 +51,8 @@ const Profile = ({ handleLogout }) => {
           Update Avatar
         </Button>
       </form>
-      <p>Venue Manager: {decodedToken.venueManager ? "Yes" : "No"}</p>
-      <Button onClick={handleLogout}>Logout</Button>
+      <p>Venue Manager: {decodedToken ? (decodedToken.venueManager ? "Yes" : "No") : ""}</p>
+      
     </div>
   );
 };
