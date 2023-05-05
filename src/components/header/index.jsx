@@ -24,20 +24,26 @@ function Nav({ decodedToken }) {
       </div>
       <MenuIcon className="menu-icon" />
       <div className="right">
-        {accessToken ? (
-          <div>
-            {decodedToken && decodedToken.avatar && (
-              <Avatar alt="User Avatar" src={decodedToken.avatar} />
-            )}
-            <Button onClick={handleLogout}>Logout</Button>
-          </div>
-        ) : (
-          <>
-            <Link to="/login">Log in</Link>
-            <Link to="/register">Create account</Link>
-          </>
-        )}
-      </div>
+  {accessToken ? (
+    <div className="avatar-container">
+      {decodedToken && decodedToken.avatar && (
+        <Avatar alt="User Avatar" src={decodedToken.avatar} />
+      )}
+      <Button onClick={handleLogout}   
+        sx={{
+          color: 'white'
+        }}
+      >
+        Logout
+      </Button>
+    </div>
+  ) : (
+    <>
+      <Link to="/login">Log in</Link>
+      <Link to="/register">Create account</Link>
+    </>
+  )}
+</div>
     </StyledNav>
   );
 }
