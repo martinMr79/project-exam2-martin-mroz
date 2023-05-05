@@ -13,9 +13,8 @@ function Nav({ decodedToken }) {
   function handleLogout() {
     clearAccessToken(); // Clear the access token from the global store
     navigate("/login"); // Redirect the user to the login page
-    window.location.reload()
   }
-  console.log(decodedToken)
+
   return (
     <StyledNav>
       <div className="left">
@@ -25,20 +24,26 @@ function Nav({ decodedToken }) {
       </div>
       <MenuIcon className="menu-icon" />
       <div className="right">
-        {accessToken ? (
-          <div>
-            {decodedToken && decodedToken.avatar && (
-              <Avatar alt="User Avatar" src={decodedToken.avatar} />
-            )}
-            <Button onClick={handleLogout}>Logout</Button>
-          </div>
-        ) : (
-          <>
-            <Link to="/login">Log in</Link>
-            <Link to="/register">Create account</Link>
-          </>
-        )}
-      </div>
+  {accessToken ? (
+    <div className="avatar-container">
+      {decodedToken && decodedToken.avatar && (
+        <Avatar alt="User Avatar" src={decodedToken.avatar} />
+      )}
+      <Button onClick={handleLogout}   
+        sx={{
+          color: 'white'
+        }}
+      >
+        Logout
+      </Button>
+    </div>
+  ) : (
+    <>
+      <Link to="/login">Log in</Link>
+      <Link to="/register">Create account</Link>
+    </>
+  )}
+</div>
     </StyledNav>
   );
 }
