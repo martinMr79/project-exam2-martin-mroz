@@ -27,7 +27,7 @@ const Profile = ({ handleLogout }) => {
       );
       setAccessToken(accessToken);
       const updatedToken = { ...decodedToken, avatar: avatarURL };
-      setDecodedToken(updatedToken);
+      setDecodedToken(updatedToken); // <-- Update this line
       setAvatarURL("");
     } catch (error) {
       console.error(error);
