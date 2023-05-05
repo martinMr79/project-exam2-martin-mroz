@@ -46,41 +46,41 @@ const LoginForm = () => {
   };
 
   return (
-    <LoginContainer>
-      {decodedToken ? (
-        <Profile decodedToken={decodedToken} handleLogout={handleLogout} />
-      ) : (
-        <form id="login-form" onSubmit={handleSubmit}>
-          {error && <Alert severity="error">{error}</Alert>}
-          {success && <Alert severity="success">{success}</Alert>}
-          <TextField
-            type="email"
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ marginBottom: "10px" }}
-          />
-          <br />
-          <TextField
-            type="password"
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ marginBottom: "10px" }}
-          />
-          <br />
-          <Button
-            variant="contained"
-            type="submit"
-            style={{ marginTop: "10px" }}
-          >
-            Log in
-          </Button>
-        </form>
-      )}
-    </LoginContainer>
+<LoginContainer>
+  {!decodedToken ? (
+    <form id="login-form" onSubmit={handleSubmit}>
+      {error && <Alert severity="error">{error}</Alert>}
+      {success && <Alert severity="success">{success}</Alert>}
+      <TextField
+        type="email"
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        style={{ marginBottom: "10px" }}
+      />
+      <br />
+      <TextField
+        type="password"
+        label="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        style={{ marginBottom: "10px" }}
+      />
+      <br />
+      <Button
+        variant="contained"
+        type="submit"
+        style={{ marginTop: "10px" }}
+      >
+        Log in
+      </Button>
+    </form>
+  ) : (
+    <Profile decodedToken={decodedToken} handleLogout={handleLogout} />
+  )}
+</LoginContainer>
   );
 };
 

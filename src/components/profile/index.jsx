@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -9,6 +10,8 @@ import { useAuthStore } from "../../hooks/useAuthStore";
 const Profile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
   const { decodedToken, accessToken, setAccessToken } = useAuthStore();
+  const history = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const handleAvatarUpdate = async (event) => {
     event.preventDefault();
@@ -22,37 +25,77 @@ const Profile = ({ handleLogout }) => {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
-      setAccessToken(accessToken); // Update the access token in the global store
-      window.location.reload(); // Reload the page to display the updated avatar
+      setAccessToken(accessToken);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
   };
 
+  useEffect(() => {
+    const fetchAccessToken = async () => {
+      if (!accessToken) {
+        const token = localStorage.getItem("accessToken");
+        if (token) {
+          setAccessToken(token);
+        } else {
+          history.push("/login");
+          return;
+        }
+      }
+
+      if (!decodedToken) {
+        const token = localStorage.getItem("accessToken");
+        if (token) {
+          setAccessToken(token);
+        } else {
+          history.push("/login");
+          return;
+        }
+      }
+
+      setLoading(false);
+    };
+
+    fetchAccessToken();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <h2>Welcome {decodedToken ? decodedToken.name : ""}</h2>
-      <p>Email: {decodedToken ? decodedToken.email : ""}</p>
-      <Avatar
-        alt={decodedToken ? decodedToken.name : ""}
-        src={decodedToken ? decodedToken.avatar : ""}
-        sx={{ width: 200, height: 200 }}
-      />
-      <form onSubmit={handleAvatarUpdate}>
-        <TextField
-          type="text"
-          label="New Avatar URL"
-          value={avatarURL}
-          onChange={(e) => setAvatarURL(e.target.value)}
-          style={{ marginTop: "10px", marginBottom: "10px" }}
-        />
-        <br />
-        <Button variant="contained" type="submit">
-          Update Avatar
-        </Button>
-      </form>
-      <p>Venue Manager: {decodedToken ? (decodedToken.venueManager ? "Yes" : "No") : ""}</p>
-      
+      {decodedToken ? (
+        <>
+          <h2>Welcome {decodedToken.name}</h2>
+          <p>Email: {decodedToken.email}</p>
+          <Avatar
+            alt={decodedToken.name}
+            src={decodedToken.avatar}
+            sx={{ width: 200, height: 200 }}
+          />
+          <form onSubmit={handleAvatarUpdate}>
+            <TextField
+              type="text"
+              label="New Avatar URL"
+              value={avatarURL}
+              onChange={(e) => setAvatarURL(e.target.value)}
+              style={{ marginTop: "10px", marginBottom: "10px" }}
+            />
+            <br />
+            <Button variant="contained" type="submit">
+              Update Avatar
+            </Button>
+          </form>
+          <p>Venue Manager: {decodedToken.venueManager ? "Yes" : "No"}</p>
+          <Button onClick={handleLogout}>Logout</Button>
+        </>
+      ) : (
+        <div>You are not logged in.</div>
+      )}
     </div>
   );
 };
