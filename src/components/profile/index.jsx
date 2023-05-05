@@ -9,7 +9,7 @@ import { useAuthStore } from "../../hooks/useAuthStore";
 
 const Profile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
-  const { decodedToken, accessToken, setAccessToken } = useAuthStore();
+  const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
   const history = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +26,9 @@ const Profile = ({ handleLogout }) => {
         }
       );
       setAccessToken(accessToken);
-      window.location.reload();
+      const updatedToken = { ...decodedToken, avatar: avatarURL };
+      setDecodedToken(updatedToken);
+      setAvatarURL("");
     } catch (error) {
       console.error(error);
     }
@@ -43,7 +45,7 @@ const Profile = ({ handleLogout }) => {
           return;
         }
       }
-
+  
       if (!decodedToken) {
         const token = localStorage.getItem("accessToken");
         if (token) {
@@ -53,14 +55,13 @@ const Profile = ({ handleLogout }) => {
           return;
         }
       }
-
+  
       setLoading(false);
     };
-
+  
     fetchAccessToken();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  
+  }, [accessToken, decodedToken, history, setAccessToken]);
 
   if (loading) {
     return <div>Loading...</div>;
