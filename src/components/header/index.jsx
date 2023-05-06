@@ -40,7 +40,10 @@ function Nav({ decodedToken }) {
   ) : (
     <>
       <Link to="/login">Log in</Link>
-      <Link to="/register">Create account</Link>
+      <button>Create account</button>
+      <Link to="/register">User</Link>
+      <Link to="/registerManager">Venue Manager</Link>
+      
     </>
   )}
 </div>

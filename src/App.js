@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, VenuePage, RegisterCustomerForm, LoginPage } from "./pages";
+import { Home, VenuePage, RegisterCustomerForm, LoginPage, RegisterVenueManagerForm } from "./pages";
 import { Nav } from "./components/header";
 import useAuthStore from "./hooks/useAuthStore";
 
@@ -14,6 +14,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="venues/:id" element={<VenuePage />} />
         <Route path="register/" element={<RegisterCustomerForm />} />
+        <Route path="registerManager/" element={<RegisterVenueManagerForm />} />
         <Route path="login/" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
