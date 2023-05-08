@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 import { useAuthStore } from "../../../hooks/useAuthStore";
+import { ProfileContainer } from "../styled";
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
@@ -50,7 +51,7 @@ const ManagerProfile = ({ handleLogout }) => {
   }
 
   return (
-    <div>
+<ProfileContainer>
       {decodedToken ? (
         <>
          {console.log("Manager profile decoded token:", decodedToken)} 
@@ -81,7 +82,7 @@ const ManagerProfile = ({ handleLogout }) => {
       ) : (
         <div>You are not logged in.</div>
       )}
-    </div>
+    </ProfileContainer>
   );
 };
 

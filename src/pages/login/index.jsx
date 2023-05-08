@@ -13,8 +13,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const { setAccessToken, clearAccessToken, decodedToken, setDecodedToken } = useAuthStore();
+  const { setAccessToken, clearAccessToken, setDecodedToken } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -32,23 +31,16 @@ const LoginForm = () => {
       const decodedToken = jwt_decode(accessToken);
       setDecodedToken(decodedToken);
       console.log("Decoded token:", decodedToken);
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       setError(`Log in failed: ${error.response.data.message}`);
     }
-  };
-
-  const handleLogout = () => {
-    clearAccessToken();
-    navigate("/profile");
-    window.location.reload();
   };
 
   return (
     <LoginContainer>
       <form id="login-form" onSubmit={handleSubmit}>
         {error && <Alert severity="error">{error}</Alert>}
-        {success && <Alert severity="success">{success}</Alert>}
         <TextField
           type="email"
           label="Email"

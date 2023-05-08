@@ -59,7 +59,7 @@ export const StyledNav = styled.nav`
 
 
   .menu-icon {
-    color: white;
+  
     margin-right: 2.5rem;
    
 
