@@ -33,7 +33,16 @@ function Nav({ decodedToken }) {
         <Link to="/">
           <div>Holidaze</div>
         </Link>
+        
       </div>
+      <div>
+      {decodedToken && (
+  <Link to="/profile" className="nav-link">
+    Profile
+  </Link>
+)}
+      </div>
+
       <MenuIcon className="menu-icon" />
       <div className="right">
         {accessToken ? (
@@ -72,6 +81,7 @@ function Nav({ decodedToken }) {
             >
               <MenuItem component={Link} to="/register" onClick={handleClose}>User</MenuItem>
               <MenuItem component={Link} to="/registerManager" onClick={handleClose}>Venue Manager</MenuItem>
+
             </Menu>
           </>
         )}

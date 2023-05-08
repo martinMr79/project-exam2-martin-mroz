@@ -14,6 +14,7 @@ export const StyledNav = styled.nav`
     justify-content: flex-start;
     width: 50%;
     margin-left: 2rem; 
+    
 
     div {
       font-family: 'Clarendon-Regular', serif;
@@ -28,12 +29,14 @@ export const StyledNav = styled.nav`
   align-items: center;
   justify-content: flex-end;
   margin-right: 1.5rem;
+  
 
   .avatar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-right: 1rem;
+    
   }
 
   a {
@@ -51,6 +54,7 @@ export const StyledNav = styled.nav`
 
   a:link {
     text-decoration: none;
+    
   }
 
 
