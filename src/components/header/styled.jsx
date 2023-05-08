@@ -29,11 +29,13 @@ export const StyledNav = styled.nav`
   align-items: center;
   justify-content: flex-end;
   margin-right: 1.5rem;
-  
+
+
+
 
   .avatar-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-right: 1rem;
     
@@ -51,6 +53,11 @@ export const StyledNav = styled.nav`
     }
   }
 }
+
+.nav-link {
+      color: white; 
+      font-family: 'Trade Gothic LT', sans-serif;
+    }
 
   a:link {
     text-decoration: none;

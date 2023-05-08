@@ -75,8 +75,8 @@ const ManagerProfile = ({ handleLogout }) => {
               Update Avatar
             </Button>
           </form>
-          <h2>add new Venue</h2>
           <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
+          <h2>Add Venue</h2>
           <Button onClick={handleLogout}>Logout</Button>
         </>
       ) : (
