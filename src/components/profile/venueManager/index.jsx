@@ -162,6 +162,7 @@ const ManagerProfile = ({ handleLogout }) => {
               value={avatarURL}
               onChange={(e) => setAvatarURL(e.target.value)}
               fullWidth
+              sx={{ marginTop: 3 }}
             />
             <Button onClick={handleAvatarUpdate}>Update Avatar</Button>
             <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
@@ -199,7 +200,7 @@ const ManagerProfile = ({ handleLogout }) => {
   ))}
   <Button onClick={addMediaInput}>Add Another Media URL</Button>
 </Grid>
-<Grid item xs={12}>
+<Grid item xs={4}>
   <TextField
     name="price"
     label="Price"
@@ -208,7 +209,7 @@ const ManagerProfile = ({ handleLogout }) => {
     fullWidth
   />
 </Grid>
-<Grid item xs={12}>
+<Grid item xs={4}>
   <TextField
     name="maxGuests"
     label="Max Guests"

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProfileContainer = styled.div`
-max-width: 1500px;
+max-width: 600px;
 display: flex;
 flex-direction: column;
 align-items: center;
