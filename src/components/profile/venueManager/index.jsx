@@ -10,6 +10,7 @@ import { ProfileContainer } from "../styled";
 import Grid from "@mui/material/Grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import handleAvatarUpdate from "../ManagerProfile/AvatarUpdate";
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
@@ -105,26 +106,7 @@ const ManagerProfile = ({ handleLogout }) => {
     }
   };
 
-  const handleAvatarUpdate = async (event) => {
-    event.preventDefault();
-    try {
-      await axios.put(
-        baseURL + `profiles/${decodedToken.name}/media`,
-        {
-          avatar: avatarURL,
-        },
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
-      );
-      setAccessToken(accessToken);
-      const updatedToken = { ...decodedToken, avatar: avatarURL };
-      setDecodedToken(updatedToken); 
-      setAvatarURL("");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {
