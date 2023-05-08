@@ -157,7 +157,13 @@ const ManagerProfile = ({ handleLogout }) => {
               src={decodedToken.avatar}
               sx={{ width: 200, height: 200 }}
             />
-     
+            <TextField
+              label="New Avatar URL"
+              value={avatarURL}
+              onChange={(e) => setAvatarURL(e.target.value)}
+              fullWidth
+            />
+            <Button onClick={handleAvatarUpdate}>Update Avatar</Button>
             <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
             <h2>Add Venue</h2>
             <form onSubmit={handleAddVenue}>
