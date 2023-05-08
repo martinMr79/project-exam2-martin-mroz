@@ -6,15 +6,14 @@ import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 
 const AvatarUpdate = ({
-  handleAvatarUpdate,
-  avatarURL,
-  setAvatarURL,
   decodedToken,
   accessToken,
   setAccessToken,
   setDecodedToken,
+  avatarURL,
+  setAvatarURL,
 }) => {
-  const handleAvatarUpdateInternal = async (event) => {
+  const handleAvatarUpdate = async (event) => {
     event.preventDefault();
     try {
       await axios.put(
@@ -48,7 +47,7 @@ const AvatarUpdate = ({
         onChange={(e) => setAvatarURL(e.target.value)}
         fullWidth
       />
-      <Button onClick={handleAvatarUpdateInternal}>Update Avatar</Button>
+      <Button onClick={handleAvatarUpdate}>Update Avatar</Button>
     </>
   );
 };

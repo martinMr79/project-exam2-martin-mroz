@@ -10,7 +10,7 @@ import { ProfileContainer } from "../styled";
 import Grid from "@mui/material/Grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import handleAvatarUpdate from "../ManagerProfile/AvatarUpdate";
+import AvatarUpdate from "../ManagerProfile/AvatarUpdate";
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
@@ -106,6 +106,28 @@ const ManagerProfile = ({ handleLogout }) => {
     }
   };
 
+  
+  const handleAvatarUpdate = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.put(
+        baseURL + `profiles/${decodedToken.name}/media`,
+        {
+          avatar: avatarURL,
+        },
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      setAccessToken(accessToken);
+      const updatedToken = { ...decodedToken, avatar: avatarURL };
+      setDecodedToken(updatedToken);
+      setAvatarURL("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   useEffect(() => {
     const fetchAccessToken = async () => {
@@ -131,22 +153,17 @@ const ManagerProfile = ({ handleLogout }) => {
       <ProfileContainer>
         {decodedToken ? (
           <>
-            {console.log("Manager profile decoded token:", decodedToken)}
+            <AvatarUpdate
+              decodedToken={decodedToken}
+              accessToken={accessToken}
+              setAccessToken={setAccessToken}
+              setDecodedToken={setDecodedToken}
+              avatarURL={avatarURL}
+              setAvatarURL={setAvatarURL}
+            />
             <h2>Welcome {decodedToken.name}</h2>
             <p>Email: {decodedToken.email}</p>
-            <Avatar
-              alt={decodedToken.name}
-              src={decodedToken.avatar}
-              sx={{ width: 200, height: 200 }}
-            />
-            <TextField
-              label="New Avatar URL"
-              value={avatarURL}
-              onChange={(e) => setAvatarURL(e.target.value)}
-              fullWidth
-              sx={{ marginTop: 3 }}
-            />
-            <Button onClick={handleAvatarUpdate}>Update Avatar</Button>
+           
             <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
             <h2>Add Venue</h2>
             <form onSubmit={handleAddVenue}>
@@ -201,7 +218,6 @@ const ManagerProfile = ({ handleLogout }) => {
   />
 </Grid>
     
-    {/* Add other form fields here as needed */}
     <Grid item xs={12}>
       <FormControlLabel
         control={
