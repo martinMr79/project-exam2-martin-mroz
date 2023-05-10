@@ -13,7 +13,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setAccessToken, clearAccessToken, setDecodedToken } = useAuthStore();
+  const { setAccessToken, setDecodedToken } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
