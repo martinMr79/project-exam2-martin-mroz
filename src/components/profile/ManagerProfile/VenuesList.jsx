@@ -17,30 +17,36 @@ const VenuesList = ({ accessToken, decodedToken  }) => {
   
     useEffect(() => {
         const fetchVenues = async () => {
-          try {
-            const response = await axios.get(baseURL + "venues", {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            });
-            console.log("Fetched venues:", response.data); // Debug statement
-    
-            // Filter venues by manager email
-            const filteredVenues = response.data.filter(
-              (venue) => venue.managerEmail === decodedToken.email
-            );
-    
-            setVenues(filteredVenues);
-          } catch (error) {
-            console.error("Error fetching venues:", error);
-            setError(error.message);
-          }
-        };
+            try {
+              const response = await axios.get(baseURL + "venues", {
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                },
+                params: {
+                  _owner: true, // Add this line to include the owner in the response
+                },
+              });
+              console.log("Fetched venues:", response.data);
+          
+              // Filter venues by manager email
+              const filteredVenues = response.data.filter(
+                (venue) => venue.owner && venue.owner.email === decodedToken.email
+              );
+          
+              setVenues(filteredVenues);
+            } catch (error) {
+              console.error("Error fetching venues:", error);
+              setError(error.message);
+            }
+          };
     
         fetchVenues();
       }, [accessToken, decodedToken]);
       
-  
+      
+      console.log("Decoded token:", decodedToken);
+      
+
     const deleteVenue = async (venueId) => {
         try {
           await axios.delete(`${baseURL}/api/v1/holidaze/listings/${venueId}`, {
