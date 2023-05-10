@@ -49,7 +49,7 @@ const VenuesList = ({ accessToken, decodedToken  }) => {
 
     const deleteVenue = async (venueId) => {
         try {
-          await axios.delete(`${baseURL}/api/v1/holidaze/listings/${venueId}`, {
+          await axios.delete(`${baseURL}venues/${venueId}`, {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
