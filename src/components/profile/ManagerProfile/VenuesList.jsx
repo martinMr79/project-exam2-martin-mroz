@@ -6,6 +6,12 @@ import Button from "@mui/material/Button";
 const VenueItem = ({ venue, onDelete }) => (
   <div>
     <h3>{venue.name}</h3>
+    <img
+        src={venue.media}
+        alt={venue.name}
+        width={100} // Set the width in pixels
+        height={100} // Set the height in pixels
+      />
     <p>{venue.description}</p>
     <Button onClick={() => onDelete(venue.id)}>Delete</Button>
   </div>
@@ -62,7 +68,7 @@ const VenuesList = ({ accessToken, decodedToken  }) => {
       };
   
     return (
-      <div>
+        <div>
         <h2>Managed Venues</h2>
         {error && <p>Error: {error}</p>}
         {venues.map((venue) => (
