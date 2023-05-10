@@ -44,47 +44,16 @@ const ManagerProfile = ({ handleLogout }) => {
     }
   });
 
- 
-  const handleAvatarUpdate = async (event) => {
-    event.preventDefault();
-    try {
-      await axios.put(
-        baseURL + `profiles/${decodedToken.name}/media`,
-        {
-          avatar: avatarURL,
-        },
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
-      );
-      setAccessToken(accessToken);
-      const updatedToken = { ...decodedToken, avatar: avatarURL };
-      setDecodedToken(updatedToken);
-      setAvatarURL("");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
 
   useEffect(() => {
-    const fetchAccessToken = async () => {
-      try {
-        const response = await axios.post(baseURL + "auth/refresh-token", {
-          token: decodedToken.refreshToken,
-        });
-  
-        setAccessToken(response.data.accessToken);
-      } catch (error) {
-        console.error(error);
-        history.push("/login");
-      }
-  
+ 
+    if (!accessToken) {
+      history.push("/login");
       setLoading(false);
-    };
-  
-    fetchAccessToken();
-  }, [accessToken, decodedToken, history, setAccessToken]);
+    } else {
+      setLoading(false);
+    }
+  }, [accessToken, history]);
 
   return (
 
