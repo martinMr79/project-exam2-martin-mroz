@@ -5,6 +5,7 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import { ProfileContainer } from "../styled";
 import AvatarUpdate from "../ManagerProfile/AvatarUpdate";
 import VenueForm from "../ManagerProfile/VenueForm";
+import VenuesList from "../ManagerProfile/VenuesList";
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
@@ -34,6 +35,7 @@ const ManagerProfile = ({ handleLogout }) => {
           <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
           <h2>Add Venue</h2>
           <VenueForm accessToken={accessToken} />
+          <VenuesList accessToken={accessToken} decodedToken={decodedToken} />
           <Button onClick={handleLogout}>Logout</Button>
         </>
       ) : (
