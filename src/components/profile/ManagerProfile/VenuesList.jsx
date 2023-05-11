@@ -40,7 +40,7 @@ const VenuesList = ({ accessToken, venues, setVenues }) => { // add venues prop 
         <div>
         <h2>Managed Venues</h2>
         {error && <p>Error: {error}</p>}
-        {venues.map((venue) => (
+        {venues && venues.map((venue) => (
           <VenueItem key={venue.id} venue={venue} onDelete={deleteVenue} />
         ))}
       </div>

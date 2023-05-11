@@ -15,44 +15,57 @@ const ManagerProfile = ({ handleLogout }) => {
   const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
   const history = useNavigate();
 
-  const [venues, setVenues] = useState([]); // Update this line
+  const [venues, setVenues] = useState([]); 
+
+  const fetchVenues = async (offset = 0, limit = 100) => {
+    try {
+      const response = await axios.get(baseURL + "venues", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          _owner: true,
+          offset: offset,
+          limit: limit,
+        },
+      });
+      console.log("Fetched venues:", response.data);
+
+      const filteredVenues = response.data.filter(
+        (venue) => venue.owner && venue.owner.email === decodedToken.email
+      );
+
+      if(response.data.length === limit) {
+        const nextOffset = offset + limit;
+        const nextVenues = await fetchVenues(nextOffset, limit);
+        return [...filteredVenues, ...nextVenues];
+      }
+
+      return filteredVenues;
+    } catch (error) {
+      console.error("Error fetching venues:", error);
+      return []; 
+    }
+  };
 
   useEffect(() => {
-    const fetchVenues = async () => {
-      try {
-        const response = await axios.get(baseURL + "venues", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          params: {
-            _owner: true,
-          },
-        });
-        console.log("Fetched venues:", response.data);
-  
-        const filteredVenues = response.data.filter(
-          (venue) => venue.owner && venue.owner.email === decodedToken.email
-        );
-  
-        setVenues(filteredVenues);
-      } catch (error) {
-        console.error("Error fetching venues:", error);
-      }
+    const initialiseVenues = async () => {
+      const fetchedVenues = await fetchVenues();
+      setVenues(fetchedVenues);
     };
 
-    fetchVenues();
+    initialiseVenues();
   }, [accessToken, decodedToken]);
-  
-
-  const addVenue = (newVenue) => {
-    setVenues((prevVenues) => [...prevVenues, newVenue]);
-  };
 
   useEffect(() => {
     if (!accessToken) {
       history.push("/login");
     }
   }, [accessToken, history]);
+
+  const addVenue = (newVenue) => {
+    setVenues((prevVenues) => [...prevVenues, newVenue]);
+  };
 
   return (
     <ProfileContainer>
