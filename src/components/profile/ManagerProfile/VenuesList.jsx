@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 import Button from "@mui/material/Button";
+import { useState } from "react";
+
 
 const VenueItem = ({ venue, onDelete }) => (
   <div>
@@ -9,49 +11,16 @@ const VenueItem = ({ venue, onDelete }) => (
     <img
         src={venue.media}
         alt={venue.name}
-        width={100} // Set the width in pixels
-        height={100} // Set the height in pixels
+        width={80} 
+        height={80} 
       />
     <p>{venue.description}</p>
     <Button onClick={() => onDelete(venue.id)}>Delete</Button>
   </div>
 );
 
-const VenuesList = ({ accessToken, decodedToken  }) => {
-    const [venues, setVenues] = useState([]);
+const VenuesList = ({ accessToken, venues, setVenues }) => { // add venues prop here
     const [error, setError] = useState(null);
-  
-    useEffect(() => {
-        const fetchVenues = async () => {
-            try {
-              const response = await axios.get(baseURL + "venues", {
-                headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                },
-                params: {
-                  _owner: true, // Add this line to include the owner in the response
-                },
-              });
-              console.log("Fetched venues:", response.data);
-          
-              // Filter venues by manager email
-              const filteredVenues = response.data.filter(
-                (venue) => venue.owner && venue.owner.email === decodedToken.email
-              );
-          
-              setVenues(filteredVenues);
-            } catch (error) {
-              console.error("Error fetching venues:", error);
-              setError(error.message);
-            }
-          };
-    
-        fetchVenues();
-      }, [accessToken, decodedToken]);
-      
-      
-      console.log("Decoded token:", decodedToken);
-      
 
     const deleteVenue = async (venueId) => {
         try {
@@ -60,7 +29,7 @@ const VenuesList = ({ accessToken, decodedToken  }) => {
               Authorization: `Bearer ${accessToken}`,
             },
           });
-          setVenues(venues.filter((venue) => venue.id !== venueId));
+          setVenues(venues.filter((venue) => venue.id !== venueId)); // Note: setVenues will not work here, as we are not maintaining state in this component anymore.
         } catch (error) {
           console.error("Error deleting venue:", error);
           setError(`Error deleting venue: ${error.message}`);

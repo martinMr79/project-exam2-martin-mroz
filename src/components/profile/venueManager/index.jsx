@@ -6,11 +6,47 @@ import { ProfileContainer } from "../styled";
 import AvatarUpdate from "../ManagerProfile/AvatarUpdate";
 import VenueForm from "../ManagerProfile/VenueForm";
 import VenuesList from "../ManagerProfile/VenuesList";
+import axios from "axios";
+import { baseURL } from "../../../utilities/constants";
+
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
   const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
   const history = useNavigate();
+
+  const [venues, setVenues] = useState([]); // Update this line
+
+  useEffect(() => {
+    const fetchVenues = async () => {
+      try {
+        const response = await axios.get(baseURL + "venues", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            _owner: true,
+          },
+        });
+        console.log("Fetched venues:", response.data);
+  
+        const filteredVenues = response.data.filter(
+          (venue) => venue.owner && venue.owner.email === decodedToken.email
+        );
+  
+        setVenues(filteredVenues);
+      } catch (error) {
+        console.error("Error fetching venues:", error);
+      }
+    };
+
+    fetchVenues();
+  }, [accessToken, decodedToken]);
+  
+
+  const addVenue = (newVenue) => {
+    setVenues((prevVenues) => [...prevVenues, newVenue]);
+  };
 
   useEffect(() => {
     if (!accessToken) {
@@ -34,8 +70,8 @@ const ManagerProfile = ({ handleLogout }) => {
           <p>Email: {decodedToken.email}</p>
           <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
           <h2>Add Venue</h2>
-          <VenueForm accessToken={accessToken} />
-          <VenuesList accessToken={accessToken} decodedToken={decodedToken} />
+          <VenueForm accessToken={accessToken} onAddVenue={addVenue} />
+          <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} />
           <Button onClick={handleLogout}>Logout</Button>
         </>
       ) : (
@@ -44,5 +80,6 @@ const ManagerProfile = ({ handleLogout }) => {
     </ProfileContainer>
   );
 };
+
 
 export default ManagerProfile;
