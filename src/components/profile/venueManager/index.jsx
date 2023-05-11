@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react"; // add useCallback here
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useAuthStore } from "../../../hooks/useAuthStore";
@@ -17,7 +17,7 @@ const ManagerProfile = ({ handleLogout }) => {
 
   const [venues, setVenues] = useState([]); 
 
-  const fetchVenues = async (offset = 0, limit = 100) => {
+  const fetchVenues = useCallback(async (offset = 0, limit = 100) => {
     try {
       const response = await axios.get(baseURL + "venues", {
         headers: {
@@ -46,7 +46,7 @@ const ManagerProfile = ({ handleLogout }) => {
       console.error("Error fetching venues:", error);
       return []; 
     }
-  };
+  }, [accessToken, decodedToken]); // add dependencies here
 
   useEffect(() => {
     const initialiseVenues = async () => {
@@ -55,7 +55,7 @@ const ManagerProfile = ({ handleLogout }) => {
     };
 
     initialiseVenues();
-  }, [accessToken, decodedToken]);
+  }, [fetchVenues]); // use fetchVenues here
 
   useEffect(() => {
     if (!accessToken) {
@@ -89,10 +89,9 @@ const ManagerProfile = ({ handleLogout }) => {
         </>
       ) : (
         <div>You are not logged in.</div>
-      )}
-    </ProfileContainer>
-  );
-};
-
-
-export default ManagerProfile;
+        )}
+      </ProfileContainer>
+    );
+  };
+  
+  export default ManagerProfile;
