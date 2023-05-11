@@ -4,10 +4,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import { baseURL } from "../../utilities/constants";
-import { useAuthStore } from "../../hooks/useAuthStore";
+import { baseURL } from "../../../utilities/constants";
+import { useAuthStore } from "../../../hooks/useAuthStore";
+import { ProfileContainer } from "../styled";
 
-const Profile = ({ handleLogout }) => {
+const UserProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
   const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
   const history = useNavigate();
@@ -36,25 +37,7 @@ const Profile = ({ handleLogout }) => {
 
   useEffect(() => {
     const fetchAccessToken = async () => {
-      if (!accessToken) {
-        const token = localStorage.getItem("accessToken");
-        if (token) {
-          setAccessToken(token);
-        } else {
-          history.push("/login");
-          return;
-        }
-      }
-  
-      if (!decodedToken) {
-        const token = localStorage.getItem("accessToken");
-        if (token) {
-          setAccessToken(token);
-        } else {
-          history.push("/login");
-          return;
-        }
-      }
+     
   
       setLoading(false);
     };
@@ -68,10 +51,11 @@ const Profile = ({ handleLogout }) => {
   }
 
   return (
-    <div>
+    <ProfileContainer>
       {decodedToken ? (
         <>
-          <h2>Welcome {decodedToken.name}</h2>
+         {console.log("User profile decoded token:", decodedToken)}
+          <h2>Welcome user {decodedToken.name}</h2>
           <p>Email: {decodedToken.email}</p>
           <Avatar
             alt={decodedToken.name}
@@ -91,14 +75,14 @@ const Profile = ({ handleLogout }) => {
               Update Avatar
             </Button>
           </form>
-          <p>Venue Manager: {decodedToken.venueManager ? "Yes" : "No"}</p>
+          <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
           <Button onClick={handleLogout}>Logout</Button>
         </>
       ) : (
         <div>You are not logged in.</div>
       )}
-    </div>
+    </ProfileContainer>
   );
 };
 
-export default Profile;
+export default UserProfile;

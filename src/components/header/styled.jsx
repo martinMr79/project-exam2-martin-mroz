@@ -14,6 +14,7 @@ export const StyledNav = styled.nav`
     justify-content: flex-start;
     width: 50%;
     margin-left: 2rem; 
+    
 
     div {
       font-family: 'Clarendon-Regular', serif;
@@ -29,11 +30,15 @@ export const StyledNav = styled.nav`
   justify-content: flex-end;
   margin-right: 1.5rem;
 
+
+
+
   .avatar-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-right: 1rem;
+    
   }
 
   a {
@@ -49,13 +54,19 @@ export const StyledNav = styled.nav`
   }
 }
 
+.nav-link {
+      color: white; 
+      font-family: 'Trade Gothic LT', sans-serif;
+    }
+
   a:link {
     text-decoration: none;
+    
   }
 
 
   .menu-icon {
-    color: white;
+  
     margin-right: 2.5rem;
    
 

@@ -78,22 +78,3 @@ import Button from '@mui/material/Button';
 
 export default RegisterVenueManagerForm;
 
-
-//Venue Manager user// 
-
-//{name: "daBoss", email: "daBoss@noroff.no", password: "bigboss79",…}
-//avatar
-//: 
-//"https://picsum.photos/id/237/200/300"
-//email
-//: 
-//"daBoss@noroff.no"
-//name
-//: 
-//"daBoss"
-//password
-//: 
-//"bigboss79"
-//venueManager
-//: 
-//true

@@ -1,11 +1,38 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, VenuePage, RegisterCustomerForm, LoginPage, RegisterVenueManagerForm } from "./pages";
+import {
+  Home,
+  VenuePage,
+  RegisterCustomerForm,
+  LoginPage,
+  RegisterVenueManagerForm,
+} from "./pages";
 import { Nav } from "./components/header";
+import User from "./components/profile/user";
+import ManagerProfile from "./components/profile/venueManager";
 import useAuthStore from "./hooks/useAuthStore";
 
+
 function App() {
-  const { decodedToken } = useAuthStore();
-  console.log("decodedToken from useAuthStore:", decodedToken);
+  const { decodedToken, clearAccessToken } = useAuthStore();
+
+  const handleLogout = () => {
+    clearAccessToken();
+    window.location.reload();
+  };
+
+  const renderProfile = () => {
+    if (!decodedToken) {
+      return <LoginPage />;
+    }
+  
+    console.log("Current role:", decodedToken.venueManager ? "venueManager" : "user");
+  
+    return decodedToken.venueManager ? (
+      <ManagerProfile decodedToken={decodedToken} handleLogout={handleLogout} />
+    ) : (
+      <User decodedToken={decodedToken} handleLogout={handleLogout} />
+    );
+  };
 
   return (
     <BrowserRouter>
@@ -16,6 +43,7 @@ function App() {
         <Route path="register/" element={<RegisterCustomerForm />} />
         <Route path="registerManager/" element={<RegisterVenueManagerForm />} />
         <Route path="login/" element={<LoginPage />} />
+        <Route path="profile/" element={renderProfile()} />
       </Routes>
     </BrowserRouter>
   );
