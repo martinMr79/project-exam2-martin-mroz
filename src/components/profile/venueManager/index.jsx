@@ -48,6 +48,26 @@ const ManagerProfile = ({ handleLogout }) => {
     }
   }, [accessToken, decodedToken]); // add dependencies here
 
+  const updateVenue = async (venueId, updatedVenue) => {
+    try {
+      const response = await axios.put(`${baseURL}venues/${venueId}`, updatedVenue, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (response.status === 200) {
+        setVenues((prevVenues) =>
+          prevVenues.map((venue) => (venue._id === venueId ? updatedVenue : venue))
+        );
+      } else {
+        console.error(`Error updating venue: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error(`Error updating venue: ${error}`);
+    }
+  };
+
   useEffect(() => {
     const initialiseVenues = async () => {
       const fetchedVenues = await fetchVenues();
@@ -84,7 +104,7 @@ const ManagerProfile = ({ handleLogout }) => {
           <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
           <h2>Add Venue</h2>
           <VenueForm accessToken={accessToken} onAddVenue={addVenue} />
-          <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} />
+          <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} onUpdateVenue={updateVenue}/>
           <Button onClick={handleLogout}>Logout</Button>
         </>
       ) : (
