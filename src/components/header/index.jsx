@@ -15,8 +15,8 @@ function Nav({ decodedToken }) {
   const open = Boolean(anchorEl);
 
   function handleLogout() {
-    clearAccessToken(); // Clear the access token from the global store
-    navigate("/login"); // Redirect the user to the login page
+    clearAccessToken(); 
+    navigate("/login"); 
   }
 
   const handleClick = (event) => {

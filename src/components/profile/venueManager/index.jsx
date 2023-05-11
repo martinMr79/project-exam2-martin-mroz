@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react"; // add useCallback here
+import React, { useEffect, useState, useCallback } from "react"; 
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useAuthStore } from "../../../hooks/useAuthStore";
@@ -46,7 +46,7 @@ const ManagerProfile = ({ handleLogout }) => {
       console.error("Error fetching venues:", error);
       return []; 
     }
-  }, [accessToken, decodedToken]); // add dependencies here
+  }, [accessToken, decodedToken]); 
 
   const updateVenue = async (venueId, updatedVenue) => {
     try {
@@ -74,7 +74,7 @@ const ManagerProfile = ({ handleLogout }) => {
     };
 
     initialiseVenues();
-  }, [fetchVenues]); // use fetchVenues here
+  }, [fetchVenues]); 
 
   useEffect(() => {
     if (!accessToken) {

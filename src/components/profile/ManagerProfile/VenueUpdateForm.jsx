@@ -17,7 +17,7 @@ const VenueUpdateForm = ({ venue, onUpdate }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onUpdate(venue.id, updatedVenue); // Ensure venue._id is correct here
+    onUpdate(venue.id, updatedVenue);
   };
 
   return (

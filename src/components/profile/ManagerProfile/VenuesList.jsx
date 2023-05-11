@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 import Button from "@mui/material/Button";
-import VenueUpdateForm from "./VenueUpdateForm"; // Import the update form component (you need to create this)
+import VenueUpdateForm from "./VenueUpdateForm"; 
 
 const VenueItem = ({ venue, onDelete, onUpdate }) => (
   <div>
@@ -15,7 +15,7 @@ const VenueItem = ({ venue, onDelete, onUpdate }) => (
     />
     <p>{venue.description}</p>
     <Button onClick={() => onDelete(venue._id)}>Delete</Button>
-    <VenueUpdateForm venue={venue} onUpdate={onUpdate}/> {/* Add the update form here */}
+    <VenueUpdateForm venue={venue} onUpdate={onUpdate}/> 
   </div>
 );
 
