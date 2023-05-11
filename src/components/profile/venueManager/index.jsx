@@ -57,9 +57,8 @@ const ManagerProfile = ({ handleLogout }) => {
       });
   
       if (response.status === 200) {
-        setVenues((prevVenues) =>
-          prevVenues.map((venue) => (venue._id === venueId ? updatedVenue : venue))
-        );
+        const fetchedVenues = await fetchVenues();
+        setVenues(fetchedVenues);
       } else {
         console.error(`Error updating venue: ${response.statusText}`);
       }
