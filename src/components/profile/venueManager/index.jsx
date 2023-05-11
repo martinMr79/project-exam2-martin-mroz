@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react"; // add useCallback here
+import React, { useEffect, useState, useCallback } from "react"; 
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useAuthStore } from "../../../hooks/useAuthStore";
@@ -46,7 +46,26 @@ const ManagerProfile = ({ handleLogout }) => {
       console.error("Error fetching venues:", error);
       return []; 
     }
-  }, [accessToken, decodedToken]); // add dependencies here
+  }, [accessToken, decodedToken]); 
+
+  const updateVenue = async (venueId, updatedVenue) => {
+    try {
+      const response = await axios.put(`${baseURL}venues/${venueId}`, updatedVenue, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (response.status === 200) {
+        const fetchedVenues = await fetchVenues();
+        setVenues(fetchedVenues);
+      } else {
+        console.error(`Error updating venue: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error(`Error updating venue: ${error}`);
+    }
+  };
 
   useEffect(() => {
     const initialiseVenues = async () => {
@@ -55,7 +74,7 @@ const ManagerProfile = ({ handleLogout }) => {
     };
 
     initialiseVenues();
-  }, [fetchVenues]); // use fetchVenues here
+  }, [fetchVenues]); 
 
   useEffect(() => {
     if (!accessToken) {
@@ -84,7 +103,7 @@ const ManagerProfile = ({ handleLogout }) => {
           <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
           <h2>Add Venue</h2>
           <VenueForm accessToken={accessToken} onAddVenue={addVenue} />
-          <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} />
+          <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} onUpdateVenue={updateVenue}/>
           <Button onClick={handleLogout}>Logout</Button>
         </>
       ) : (
