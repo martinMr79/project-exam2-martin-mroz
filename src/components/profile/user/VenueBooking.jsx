@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -8,7 +7,7 @@ import { baseURL } from "../../../utilities/constants";
 import { ProfileContainer } from "../styled"; 
 
 const VenueBooking = ({ venueId }) => {
-  const { bookingId } = useParams();
+ 
   const { accessToken } = useAuthStore();
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
