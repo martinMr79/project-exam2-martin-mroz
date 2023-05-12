@@ -10,8 +10,8 @@ import { ProfileContainer } from "../styled";
 
 const UserProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
+  const [bookings, setBookings] = useState([]);
   const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
-  const history = useNavigate();
   const [loading, setLoading] = useState(true);
 
   const handleAvatarUpdate = async (event) => {
@@ -36,15 +36,21 @@ const UserProfile = ({ handleLogout }) => {
   };
 
   useEffect(() => {
-    const fetchAccessToken = async () => {
-     
-  
-      setLoading(false);
+    const fetchBookings = async () => {
+      try {
+        const response = await axios.get(
+          `${baseURL}profiles/${decodedToken.name}/bookings`,
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+        setBookings(response.data);
+        setLoading(false); // Move this line here
+      } catch (error) {
+        console.error(error);
+      }
     };
-  
-    fetchAccessToken();
-  
-  }, [accessToken, decodedToken, history, setAccessToken]);
+    
+    fetchBookings();
+  }, [accessToken, decodedToken]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -54,7 +60,6 @@ const UserProfile = ({ handleLogout }) => {
     <ProfileContainer>
       {decodedToken ? (
         <>
-         {console.log("User profile decoded token:", decodedToken)}
           <h2>Welcome user {decodedToken.name}</h2>
           <p>Email: {decodedToken.email}</p>
           <Avatar
@@ -77,6 +82,19 @@ const UserProfile = ({ handleLogout }) => {
           </form>
           <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
           <Button onClick={handleLogout}>Logout</Button>
+          {bookings.length > 0 && (
+  <div>
+    <h2>Your Bookings:</h2>
+    {bookings.map((booking) => (
+      <div key={booking.id}>
+        <h3>Venue: {booking.venueId}</h3>
+        <p>
+          From: {booking.dateFrom} To: {booking.dateTo} Guests: {booking.guests}
+        </p>
+      </div>
+    ))}
+  </div>
+)}
         </>
       ) : (
         <div>You are not logged in.</div>
