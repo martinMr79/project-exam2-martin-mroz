@@ -39,13 +39,20 @@ const UserProfile = ({ handleLogout }) => {
     const fetchBookings = async () => {
       try {
         const response = await axios.get(
-          `${baseURL}profiles/${decodedToken.name}/bookings`,
+          `${baseURL}profiles/${decodedToken.name}?_venues=true&_bookings=true`,
           { headers: { Authorization: `Bearer ${accessToken}` } }
         );
-        setBookings(response.data);
-        setLoading(false); // Move this line here
+    
+        // If the API returns the bookings in the response data
+        if (response.data.bookings) {
+          setBookings(response.data.bookings);
+        } else {
+          console.error("API did not return expected bookings data");
+        }
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false); // Setting loading to false even if there was an error
       }
     };
     
@@ -87,7 +94,7 @@ const UserProfile = ({ handleLogout }) => {
     <h2>Your Bookings:</h2>
     {bookings.map((booking) => (
       <div key={booking.id}>
-        <h3>Venue: {booking.venueId}</h3>
+        <h3>Venue: {booking.venue.name}</h3>
         <p>
           From: {booking.dateFrom} To: {booking.dateTo} Guests: {booking.guests}
         </p>
