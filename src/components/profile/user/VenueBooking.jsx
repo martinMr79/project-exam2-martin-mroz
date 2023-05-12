@@ -30,7 +30,7 @@ const VenueBooking = ({ venueId }) => {
         }
       );
       console.log(response);
-      setMessage("Booking successful!");
+      setMessage(`Booking successful! You have booked the venue from ${dateFrom} to ${dateTo} for ${guests} guests.`);
     } catch (error) {
       setMessage(`Booking failed: ${error.response.data.message}`);
     }
@@ -72,6 +72,7 @@ const VenueBooking = ({ venueId }) => {
           Book
         </Button>
       </form>
+      
     </ProfileContainer>
   );
 };
