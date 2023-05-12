@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useAPI } from "../../hooks/api";
-
+import VenueBooking from "../../components/profile/user/VenueBooking";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -37,7 +37,8 @@ function VenuePage() {
               <h2 key={data.id}>{data.name}</h2>        
               <p>{data.price} Nok pr night</p>
               <p>{data.description}</p>
-             
+              
+              <VenueBooking venueId={params.id} /> 
             </CardContent>
           </Card>
         )}
