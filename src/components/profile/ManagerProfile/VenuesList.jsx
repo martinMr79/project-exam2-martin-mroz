@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 import Button from "@mui/material/Button";
-import VenueUpdateForm from "./VenueUpdateForm"; 
+import VenueUpdateForm from "./VenueUpdateForm";
+import VenueBookings from "./VenueBookings"; 
 
-const VenueItem = ({ venue, onDelete, onUpdate }) => (
+const VenueItem = ({ venue, onDelete, onUpdate, accessToken }) => (
   <div>
     <h3>{venue.name}</h3>
     <img
@@ -16,6 +17,7 @@ const VenueItem = ({ venue, onDelete, onUpdate }) => (
     <p>{venue.description}</p>
     <Button onClick={() => onDelete(venue._id)}>Delete</Button>
     <VenueUpdateForm venue={venue} onUpdate={onUpdate}/> 
+    <VenueBookings venueId={venue._id} accessToken={accessToken} />
   </div>
 );
 
