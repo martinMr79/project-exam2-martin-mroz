@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,8 +10,8 @@ import { ProfileContainer } from "../styled";
 
 const UserProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
+  const [bookings, setBookings] = useState([]);
   const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
-  const history = useNavigate();
   const [loading, setLoading] = useState(true);
 
   const handleAvatarUpdate = async (event) => {
@@ -36,15 +36,28 @@ const UserProfile = ({ handleLogout }) => {
   };
 
   useEffect(() => {
-    const fetchAccessToken = async () => {
-     
+    const fetchBookings = async () => {
+      try {
+        const response = await axios.get(
+          `${baseURL}profiles/${decodedToken.name}?_venues=true&_bookings=true`,
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+
   
-      setLoading(false);
+        if (response.data.bookings) {
+          setBookings(response.data.bookings);
+        } else {
+          console.error("API did not return expected bookings data");
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false); 
+      }
     };
-  
-    fetchAccessToken();
-  
-  }, [accessToken, decodedToken, history, setAccessToken]);
+    
+    fetchBookings();
+  }, [accessToken, decodedToken]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -54,7 +67,6 @@ const UserProfile = ({ handleLogout }) => {
     <ProfileContainer>
       {decodedToken ? (
         <>
-         {console.log("User profile decoded token:", decodedToken)}
           <h2>Welcome user {decodedToken.name}</h2>
           <p>Email: {decodedToken.email}</p>
           <Avatar
@@ -77,6 +89,29 @@ const UserProfile = ({ handleLogout }) => {
           </form>
           <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
           <Button onClick={handleLogout}>Logout</Button>
+          {bookings.length > 0 && (
+            <div>
+              <h2>Your Bookings:</h2>
+              {bookings.map((booking) => {
+                const fromDate = new Date(booking.dateFrom);
+                const toDate = new Date(booking.dateTo);
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+                return (
+                  <div key={booking.id}>
+                    <h3>{booking.venue.name}</h3>
+                    <img src= {booking.venue.media} 
+                         alt={booking.venue.name} 
+                         style={{ width: "250px", marginBottom: "10px" }}/>
+                      <p>
+                      Check in: 15:00 {fromDate.toLocaleDateString(undefined, options)}</p> 
+                      <p>check out: {toDate.toLocaleDateString(undefined, options)}</p>
+                      <p>Guests:{booking.guests}</p> 
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </>
       ) : (
         <div>You are not logged in.</div>
