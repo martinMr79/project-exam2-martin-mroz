@@ -8,9 +8,9 @@ const VenueBookings = ({ venueId, accessToken }) => {
   useEffect(() => {
     const fetchVenueBookings = async () => {
       try {
-        const response = await axios.get(`${baseURL}venues/${venueId}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
+        const response = await axios.get(`${baseURL}venues/${venueId}?_bookings=true`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
           },
         });
 
