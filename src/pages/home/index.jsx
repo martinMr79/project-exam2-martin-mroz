@@ -2,6 +2,7 @@ import { baseURL } from "../../utilities/constants";
 import { useAPI } from "../../hooks/api";
 import { Link } from "react-router-dom";
 import { Container, CardContainer } from "./styled";
+import SearchBar from "../../components/searchbar";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -10,6 +11,12 @@ import CardMedia from '@mui/material/CardMedia';
 export function Home() {
     const { data, isLoading, isError } = useAPI(baseURL + "venues");
     console.log(data)
+
+    const handleSearch = (searchTerm) => {
+        // Call an API or filter your local state based on the search term
+        console.log('Searching for:', searchTerm);
+    }
+
     if (isLoading) {
         return <div>Loading</div>;
       }
@@ -21,8 +28,7 @@ export function Home() {
         <Container>
 
           <h1>Venues</h1>
-          
-
+          <SearchBar onSearch={handleSearch} />
           <CardContainer>
           
           {data && data.map((venue) => (
