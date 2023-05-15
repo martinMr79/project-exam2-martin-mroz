@@ -6,6 +6,7 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import { baseURL } from "../../../utilities/constants";
 import { ProfileContainer } from "../styled"; 
 import DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/DatePicker.css'
 
 const VenueBooking = ({ venueId }) => {
  
@@ -91,7 +92,7 @@ const VenueBooking = ({ venueId }) => {
         value={guests}
         onChange={(e) => setGuests(e.target.value)}
         required
-        style={{ marginBottom: "10px" }}
+        style={{ margin: "20px 0px" }}
       />
       <br />
       <Button variant="contained" type="submit">
