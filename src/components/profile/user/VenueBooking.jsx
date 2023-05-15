@@ -20,15 +20,20 @@ const VenueBooking = ({ venueId }) => {
   useEffect(() => {
     const fetchBookedDates = async () => {
       try {
-        const response = await axios.get(`${baseURL}bookedDates/${venueId}`, {
+        const response = await axios.get(`${baseURL}venues/${venueId}?_bookings=true`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
-        setBookedDates(response.data.map(dateStr => new Date(dateStr)));
+  
+        const dates = response.data.bookings.flatMap(booking => [
+          new Date(booking.dateFrom),
+          new Date(booking.dateTo),
+        ]);
+        setBookedDates(dates);
       } catch (error) {
         console.error('Failed to fetch booked dates:', error);
       }
     };
-
+  
     fetchBookedDates();
   }, [venueId, accessToken]);
 
@@ -65,11 +70,12 @@ const VenueBooking = ({ venueId }) => {
         minDate={new Date()}
         maxDate={new Date(Date.now() + 31536000000)}
         tileDisabled={({ date, view }) =>
-          view === 'month' && // Block the date only in month view
-          bookedDates.some(disabledDate =>
-            disabledDate.getTime() === date.getTime()
-          )
-        }
+        view === 'month' && 
+        bookedDates.some(bookedDate =>
+          bookedDate.getTime() <= date.getTime() &&
+          bookedDate.getTime() >= date.getTime()
+        )
+      }
         required
       />
       <DatePicker
@@ -78,11 +84,12 @@ const VenueBooking = ({ venueId }) => {
         minDate={dateFrom}
         maxDate={new Date(Date.now() + 31536000000)}
         tileDisabled={({ date, view }) =>
-          view === 'month' && // Block the date only in month view
-          bookedDates.some(disabledDate =>
-            disabledDate.getTime() === date.getTime()
-          )
-        }
+        view === 'month' && 
+        bookedDates.some(bookedDate =>
+          bookedDate.getTime() <= date.getTime() &&
+          bookedDate.getTime() >= date.getTime()
+        )
+      }
         required
       />
       <br />
