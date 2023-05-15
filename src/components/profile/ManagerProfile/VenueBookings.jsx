@@ -4,6 +4,7 @@ import { baseURL } from "../../../utilities/constants";
 
 const VenueBookings = ({ venueId, accessToken }) => {
   const [venue, setVenue] = useState(null);
+  
 
   useEffect(() => {
     const fetchVenueBookings = async () => {

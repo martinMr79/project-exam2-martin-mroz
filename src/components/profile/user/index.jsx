@@ -10,9 +10,10 @@ import { ProfileContainer } from "../styled";
 
 const UserProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
-  const [bookings, setBookings] = useState([]);
+  const [bookings] = useState([]);
   const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
   const [loading, setLoading] = useState(true);
+  const { setBookings } = useAuthStore();
 
   const handleAvatarUpdate = async (event) => {
     event.preventDefault();
@@ -57,7 +58,7 @@ const UserProfile = ({ handleLogout }) => {
     };
     
     fetchBookings();
-  }, [accessToken, decodedToken]);
+  }, [accessToken, decodedToken, setBookings]);
 
   if (loading) {
     return <div>Loading...</div>;

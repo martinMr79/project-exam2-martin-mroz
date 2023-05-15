@@ -8,6 +8,7 @@ export const useAuthStore = create((set) => {
   return {
     accessToken,
     decodedToken,
+    bookings: [],
     setAccessToken: (token) => {
       localStorage.setItem("accessToken", token);
 
@@ -21,11 +22,13 @@ export const useAuthStore = create((set) => {
     setDecodedToken: (decodedToken) => {
       set({ decodedToken });
     },
+    setBookings: (bookings) => {
+      set({ bookings });
+    },
     clearAccessToken: () => {
       localStorage.removeItem("accessToken");
-      set({ accessToken: "", decodedToken: null });
+      set({ accessToken: "", decodedToken: null, bookings: [] });
     },
-
   };
 });
 

@@ -50,8 +50,10 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ### `npm install react-router-dom`
 
-### `npm install @mui/material @mui/styled-engine-sc styled-components`
+### `npm install @mui/material @mui/styled-engine-sc styled-components` link: https://mui.com/
 
-### `npm i zustand`
+### `npm i zustand` link: https://www.npmjs.com/package/zustand
 
 ### `npm install jwt-decode`
+
+### `npm install react-date-picker` link: https://www.npmjs.com/package/react-datepicker
