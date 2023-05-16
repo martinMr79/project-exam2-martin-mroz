@@ -25,8 +25,6 @@ function App() {
       return <LoginPage />;
     }
   
-    console.log("Current role:", decodedToken.venueManager ? "venueManager" : "user");
-  
     return decodedToken.venueManager ? (
       <ManagerProfile decodedToken={decodedToken} handleLogout={handleLogout} />
     ) : (

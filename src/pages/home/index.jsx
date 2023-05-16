@@ -24,7 +24,7 @@ export function Home() {
           <SearchBar data={data} isLoading={isLoading} isError={isError} />
           <CardContainer>
             {data && data.map((venue) => (
-              <Link to={`/venues/${venue.id}`}>
+              <Link key={venue.id} to={`/venues/${venue.id}`}>
                 <Card 
                   sx={{ 
                     maxWidth: 345,
@@ -33,7 +33,7 @@ export function Home() {
                 >
                   <CardMedia
                     component="img"
-                    image={venue.media.length > 0 ? venue.media : 'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
+                    image={venue.media.length > 0 ? venue.media[0] : 'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
                     title={venue.name}
                     alt={venue.name}
                   />
