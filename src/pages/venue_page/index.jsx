@@ -8,7 +8,6 @@ import CardMedia from '@mui/material/CardMedia';
 function VenuePage() {
     let params = useParams();
     const { data, isLoading, hasError } = useAPI(`https://api.noroff.dev/api/v1/holidaze/venues/${params.id}`);
-    console.log(data)
     if (isLoading) {
       return <div>Loading...</div>;
     }
@@ -16,7 +15,6 @@ function VenuePage() {
     if (hasError) {
       return <div>Error</div>;
     }
-    console.log(data); 
 
     return (
       <>
@@ -27,12 +25,15 @@ function VenuePage() {
               minHeight: 600  
             }}
           >
-            <CardMedia
-              component="img"
-              image={data.media}
-              title={data.name}
-              alt={data.name}
-            />
+{data && data.media && data.media.map((imageUrl, index) => (
+  <CardMedia
+    key={index} // Use index as the key
+    component="img"
+    image={imageUrl}
+    title={data.name}
+    alt={data.name}
+  />
+))}
             <CardContent>      
               <h2 key={data.id}>{data.name}</h2>        
               <p>{data.price} Nok pr night</p>

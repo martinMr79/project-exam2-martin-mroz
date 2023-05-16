@@ -29,7 +29,6 @@ const ManagerProfile = ({ handleLogout }) => {
           limit: limit,
         },
       });
-      console.log("Fetched venues:", response.data);
 
       const filteredVenues = response.data.filter(
         (venue) => venue.owner && venue.owner.email === decodedToken.email
