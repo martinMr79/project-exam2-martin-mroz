@@ -6,9 +6,10 @@ import SearchBar from "../../components/searchbar";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import { useHomeStore } from "../../hooks/api";
 
 export function Home() {
-    const { data, isLoading, isError } = useAPI(baseURL + "venues");
+    const { data, isLoading, isError } = useAPI(baseURL + "venues", useHomeStore);
 
     if (isLoading) {
         return <div>Loading</div>;
@@ -17,6 +18,11 @@ export function Home() {
     if (isError) {
         return <div>Error</div>;
     }
+
+    if (!Array.isArray(data)) {
+      return <div>No data</div>;
+  }
+
 
     return (
         <Container>

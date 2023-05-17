@@ -4,10 +4,11 @@ import VenueBooking from "../../components/profile/user/VenueBooking";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import { useVenuePageStore } from "../../hooks/api";
 
 function VenuePage() {
     let params = useParams();
-    const { data, isLoading, hasError } = useAPI(`https://api.noroff.dev/api/v1/holidaze/venues/${params.id}`);
+    const { data, isLoading, hasError } = useAPI(`https://api.noroff.dev/api/v1/holidaze/venues/${params.id}`, useVenuePageStore);
     if (isLoading) {
       return <div>Loading...</div>;
     }
