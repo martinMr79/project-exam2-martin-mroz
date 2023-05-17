@@ -1,59 +1,93 @@
-# User Stories
-The client has specified the following requirements in the form of User Stories:
+# Holidaze Accommodation Booking Site
 
-#### A user may view a list of Venues
-#### A user may search for a specific Venue
-#### A user may view a specific Venue page by id
-#### A user may view a calendar with available dates for a Venue
-#### A user with a stud.noroff.no email may register as a customer
-#### A registered customer may create a booking at a Venue
-#### A registered customer may view their upcoming bookings
-#### A user with a stud.noroff.no email may register as a Venue manager
-#### A registered Venue manager may create a Venue
-#### A registered Venue manager may update a Venue they manage
-#### A registered Venue manager may delete a Venue they manage
-#### A registered Venue manager may view bookings for a Venue they manage
-#### A registered user may login
-#### A registered user may update their avatar
-#### A registered user may logout
+Holidaze is a modern, user-friendly accommodation booking site that connects users with their ideal holiday venues. With a sleek front end design, Holidaze offers seamless navigation and functionality, ensuring an enjoyable booking experience. The platform also includes an admin-facing side where registered users can manage venues and bookings efficiently. 
 
-## Available Scripts
+## Features
+
+Here are some of the main features that Holidaze provides:
+
+- View a comprehensive list of venues.
+- Search functionality to find specific venues.
+- Detailed pages for each venue.
+- A calendar with available dates for each venue.
+- User registration for customers and venue managers.
+- Booking creation and management for registered customers.
+- Venue creation, update, and management for registered venue managers.
+- Ability to view bookings for the venues a manager oversees.
+- User login and logout functionality.
+- Avatar update for registered users.
+
+## Technical Information
+
+Holidaze is developed using approved, modern technologies, ensuring robust performance and scalability. The application is built on the React JavaScript framework, coupled with a CSS framework for responsive and appealing design. It uses the Holidaze API for all functionalities, making it a front-end application only.
+
+The application is hosted on Netlify, a popular static host known for its reliability and speed.
+
+## Design and Planning Tools
+
+For designing the user interface and user experience, we used Figma, a popular design application that allows for interactive prototyping.
+
+Our project planning was carried out using Trello, a web-based Kanban-style list-making application. We used a Gantt chart for project timing.
+
+## Links
+
+- [Gantt Chart](#) for project timing
+- [Design Prototype](#)
+- [Style Guide](#)
+- [Kanban Project Board](#)
+- [Repository Link](#)
+- [Hosted Application Demo Link](https://master--fantastic-puppy-a523c3.netlify.app/)
+
+## Installation
+
+1. Clone the repository: `git clone <repository-link>`
+2. Install the dependencies: `npm install`
+3. Start the application: `npm start`
+
+Please note that you need Node.js installed on your machine to run this application locally.
+
+## Contribution
+
+We welcome contributions. If you want to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+
+## Licensing
+
+The code in this project is licensed under MIT license.
+
+---
+
+For any additional information, please reach out to our team.
+
+## Available Scripts and Dependencies
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so it comes with several scripts predefined in the package.json file. 
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Builds the app for production to the `build` folder. The build is minified, and the filenames include the hashes. Your app is ready to be deployed!
 
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For advanced configuration and control over the project setup, you can use this command. But remember, once you eject, there's no going back!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Dependencies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This project uses several dependencies for its functionality:
 
-### `npm install react-router-dom`
-
-### `npm install @mui/material @mui/styled-engine-sc styled-components` link: https://mui.com/
-
-### `npm i zustand` link: https://www.npmjs.com/package/zustand
-
-### `npm install jwt-decode`
-
-### `npm install react-date-picker` link: https://www.npmjs.com/package/react-datepicker
+- [React Router DOM](https://reactrouter.com/) - for handling routing: `npm install react-router-dom`
+- [Material UI](https://mui.com/) - for UI components: `npm install @mui/material @mui/styled-engine-sc styled-components`
+- [Zustand](https://www.npmjs.com/package/zustand) - for state management: `npm i zustand`
+- [jwt-decode](https://www.npmjs.com/package/jwt-decode) - for decoding JWT tokens: `npm install jwt-decode`
+- [React Date Picker](https://www.npmjs.com/package/react-datepicker) - for date selection functionality: `npm install react-date-picker`

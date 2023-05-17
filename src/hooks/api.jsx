@@ -1,7 +1,8 @@
-import create from "zustand";
 import { useEffect } from 'react';
+import create from 'zustand';
 
-const useAPIStore = create((set) => ({
+// Create a store factory
+const createStore = () => create((set) => ({
   data: [],
   isLoading: false,
   hasError: false,
@@ -19,8 +20,13 @@ const useAPIStore = create((set) => ({
   },
 }));
 
-export function useAPI(url) {
-  const { data, isLoading, hasError, fetchData } = useAPIStore();
+
+export const useHomeStore = createStore();
+export const useProfileStore = createStore();
+export const useVenuePageStore = createStore();
+
+export function useAPI(url, store) {
+  const { data, isLoading, hasError, fetchData } = store();
 
   useEffect(() => {
     fetchData(url);
@@ -32,4 +38,3 @@ export function useAPI(url) {
     hasError,
   };
 }
-

@@ -6,9 +6,10 @@ import SearchBar from "../../components/searchbar";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import { useHomeStore } from "../../hooks/api";
 
 export function Home() {
-    const { data, isLoading, isError } = useAPI(baseURL + "venues");
+    const { data, isLoading, isError } = useAPI(baseURL + "venues", useHomeStore);
 
     if (isLoading) {
         return <div>Loading</div>;
@@ -18,13 +19,18 @@ export function Home() {
         return <div>Error</div>;
     }
 
+    if (!Array.isArray(data)) {
+      return <div>No data</div>;
+  }
+
+
     return (
         <Container>
           <h1>Venues</h1>
           <SearchBar data={data} isLoading={isLoading} isError={isError} />
           <CardContainer>
             {data && data.map((venue) => (
-              <Link to={`/venues/${venue.id}`}>
+              <Link key={venue.id} to={`/venues/${venue.id}`}>
                 <Card 
                   sx={{ 
                     maxWidth: 345,
@@ -33,7 +39,7 @@ export function Home() {
                 >
                   <CardMedia
                     component="img"
-                    image={venue.media.length > 0 ? venue.media : 'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
+                    image={venue.media.length > 0 ? venue.media[0] : 'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
                     title={venue.name}
                     alt={venue.name}
                   />

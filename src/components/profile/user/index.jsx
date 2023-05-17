@@ -10,10 +10,8 @@ import { ProfileContainer } from "../styled";
 
 const UserProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
-  const [bookings] = useState([]);
-  const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
+  const { decodedToken, accessToken, setAccessToken, setDecodedToken, bookings, setBookings } = useAuthStore();
   const [loading, setLoading] = useState(true);
-  const { setBookings } = useAuthStore();
 
   const handleAvatarUpdate = async (event) => {
     event.preventDefault();
