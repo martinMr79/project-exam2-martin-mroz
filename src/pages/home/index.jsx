@@ -32,8 +32,8 @@ export function Home() {
       </ImageContainer>
       <h1>Venues</h1>
       <CardContainer>
-        {data.map((venue) => (
-          <Link key={venue.id} to={`/venues/${venue.id}`}>
+      {data && data.map((venue, index) => (
+  <Link key={`${venue.id}-${index}`} to={`/venues/${venue.id}`}>
             <Card 
               sx={{ 
                 maxWidth: 345,
