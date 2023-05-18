@@ -10,7 +10,7 @@ import { useHomeStore } from "../../hooks/api";
 import backgroundImg from "../../assets/images/backgroundImg.jpg"
 
 export function Home() {
-  const { data, isLoading, isError } = useAPI(baseURL + "venues", useHomeStore);
+  const { data, isLoading, isError, loadMore } = useAPI(baseURL + "venues", useHomeStore);
 
   if (isLoading) {
       return <div>Loading</div>;
@@ -32,7 +32,7 @@ export function Home() {
       </ImageContainer>
       <h1>Venues</h1>
       <CardContainer>
-        {data && data.map((venue) => (
+        {data.map((venue) => (
           <Link key={venue.id} to={`/venues/${venue.id}`}>
             <Card 
               sx={{ 
@@ -56,6 +56,7 @@ export function Home() {
           </Link>
         ))}
       </CardContainer>
+      <button onClick={loadMore}>Load More</button>
     </Container>
   );
 }
