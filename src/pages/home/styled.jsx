@@ -8,6 +8,7 @@ export const Container = styled.div`
   margin: 0 auto 6rem;
 `;
 
+
 export const ImageContainer = styled.div`
   background: url(${props => props.backgroundImg}) no-repeat center center/cover;
   height: 400px; 
@@ -16,6 +17,13 @@ export const ImageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+export const VenueImage = styled.img`
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  margin: 1.5rem;
 `;
 
 export const CardContainer = styled.div`

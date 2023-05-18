@@ -1,7 +1,7 @@
 import { baseURL } from "../../utilities/constants";
 import { useAPI } from "../../hooks/api";
 import { Link } from "react-router-dom";
-import { Container, CardContainer, ImageContainer } from "./styled";
+import { Container, CardContainer, ImageContainer, VenueImage } from "./styled";
 import SearchBar from "../../components/searchbar";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -45,6 +45,12 @@ export function Home() {
                 image={venue.media.length > 0 ? venue.media[0] : 'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
                 title={venue.name}
                 alt={venue.name}
+                sx={{
+                  height: '300px',
+                  width: '300px',
+                  objectFit: 'cover',
+                  m: '1.5rem'
+                }}
               />
               <CardContent>      
                 <h2 key={venue.id}>{venue.name}</h2>        
