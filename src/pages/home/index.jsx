@@ -1,10 +1,11 @@
 import { baseURL } from "../../utilities/constants";
 import { useAPI } from "../../hooks/api";
 import { Link } from "react-router-dom";
-import { Container, CardContainer, ImageContainer, VenueImage } from "./styled";
+import { Container, CardContainer, ImageContainer } from "./styled";
 import SearchBar from "../../components/searchbar";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Button from "@mui/material/Button";
 import CardMedia from '@mui/material/CardMedia';
 import { useHomeStore } from "../../hooks/api";
 import backgroundImg from "../../assets/images/backgroundImg.jpg"
@@ -25,15 +26,20 @@ export function Home() {
   }
 
   return (
-    <Container>
-      <ImageContainer backgroundImg={backgroundImg}>
+    <>
+    <ImageContainer backgroundImg={backgroundImg}>
         
-        <SearchBar data={data} isLoading={isLoading} isError={isError} />
-      </ImageContainer>
+    <SearchBar data={data} isLoading={isLoading} isError={isError} />
+  </ImageContainer>
+    <Container>
+
       <h1>Venues</h1>
       <CardContainer>
       {data && data.map((venue, index) => (
-  <Link key={`${venue.id}-${index}`} to={`/venues/${venue.id}`}>
+  <Link key={`${venue.id}-${index}`}
+        to={`/venues/${venue.id}`}
+        style={{ textDecoration: 'none' }}
+        >
             <Card 
               sx={{ 
                 maxWidth: 345,
@@ -53,17 +59,20 @@ export function Home() {
                 }}
               />
               <CardContent>      
-                <h2 key={venue.id}>{venue.name}</h2>        
+                <h2 key={venue.id}>{venue.name}</h2>      
                 <p >{venue.price} Nok pr night</p>
-                <p >{venue.description}</p>
                 <p>WiFi: {venue.meta.wifi ? 'Yes' : 'No'}</p>
+                <p>Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}</p>
+                <p>Parking: {venue.meta.wifi ? 'Yes' : 'No'}</p>
+                <p>Pets: {venue.meta.wifi ? 'Allowed' : 'Not allowed'}</p>
               </CardContent>
             </Card>
           </Link>
         ))}
       </CardContainer>
-      <button onClick={loadMore}>Load More</button>
+      <Button onClick={loadMore}>Load More</Button>
     </Container>
+    </>
   );
 }
 

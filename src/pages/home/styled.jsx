@@ -19,12 +19,6 @@ export const ImageContainer = styled.div`
   justify-content: center;
 `;
 
-export const VenueImage = styled.img`
-  height: 300px;
-  width: 300px;
-  object-fit: cover;
-  margin: 1.5rem;
-`;
 
 export const CardContainer = styled.div`
   border-radius: 8px;

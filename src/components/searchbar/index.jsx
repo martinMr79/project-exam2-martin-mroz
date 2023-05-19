@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import TextField from "@mui/material/TextField";
 
 const SearchBar = ({ data, isLoading, isError }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -29,12 +30,14 @@ const SearchBar = ({ data, isLoading, isError }) => {
 
     return (
       <div>
-        <input 
-            type="text"
-            placeholder="Search venues..."
-            value={searchTerm}
-            onChange={handleInputChange}
-        />
+     <TextField
+        type="text"
+        placeholder="Search venues..."
+        value={searchTerm}
+        onChange={handleInputChange}
+        variant="outlined"
+        fullWidth
+      />
         {searchResults.length ? (
           <ul>
             {searchResults.map((venue) => (
