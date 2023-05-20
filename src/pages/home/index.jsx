@@ -1,7 +1,7 @@
 import { baseURL } from "../../utilities/constants";
 import { useAPI } from "../../hooks/api";
 import { Link } from "react-router-dom";
-import { Container, CardContainer, ImageContainer } from "./styled";
+import { Container, CardContainer, ImageContainer, SearchContainer } from "./styled";
 import SearchBar from "../../components/searchbar";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -29,7 +29,9 @@ export function Home() {
     <>
     <ImageContainer backgroundImg={backgroundImg}>
         
+    <SearchContainer>
     <SearchBar data={data} isLoading={isLoading} isError={isError} />
+  </SearchContainer>
   </ImageContainer>
     <Container>
 
