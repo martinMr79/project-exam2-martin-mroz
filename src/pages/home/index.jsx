@@ -35,40 +35,46 @@ export function Home() {
 
       <h1>Venues</h1>
       <CardContainer>
-      {data && data.map((venue, index) => (
-  <Link key={`${venue.id}-${index}`}
-        to={`/venues/${venue.id}`}
-        style={{ textDecoration: 'none' }}
-        >
-            <Card 
-              sx={{ 
-                maxWidth: 345,
-                minHeight: 600
-              }}
-            >
-              <CardMedia
-                component="img"
-                image={venue.media.length > 0 ? venue.media[0] : 'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
-                title={venue.name}
-                alt={venue.name}
-                sx={{
-                  height: '300px',
-                  width: '300px',
-                  objectFit: 'cover',
-                  m: '1.5rem'
-                }}
-              />
-              <CardContent>      
-                <h2 key={venue.id}>{venue.name}</h2>      
-                <p >{venue.price} Nok pr night</p>
-                <p>WiFi: {venue.meta.wifi ? 'Yes' : 'No'}</p>
-                <p>Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}</p>
-                <p>Parking: {venue.meta.wifi ? 'Yes' : 'No'}</p>
-                <p>Pets: {venue.meta.wifi ? 'Allowed' : 'Not allowed'}</p>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+      {data && data.map((venue, index) => {
+  if (venue.media.length === 0) {
+    return null; // Don't render this venue if it has no media
+  }
+
+  return (
+    <Link key={`${venue.id}-${index}`}
+      to={`/venues/${venue.id}`}
+      style={{ textDecoration: 'none' }}
+    >
+      <Card 
+        sx={{ 
+          maxWidth: 345,
+          minHeight: 600
+        }}
+      >
+        <CardMedia
+          component="img"
+          image={venue.media[0]}
+          title={venue.name}
+          alt={venue.name}
+          sx={{
+            height: '300px',
+            width: '300px',
+            objectFit: 'cover',
+            m: '1.5rem'
+          }}
+        />
+        <CardContent>      
+          <h2 key={venue.id}>{venue.name}</h2>      
+          <p >{venue.price} Nok pr night</p>
+          <p>WiFi: {venue.meta.wifi ? 'Yes' : 'No'}</p>
+          <p>Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}</p>
+          <p>Parking: {venue.meta.wifi ? 'Yes' : 'No'}</p>
+          <p>Pets: {venue.meta.wifi ? 'Allowed' : 'Not allowed'}</p>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+})}
       </CardContainer>
       <Button onClick={loadMore}>Load More</Button>
     </Container>
