@@ -9,28 +9,33 @@ import Button from "@mui/material/Button";
 import CardMedia from '@mui/material/CardMedia';
 import { useHomeStore } from "../../hooks/api";
 import backgroundImg from "../../assets/images/backgroundImg.jpg"
-
-/*import WifiIcon from '@mui/icons-material/Wifi';
-import WifiOffIcon from '@mui/icons-material/WifiOff';
-
-import NoMealsIcon from '@mui/icons-material/NoMeals';
-import RestaurantIcon from '@mui/icons-material/Restaurant'; */
+import { useState, useEffect } from "react";
 
 export function Home() {
-  const { data, isLoading, isError, loadMore } = useAPI(baseURL + "venues", useHomeStore);
+  const [itemsToShow, setItemsToShow] = useState(20); // Show 20 items initially
+  const { data, isLoading, isError, loadMore } = useAPI(useHomeStore);
+
+  useEffect(() => {
+    useHomeStore.getState().fetchData(baseURL + "venues", true);
+  }, []);
 
   if (isLoading) {
-      return <div>Loading</div>;
+    return <div>Loading...</div>;
   }
 
   if (isError) {
-      return <div>Error</div>;
+    return <div>Error...</div>;
   }
 
   if (!Array.isArray(data)) {
-    return <div>No data</div>;
+    return <div>No data...</div>;
   }
 
+  const showMoreItems = () => {
+    loadMore();
+    setItemsToShow(itemsToShow + 20); // Show 20 more items
+  };
+  
   return (
     <>
       <ImageContainer backgroundImg={backgroundImg}/>
@@ -38,52 +43,52 @@ export function Home() {
         <SearchBar data={data} isLoading={isLoading} isError={isError} />
       </SearchContainer>
       <Container>
-
-      <h1>Book your dream apartment</h1>
-      <CardContainer>
-      {data && data.map((venue, index) => {
-  if (venue.media.length === 0) {
-    return null;
-  }
-
-  return (
-    <Link key={`${venue.id}-${index}`}
-      to={`/venues/${venue.id}`}
-      style={{ textDecoration: 'none' }}
-    >
-      <Card 
-        sx={{ 
-          maxWidth: 345,
-          minHeight: 600
-        }}
-      >
-        <CardMedia
-          component="img"
-          image={venue.media[0]}
-          title={venue.name}
-          alt={venue.name}
-          sx={{
-            height: '300px',
-            width: '300px',
-            objectFit: 'cover',
-            m: '1.5rem'
-          }}
-        />
-        <CardContent>      
-          <h2 key={venue.id}>{venue.name}</h2>      
-          <p >{venue.price} Nok pr night</p>
-          <p>WiFi: {venue.meta.wifi ? 'Yes' : 'No'}</p>
-          <p>Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}</p>
-          <p>Parking: {venue.meta.wifi ? 'Yes' : 'No'}</p>
-          <p>Pets: {venue.meta.wifi ? 'Allowed' : 'Not allowed'}</p>
-        </CardContent>
-      </Card>
-    </Link>
-  );
-})}
-      </CardContainer>
-      <Button onClick={loadMore}>Load More</Button>
-    </Container>
+        <h1>Book your dream apartment</h1>
+        <CardContainer>
+          {data && data.slice(0, itemsToShow).map((venue, index) => {
+            if (venue.media.length === 0) {
+              return null;
+            }
+            return (
+              <Link key={`${venue.id}-${index}`}
+                to={`/venues/${venue.id}`}
+                style={{ textDecoration: 'none' }}
+              >
+                <Card 
+                  sx={{ 
+                    maxWidth: 345,
+                    minHeight: 600
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={venue.media[0]}
+                    title={venue.name}
+                    alt={venue.name}
+                    sx={{
+                      height: '300px',
+                      width: '300px',
+                      objectFit: 'cover',
+                      m: '1.5rem'
+                    }}
+                  />
+                  <CardContent>      
+                    <h2 key={venue.id}>{venue.name}</h2>      
+                    <p >{venue.price} Nok pr night</p>
+                    <p>WiFi: {venue.meta.wifi ? 'Yes' : 'No'}</p>
+                    <p>Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}</p>
+                    <p>Parking: {venue.meta.wifi ? 'Yes' : 'No'}</p>
+                    <p>Pets: {venue.meta.wifi ? 'Allowed' : 'Not allowed'}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            );
+          })}
+        </CardContainer>
+        {itemsToShow < data.length && ( // Only show the "Load More" button if there are more items to show
+          <Button onClick={showMoreItems}>Load More</Button>
+        )}
+      </Container>
     </>
   );
 }

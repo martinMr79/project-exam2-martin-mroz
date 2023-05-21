@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {create} from 'zustand';
 
 // Create a store factory
@@ -35,23 +35,12 @@ export const useHomeStore = createStore();
 export const useProfileStore = createStore();
 export const useVenuePageStore = createStore();
 
-export function useAPI(url, store) {
-  const { data, isLoading, hasError, fetchData } = store();
+export const useAPI = (store) => {
+  const { data, isLoading, isError, fetchData } = store();
 
   const loadMore = () => {
-    fetchData(url);
+    fetchData(null, true);
   };
 
-  useEffect(() => {
-    fetchData(url);
-  }, [fetchData, url]);
-
-  console.log({ data, isLoading, hasError });
-
-  return {
-    data,
-    isLoading,
-    hasError,
-    loadMore,
-  };
-}
+  return { data, isLoading, isError, loadMore };
+};
