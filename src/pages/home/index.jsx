@@ -27,13 +27,11 @@ export function Home() {
 
   return (
     <>
-    <ImageContainer backgroundImg={backgroundImg}>
-        
-    <SearchContainer>
-    <SearchBar data={data} isLoading={isLoading} isError={isError} />
-  </SearchContainer>
-  </ImageContainer>
-    <Container>
+      <ImageContainer backgroundImg={backgroundImg}/>
+      <SearchContainer>
+        <SearchBar data={data} isLoading={isLoading} isError={isError} />
+      </SearchContainer>
+      <Container>
 
       <h1>Venues</h1>
       <CardContainer>

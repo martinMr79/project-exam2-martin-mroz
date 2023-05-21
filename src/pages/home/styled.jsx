@@ -5,7 +5,7 @@ export const SearchContainer = styled.div`
   justify-content: center;
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
+  margin: -16rem auto;
 `;
 
 export const Container = styled.div`
@@ -13,7 +13,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto 6rem;
+  margin: 25rem auto 6rem;
 `;
 
 export const ImageContainer = styled.div`
