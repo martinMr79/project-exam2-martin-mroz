@@ -33,7 +33,7 @@ export function Home() {
       </SearchContainer>
       <Container>
 
-      <h1>Venues</h1>
+      <h1>Book your dream apartment</h1>
       <CardContainer>
       {data && data.map((venue, index) => {
   if (venue.media.length === 0) {
