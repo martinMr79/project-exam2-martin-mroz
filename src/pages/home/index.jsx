@@ -12,7 +12,7 @@ import backgroundImg from "../../assets/images/backgroundImg.jpg"
 import { useState, useEffect } from "react";
 
 export function Home() {
-  const [itemsToShow, setItemsToShow] = useState(20); // Show 20 items initially
+  const [itemsToShow, setItemsToShow] = useState(20);
   const { data, isLoading, isError, loadMore } = useAPI(useHomeStore);
 
   useEffect(() => {
@@ -33,9 +33,9 @@ export function Home() {
 
   const showMoreItems = () => {
     loadMore();
-    setItemsToShow(itemsToShow + 20); // Show 20 more items
+    setItemsToShow(itemsToShow + 20); 
   };
-  
+
   return (
     <>
       <ImageContainer backgroundImg={backgroundImg}/>
@@ -72,20 +72,20 @@ export function Home() {
                       m: '1.5rem'
                     }}
                   />
-                  <CardContent>      
-                    <h2 key={venue.id}>{venue.name}</h2>      
-                    <p >{venue.price} Nok pr night</p>
-                    <p>WiFi: {venue.meta.wifi ? 'Yes' : 'No'}</p>
-                    <p>Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}</p>
-                    <p>Parking: {venue.meta.wifi ? 'Yes' : 'No'}</p>
-                    <p>Pets: {venue.meta.wifi ? 'Allowed' : 'Not allowed'}</p>
-                  </CardContent>
+<CardContent>      
+  <h2 key={venue.id}>{venue.name}</h2>
+  <p>{venue.location.city} {venue.location.country}</p>
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <p>{venue.price}Nok pr night</p>
+    <p>Max Guests: {venue.maxGuests}</p>
+  </div>
+</CardContent>
                 </Card>
               </Link>
             );
           })}
         </CardContainer>
-        {itemsToShow < data.length && ( // Only show the "Load More" button if there are more items to show
+        {itemsToShow < data.length && ( 
           <Button onClick={showMoreItems}>Load More</Button>
         )}
       </Container>
