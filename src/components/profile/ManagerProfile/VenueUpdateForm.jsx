@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 const VenueUpdateForm = ({ venue, onUpdate }) => {
   const [updatedVenue, setUpdatedVenue] = useState(venue);
@@ -22,12 +23,14 @@ const VenueUpdateForm = ({ venue, onUpdate }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <p>Venue Name</p>
+      <TextField
         name="name"
         value={updatedVenue.name}
         onChange={handleChange}
       />
-      <input
+      <p>Venue Description</p>
+      <TextField
         name="description"
         value={updatedVenue.description}
         onChange={handleChange}

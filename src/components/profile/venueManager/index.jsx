@@ -89,6 +89,7 @@ const ManagerProfile = ({ handleLogout }) => {
     <ProfileContainer>
       {decodedToken ? (
         <>
+          <h1>Welcome {decodedToken.name}</h1>
           <AvatarUpdate
             decodedToken={decodedToken}
             accessToken={accessToken}
@@ -97,9 +98,7 @@ const ManagerProfile = ({ handleLogout }) => {
             avatarURL={avatarURL}
             setAvatarURL={setAvatarURL}
           />
-          <h2>Welcome {decodedToken.name}</h2>
           <p>Email: {decodedToken.email}</p>
-          <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
           <h2>Add Venue</h2>
           <VenueForm accessToken={accessToken} onAddVenue={addVenue} />
           <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} onUpdateVenue={updateVenue}/>
