@@ -10,6 +10,12 @@ import CardMedia from '@mui/material/CardMedia';
 import { useHomeStore } from "../../hooks/api";
 import backgroundImg from "../../assets/images/backgroundImg.jpg"
 
+/*import WifiIcon from '@mui/icons-material/Wifi';
+import WifiOffIcon from '@mui/icons-material/WifiOff';
+
+import NoMealsIcon from '@mui/icons-material/NoMeals';
+import RestaurantIcon from '@mui/icons-material/Restaurant'; */
+
 export function Home() {
   const { data, isLoading, isError, loadMore } = useAPI(baseURL + "venues", useHomeStore);
 
