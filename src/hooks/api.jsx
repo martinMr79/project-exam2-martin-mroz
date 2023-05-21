@@ -1,13 +1,12 @@
-import { useEffect } from 'react';
 import {create} from 'zustand';
 
-// Create a store factory
+
 const createStore = () => create((set, get) => ({ 
   data: [],
   isLoading: false,
   hasError: false,
-  offset: 0, // new state to track offset
-  limit: 100, // new state to set limit
+  offset: 0, 
+  limit: 100, 
   fetchData: async (url, usePagination = true) => {
     try {
       set({ isLoading: true, hasError: false });
@@ -35,23 +34,12 @@ export const useHomeStore = createStore();
 export const useProfileStore = createStore();
 export const useVenuePageStore = createStore();
 
-export function useAPI(url, store) {
-  const { data, isLoading, hasError, fetchData } = store();
+export const useAPI = (store) => {
+  const { data, isLoading, isError, fetchData } = store();
 
   const loadMore = () => {
-    fetchData(url);
+    fetchData(null, true);
   };
 
-  useEffect(() => {
-    fetchData(url);
-  }, [fetchData, url]);
-
-  console.log({ data, isLoading, hasError });
-
-  return {
-    data,
-    isLoading,
-    hasError,
-    loadMore,
-  };
-}
+  return { data, isLoading, isError, loadMore };
+};

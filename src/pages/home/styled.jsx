@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 
+export const SearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: -16rem auto;
+`;
+
 export const Container = styled.div`
   max-width: 1500px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto 6rem;
+  margin: 25rem auto 6rem;
 `;
-
 
 export const ImageContainer = styled.div`
   background: url(${props => props.backgroundImg}) no-repeat center center/cover;
@@ -18,7 +25,6 @@ export const ImageContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
 
 export const CardContainer = styled.div`
   border-radius: 8px;

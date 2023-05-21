@@ -1,5 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import { styled } from '@mui/system';
+import { SearchBarWrapper } from './styled';
+
+const ParentContainer = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  minHeight: '180px',
+  width: '60rem', 
+  
+});
 
 const SearchBar = ({ data, isLoading, isError }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -29,28 +42,52 @@ const SearchBar = ({ data, isLoading, isError }) => {
     }
 
     return (
-      <div>
-     <TextField
-        type="text"
-        placeholder="Search venues..."
-        value={searchTerm}
-        onChange={handleInputChange}
-        variant="outlined"
-        fullWidth
-      />
-        {searchResults.length ? (
-          <ul>
-            {searchResults.map((venue) => (
-              <li key={venue.id}>
-                {venue.name}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          searchTerm.length >= 2 && <div>No results found</div>
-        )}
-      </div>
+      <ParentContainer>
+        <SearchBarWrapper>
+    <Box
+      sx={{ 
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+        px: "3rem",
+        py: "2rem",
+        borderRadius: 5,
+        
+       
+      }}
+    >
+<TextField
+  type="text"
+  placeholder="Search venues"
+  value={searchTerm}
+  onChange={handleInputChange}
+  variant="outlined"
+  sx={{
+    color: "black",
+    backgroundColor: 'white',
+    borderRadius: 5, 
+    maxWidth: "100%", 
+    width: "100%", 
+    '@media (min-width: 500px)': { 
+      width: '30rem', 
+    },
+  }}
+/>
+            {searchResults.length ? (
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                {searchResults.map((venue) => (
+                  <li key={venue.id}>
+                    <Link to={`/venues/${venue.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                      {venue.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (             
+              searchTerm.length >= 2 && <div>No results found</div>
+            )}
+          </Box>
+          </SearchBarWrapper>
+      </ParentContainer>
     );
-}
-
+  }
+  
 export default SearchBar;
