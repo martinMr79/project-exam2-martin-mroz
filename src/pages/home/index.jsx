@@ -37,7 +37,7 @@ export function Home() {
       <CardContainer>
       {data && data.map((venue, index) => {
   if (venue.media.length === 0) {
-    return null; // Don't render this venue if it has no media
+    return null;
   }
 
   return (

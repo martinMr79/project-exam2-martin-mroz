@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const SearchSection = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 1000px;
+
 `;
 
 export const SearchBarWrapper = styled.div`

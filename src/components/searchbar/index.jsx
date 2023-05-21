@@ -10,7 +10,8 @@ const ParentContainer = styled('div')({
   flexDirection: 'column',
   alignItems: 'center',
   minHeight: '180px',
-  width: '100%', // You may want to also set the width to 100% so it takes the full width of its parent.
+  width: '60rem', 
+  
 });
 
 const SearchBar = ({ data, isLoading, isError }) => {
@@ -49,23 +50,27 @@ const SearchBar = ({ data, isLoading, isError }) => {
         px: "3rem",
         py: "2rem",
         borderRadius: 5,
-        width: '100%',  
-        maxWidth: '40rem'
+        
+       
       }}
     >
-      <TextField
-        type="text"
-        placeholder="Search venues"
-        value={searchTerm}
-        onChange={handleInputChange}
-        variant="outlined"
-        sx={{
-          color: "black",
-          backgroundColor: 'white',
-          borderRadius: 5, 
-          width: "100%" 
-        }}
-      />
+<TextField
+  type="text"
+  placeholder="Search venues"
+  value={searchTerm}
+  onChange={handleInputChange}
+  variant="outlined"
+  sx={{
+    color: "black",
+    backgroundColor: 'white',
+    borderRadius: 5, 
+    maxWidth: "100%", 
+    width: "100%", 
+    '@media (min-width: 500px)': { 
+      width: '30rem', 
+    },
+  }}
+/>
             {searchResults.length ? (
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 {searchResults.map((venue) => (

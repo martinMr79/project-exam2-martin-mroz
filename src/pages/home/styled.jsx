@@ -4,7 +4,7 @@ export const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 1000px;
   margin: -16rem auto;
 `;
 
