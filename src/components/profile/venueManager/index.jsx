@@ -16,6 +16,7 @@ const ManagerProfile = ({ handleLogout }) => {
   const history = useNavigate();
 
   const [venues, setVenues] = useState([]); 
+  const [activeComponent, setActiveComponent] = useState(null);
 
   const fetchVenues = useCallback(async (offset = 0, limit = 100) => {
     try {
@@ -90,25 +91,47 @@ const ManagerProfile = ({ handleLogout }) => {
       {decodedToken ? (
         <>
           <h1>Welcome {decodedToken.name}</h1>
-          <AvatarUpdate
-            decodedToken={decodedToken}
-            accessToken={accessToken}
-            setAccessToken={setAccessToken}
-            setDecodedToken={setDecodedToken}
-            avatarURL={avatarURL}
-            setAvatarURL={setAvatarURL}
-          />
-          <p>Email: {decodedToken.email}</p>
-          <h2>Add Venue</h2>
-          <VenueForm accessToken={accessToken} onAddVenue={addVenue} />
-          <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} onUpdateVenue={updateVenue}/>
-          <Button onClick={handleLogout}>Logout</Button>
+
+          {activeComponent === "profile" && (
+            <AvatarUpdate
+              decodedToken={decodedToken}
+              accessToken={accessToken}
+              setAccessToken={setAccessToken}
+              setDecodedToken={setDecodedToken}
+              avatarURL={avatarURL}
+              setAvatarURL={setAvatarURL}
+            />
+          )}
+          
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
+            <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("profile")}>Profile</Button>
+            <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("myVenues")}>My Venues</Button>
+            <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("addVenue")}>Add a Venue</Button>
+            <Button variant="contained" style={{ marginRight: "10px" }}>My bookings</Button>
+          </div>
+
+          {activeComponent === "myVenues" && (
+            <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} onUpdateVenue={updateVenue}/>
+          )}
+          
+          {activeComponent === "addVenue" && (
+            <VenueForm accessToken={accessToken} onAddVenue={addVenue} />
+          )}
+
+          {/* Rest of your JSX */}
         </>
       ) : (
         <div>You are not logged in.</div>
-        )}
-      </ProfileContainer>
-    );
-  };
-  
-  export default ManagerProfile;
+      )}
+    </ProfileContainer>
+  );
+};
+
+export default ManagerProfile;
+
+
+
+
+
+
+

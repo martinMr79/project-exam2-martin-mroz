@@ -67,6 +67,7 @@ const UserProfile = ({ handleLogout }) => {
       {decodedToken ? (
         <>
           <h2>Welcome user {decodedToken.name}</h2>
+
           <p>Email: {decodedToken.email}</p>
           <Avatar
             alt={decodedToken.name}
