@@ -81,7 +81,7 @@ const VenueForm = ({ accessToken, onAddVenue }) => {
   fullWidth
 />
 </Grid>
-<Grid item xs={12}>
+<Grid item xs={6}>
 <TextField
   name="location.zip"
   label="zip"
@@ -90,7 +90,7 @@ const VenueForm = ({ accessToken, onAddVenue }) => {
   fullWidth
 />
 </Grid>
-<Grid item xs={12}>
+<Grid item xs={6}>
 <TextField
   name="location.country"
   label="country"
