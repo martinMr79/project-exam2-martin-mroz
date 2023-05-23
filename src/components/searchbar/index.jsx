@@ -4,6 +4,8 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { styled } from '@mui/system';
 import { SearchBarWrapper } from './styled';
+import { useHomeStore } from '../../hooks/api'; 
+import { baseURL } from '../../utilities/constants';
 
 const ParentContainer = styled('div')({
   display: 'flex',
@@ -11,83 +13,86 @@ const ParentContainer = styled('div')({
   alignItems: 'center',
   minHeight: '180px',
   width: '60rem', 
-  
 });
 
-const SearchBar = ({ data, isLoading, isError }) => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+const SearchBar = () => {
+  const { data, isLoading, isError, fetchData } = useHomeStore();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-    const handleInputChange = (event) => {
-      setSearchTerm(event.target.value);
-    };
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
-    useEffect(() => {
-      if (!isLoading && data && data.length && searchTerm.length >= 2) {
-        const results = data.filter((venue) =>
-          venue.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setSearchResults(results);
-      } else {
-        setSearchResults([]);
-      }
-    }, [data, searchTerm, isLoading]);
+  useEffect(() => {
+    fetchData(`${baseURL}venues`, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    if (isError) {
-      return <div>Error</div>;
+  useEffect(() => {
+    if (!isLoading && data && data.length && searchTerm.length >= 2) {
+      const results = data.filter((venue) =>
+        venue.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
     }
+  }, [data, searchTerm, isLoading]);
 
-    if (isLoading) {
-      return <div>Loading...</div>;
-    }
-
-    return (
-      <ParentContainer>
-        <SearchBarWrapper>
-    <Box
-      sx={{ 
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-        px: "3rem",
-        py: "2rem",
-        borderRadius: 5,
-        
-       
-      }}
-    >
-<TextField
-  type="text"
-  placeholder="Search venues"
-  value={searchTerm}
-  onChange={handleInputChange}
-  variant="outlined"
-  sx={{
-    color: "black",
-    backgroundColor: 'white',
-    borderRadius: 5, 
-    maxWidth: "100%", 
-    width: "100%", 
-    '@media (min-width: 500px)': { 
-      width: '30rem', 
-    },
-  }}
-/>
-            {searchResults.length ? (
-              <ul style={{ listStyle: 'none', padding: 0 }}>
-                {searchResults.map((venue) => (
-                  <li key={venue.id}>
-                    <Link to={`/venues/${venue.id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                      {venue.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : (             
-              searchTerm.length >= 2 && <div>No results found</div>
-            )}
-          </Box>
-          </SearchBarWrapper>
-      </ParentContainer>
-    );
+  if (isError) {
+    return <div>Error</div>;
   }
-  
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <ParentContainer>
+      <SearchBarWrapper>
+        <Box
+          sx={{ 
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+            px: "3rem",
+            py: "2rem",
+            borderRadius: 5,
+          }}
+        >
+          <TextField
+            type="text"
+            placeholder="Search venues"
+            value={searchTerm}
+            onChange={handleInputChange}
+            variant="outlined"
+            sx={{
+              color: "black",
+              backgroundColor: 'white',
+              borderRadius: 5, 
+              maxWidth: "100%", 
+              width: "100%", 
+              '@media (min-width: 500px)': { 
+                width: '30rem', 
+              },
+            }}
+          />
+          {searchResults.length ? (
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {searchResults.map((venue) => (
+                <li key={venue.id}>
+                  <Link to={`/venues/${venue.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                    {venue.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (             
+            searchTerm.length >= 2 && <div>No results found</div>
+          )}
+        </Box>
+      </SearchBarWrapper>
+    </ParentContainer>
+  );
+}
+
 export default SearchBar;

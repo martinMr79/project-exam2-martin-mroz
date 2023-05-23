@@ -16,7 +16,7 @@ export function Home() {
   const { data, isLoading, isError, loadMore } = useAPI(useHomeStore);
 
   useEffect(() => {
-    useHomeStore.getState().fetchData(baseURL + "venues", true);
+    useHomeStore.getState().fetchData(`${baseURL}venues`, true);
   }, []);
 
   if (isLoading) {
@@ -32,8 +32,10 @@ export function Home() {
   }
 
   const showMoreItems = () => {
-    loadMore();
-    setItemsToShow(itemsToShow + 20); 
+    if (!isLoading) {
+      loadMore();
+      setItemsToShow(itemsToShow + 20);
+    }
   };
 
   return (
@@ -76,7 +78,7 @@ export function Home() {
   <h2 key={venue.id}>{venue.name}</h2>
   <p>{venue.location.city} {venue.location.country}</p>
   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-    <p>{venue.price}Nok pr night</p>
+    <p>{venue.price} Nok pr night</p>
     <p>Max Guests: {venue.maxGuests}</p>
   </div>
 </CardContent>
