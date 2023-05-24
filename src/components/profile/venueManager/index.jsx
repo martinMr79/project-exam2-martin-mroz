@@ -10,6 +10,7 @@ import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 import ViewBookings from "../hooks/viewBookings"
 import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
@@ -19,6 +20,7 @@ const ManagerProfile = ({ handleLogout }) => {
   const [venues, setVenues] = useState([]);
   const [activeComponent, setActiveComponent] = useState("profile");
   const [loading, setLoading] = useState(false);
+
 
 
   const handleMyBookings = useCallback(async () => {
@@ -121,13 +123,54 @@ const ManagerProfile = ({ handleLogout }) => {
             <>
               <h1 style={{ marginBottom: "3rem" }}>Welcome {decodedToken.name}</h1>
 
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "3rem", gap: "1rem" }}>
-                <Button variant="contained" style={{ marginRight: "1.5rem" }} onClick={() => setActiveComponent("profile")}>Profile</Button>
-                <Button variant="contained" style={{ marginRight: "1.5rem" }} onClick={() => setActiveComponent("myVenues")}>My Venues</Button>
-                <Button variant="contained" style={{ marginRight: "1.5rem" }} onClick={() => setActiveComponent("addVenue")}>Add a Venue</Button>
-                <Button variant="contained" style={{ marginRight: "1.5rem" }} onClick={handleMyBookings}>My bookings</Button>
-              </div>
+              
 
+              <Box sx={{ padding: 1, marginBottom: "3rem" }}>
+  <Button 
+    variant="contained" 
+    sx={{ 
+      margin: 1, 
+      width: { xs: '100%', sm: 'auto' }, 
+      marginBottom: { xs: 2, sm: 'auto' } 
+    }} 
+    onClick={() => setActiveComponent("profile")}
+  >
+    Profile
+  </Button>
+  <Button 
+    variant="contained" 
+    sx={{ 
+      margin: 1, 
+      width: { xs: '100%', sm: 'auto' }, 
+      marginBottom: { xs: 2, sm: 'auto' } 
+    }} 
+    onClick={() => setActiveComponent("myVenues")}
+  >
+    My Venues
+  </Button>
+  <Button 
+    variant="contained" 
+    sx={{ 
+      margin: 1, 
+      width: { xs: '100%', sm: 'auto' }, 
+      marginBottom: { xs: 2, sm: 'auto' } 
+    }} 
+    onClick={() => setActiveComponent("addVenue")}
+  >
+    Add a Venue
+  </Button>
+  <Button 
+    variant="contained" 
+    sx={{ 
+      margin: 1, 
+      width: { xs: '100%', sm: 'auto' }, 
+      marginBottom: { xs: 2, sm: 'auto' } 
+    }} 
+    onClick={handleMyBookings}
+  >
+    My bookings
+  </Button>
+</Box>
               {activeComponent === "profile" && (
                 <AvatarUpdate
                   decodedToken={decodedToken}
