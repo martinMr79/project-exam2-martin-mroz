@@ -88,7 +88,7 @@ export function Home() {
           })}
         </CardContainer>
         {itemsToShow < data.length && ( 
-          <Button onClick={showMoreItems}>Load More</Button>
+          <Button onClick={showMoreItems} style={{ margin: "15px" }}>Load More</Button>
         )}
       </Container>
     </>
