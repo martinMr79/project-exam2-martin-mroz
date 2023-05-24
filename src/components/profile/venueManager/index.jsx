@@ -6,10 +6,10 @@ import { ProfileContainer } from "../styled";
 import AvatarUpdate from "../ManagerProfile/AvatarUpdate";
 import VenueForm from "../ManagerProfile/VenueForm";
 import VenuesList from "../ManagerProfile/VenuesList";
-import VenueBooking from "../user/VenueBooking"
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 import ViewBookings from "../hooks/viewBookings"
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
@@ -17,8 +17,9 @@ const ManagerProfile = ({ handleLogout }) => {
   const history = useNavigate();
   const [bookings, setBookings] = useState([]);
   const [venues, setVenues] = useState([]);
-  const [activeComponent, setActiveComponent] = useState(null);
+  const [activeComponent, setActiveComponent] = useState("profile");
   const [loading, setLoading] = useState(false);
+
 
   const handleMyBookings = useCallback(async () => {
     setActiveComponent("myBookings");
@@ -84,7 +85,7 @@ const ManagerProfile = ({ handleLogout }) => {
 
   useEffect(() => {
     const fetchBookings = async () => {
-      setLoading(true);
+      setLoading(true); 
       try {
         const response = await axios.get(
           `${baseURL}profiles/${decodedToken.name}?_venues=true&_bookings=true`,
@@ -104,7 +105,7 @@ const ManagerProfile = ({ handleLogout }) => {
     };
 
     fetchBookings();
-  }, [accessToken, decodedToken, baseURL]);
+  }, [accessToken, decodedToken]);
 
   const addVenue = (newVenue) => {
     setVenues((prevVenues) => [...prevVenues, newVenue]);
@@ -112,29 +113,35 @@ const ManagerProfile = ({ handleLogout }) => {
 
   return (
     <ProfileContainer>
-      {decodedToken ? (
+      {loading ? (
+        <CircularProgress />
+      ) : (
         <>
-          <h1>Welcome {decodedToken.name}</h1>
+          {decodedToken ? (
+            <>
+              <h1 style={{ marginBottom: "3rem" }}>Welcome {decodedToken.name}</h1>
 
-          {activeComponent === "profile" && (
-            <AvatarUpdate
-              decodedToken={decodedToken}
-              accessToken={accessToken}
-              setAccessToken={setAccessToken}
-              setDecodedToken={setDecodedToken}
-              avatarURL={avatarURL}
-              setAvatarURL={setAvatarURL}            />
-              )}
-              
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
-                <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("profile")}>Profile</Button>
-                <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("myVenues")}>My Venues</Button>
-                <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("addVenue")}>Add a Venue</Button>
-                <Button variant="contained" style={{ marginRight: "10px" }} onClick={handleMyBookings}>My bookings</Button>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "3rem", gap: "1rem" }}>
+                <Button variant="contained" style={{ marginRight: "1.5rem" }} onClick={() => setActiveComponent("profile")}>Profile</Button>
+                <Button variant="contained" style={{ marginRight: "1.5rem" }} onClick={() => setActiveComponent("myVenues")}>My Venues</Button>
+                <Button variant="contained" style={{ marginRight: "1.5rem" }} onClick={() => setActiveComponent("addVenue")}>Add a Venue</Button>
+                <Button variant="contained" style={{ marginRight: "1.5rem" }} onClick={handleMyBookings}>My bookings</Button>
               </div>
-    
+
+              {activeComponent === "profile" && (
+                <AvatarUpdate
+                  decodedToken={decodedToken}
+                  accessToken={accessToken}
+                  setAccessToken={setAccessToken}
+                  setDecodedToken={setDecodedToken}
+                  avatarURL={avatarURL}
+                  setAvatarURL={setAvatarURL}            
+                />
+              )}
+
+
               {activeComponent === "myBookings" && <ViewBookings bookings={bookings} />}
-    
+
               {activeComponent === "myVenues" && (
                 <VenuesList
                   venues={venues}
@@ -151,18 +158,20 @@ const ManagerProfile = ({ handleLogout }) => {
                   addVenue={addVenue}
                 />
               )}
-    
+
               <Button variant="contained" style={{ marginTop: "10px" }} onClick={handleLogout}>Logout</Button>
-    
+
             </>
           ) : (
             <div>You are not logged in.</div>
           )}
-        </ProfileContainer>
-      );
-    };
-    
-    export default ManagerProfile;
+        </>
+      )}
+    </ProfileContainer>
+  );
+};
+
+export default ManagerProfile;
     
            
 
