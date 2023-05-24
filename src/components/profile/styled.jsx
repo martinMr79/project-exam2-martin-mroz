@@ -15,22 +15,27 @@ max-width: 90vw;
   }
   `;
 
-export const CardContainer = styled.div`
-border-radius: 8px;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-display: grid;
-grid-template-columns: repeat(1, minmax(0, 1fr));
-justify-items: center;
-gap: 1rem;
-position: relative;
-z-index: 1;
-margin-top: 2rem;
-`
-
 export const Container = styled.div`
-  max-width: 1500px;
+  width: 1500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   
-`;
+`;  
+
+export const CardContainer = styled.div`
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  justify-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+  margin-top: 2rem;
+
+  @media (min-width: 680px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`
+
