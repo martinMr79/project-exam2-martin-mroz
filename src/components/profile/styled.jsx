@@ -29,7 +29,7 @@ export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   justify-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   position: relative;
   z-index: 1;
   margin-top: 2rem;
