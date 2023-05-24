@@ -16,7 +16,8 @@ max-width: 90vw;
   `;
 
 export const Container = styled.div`
-  width: 1500px;
+  width: 100%;
+  max-width: 1500px;
   display: flex;
   flex-direction: column;
   align-items: center;
