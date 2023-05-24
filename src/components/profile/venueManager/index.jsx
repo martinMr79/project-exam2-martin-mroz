@@ -6,17 +6,32 @@ import { ProfileContainer } from "../styled";
 import AvatarUpdate from "../ManagerProfile/AvatarUpdate";
 import VenueForm from "../ManagerProfile/VenueForm";
 import VenuesList from "../ManagerProfile/VenuesList";
+import VenueBooking from "../user/VenueBooking"
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
-
+import ViewBookings from "../hooks/viewBookings"
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
   const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
   const history = useNavigate();
-
-  const [venues, setVenues] = useState([]); 
+  const [bookings, setBookings] = useState([]);
+  const [venues, setVenues] = useState([]);
   const [activeComponent, setActiveComponent] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleMyBookings = useCallback(async () => {
+    setActiveComponent("myBookings");
+    const response = await axios.get(`${baseURL}venues/${decodedToken.id}/bookings`, {
+      headers: {
+          Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (response.status === 200) {
+        setBookings(response.data);
+    }
+  }, [accessToken, decodedToken]);
 
   const fetchVenues = useCallback(async (offset = 0, limit = 100) => {
     try {
@@ -48,25 +63,6 @@ const ManagerProfile = ({ handleLogout }) => {
     }
   }, [accessToken, decodedToken]); 
 
-  const updateVenue = async (venueId, updatedVenue) => {
-    try {
-      const response = await axios.put(`${baseURL}venues/${venueId}`, updatedVenue, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-  
-      if (response.status === 200) {
-        const fetchedVenues = await fetchVenues();
-        setVenues(fetchedVenues);
-      } else {
-        console.error(`Error updating venue: ${response.statusText}`);
-      }
-    } catch (error) {
-      console.error(`Error updating venue: ${error}`);
-    }
-  };
-
   useEffect(() => {
     const initialiseVenues = async () => {
       const fetchedVenues = await fetchVenues();
@@ -81,6 +77,34 @@ const ManagerProfile = ({ handleLogout }) => {
       history.push("/login");
     }
   }, [accessToken, history]);
+
+  useEffect(() => {
+    console.log(activeComponent);
+  }, [activeComponent]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `${baseURL}profiles/${decodedToken.name}?_venues=true&_bookings=true`,
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+
+        if (response.data.bookings) {
+          setBookings(response.data.bookings);
+        } else {
+          console.error("API did not return expected bookings data");
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookings();
+  }, [accessToken, decodedToken, baseURL]);
 
   const addVenue = (newVenue) => {
     setVenues((prevVenues) => [...prevVenues, newVenue]);
@@ -99,35 +123,48 @@ const ManagerProfile = ({ handleLogout }) => {
               setAccessToken={setAccessToken}
               setDecodedToken={setDecodedToken}
               avatarURL={avatarURL}
-              setAvatarURL={setAvatarURL}
-            />
+              setAvatarURL={setAvatarURL}            />
+              )}
+              
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
+                <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("profile")}>Profile</Button>
+                <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("myVenues")}>My Venues</Button>
+                <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("addVenue")}>Add a Venue</Button>
+                <Button variant="contained" style={{ marginRight: "10px" }} onClick={handleMyBookings}>My bookings</Button>
+              </div>
+    
+              {activeComponent === "myBookings" && <ViewBookings bookings={bookings} />}
+    
+              {activeComponent === "myVenues" && (
+                <VenuesList
+                  venues={venues}
+                  setVenues={setVenues}
+                  accessToken={accessToken}
+                  decodedToken={decodedToken}
+                />
+              )}
+              
+              {activeComponent === "addVenue" && (
+                <VenueForm
+                  accessToken={accessToken}
+                  decodedToken={decodedToken}
+                  addVenue={addVenue}
+                />
+              )}
+    
+              <Button variant="contained" style={{ marginTop: "10px" }} onClick={handleLogout}>Logout</Button>
+    
+            </>
+          ) : (
+            <div>You are not logged in.</div>
           )}
-          
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
-            <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("profile")}>Profile</Button>
-            <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("myVenues")}>My Venues</Button>
-            <Button variant="contained" style={{ marginRight: "10px" }} onClick={() => setActiveComponent("addVenue")}>Add a Venue</Button>
-            <Button variant="contained" style={{ marginRight: "10px" }}>My bookings</Button>
-          </div>
-
-          {activeComponent === "myVenues" && (
-            <VenuesList accessToken={accessToken} venues={venues} setVenues={setVenues} decodedToken={decodedToken} onUpdateVenue={updateVenue}/>
-          )}
-          
-          {activeComponent === "addVenue" && (
-            <VenueForm accessToken={accessToken} onAddVenue={addVenue} />
-          )}
-
-          {/* Rest of your JSX */}
-        </>
-      ) : (
-        <div>You are not logged in.</div>
-      )}
-    </ProfileContainer>
-  );
-};
-
-export default ManagerProfile;
+        </ProfileContainer>
+      );
+    };
+    
+    export default ManagerProfile;
+    
+           
 
 
 
