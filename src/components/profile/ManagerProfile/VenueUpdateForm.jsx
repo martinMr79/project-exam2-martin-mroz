@@ -8,10 +8,10 @@ const VenueUpdateForm = ({ venue, onUpdate }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUpdatedVenue((prevVenue) => ({
-        ...prevVenue,
-        [name]: name === 'price' ? parseFloat(value) : value,
+      ...prevVenue,
+      [name]: name === 'price' || name === 'maxGuests' ? parseFloat(value) : value,
     }));
-};
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,13 +32,18 @@ const VenueUpdateForm = ({ venue, onUpdate }) => {
         onChange={handleChange}
       />
 
-      {/* New fields */}
       <TextField
         name="price"
         value={updatedVenue.price}
         onChange={handleChange}
       />
-      {/* Add more fields as needed */}
+
+      <TextField
+        name="maxGuests"
+        value={updatedVenue.maxGuests}
+        onChange={handleChange}
+        type="number"
+      />
 
       <Button type="submit">Update</Button>
     </form>
