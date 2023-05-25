@@ -29,7 +29,7 @@ For designing the user interface and user experience, i used Adobe XD
 
 Our project planning was carried out using Trello, a web-based Kanban-style list-making application. We used a Gantt chart for project timing.
 
-My Gantt chart: image.png
+My Gantt chart: ![Gantt Chart](src/assets/images/Gantt-Chart.PNG)
 
 
 ## Links
@@ -49,7 +49,7 @@ Please note that you need Node.js installed on your machine to run this applicat
 
 ## Contribution
 
-We welcome contributions. If you want to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+If you want to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
 ## Licensing
 
@@ -92,5 +92,5 @@ This project uses several dependencies for its functionality:
 - [Zustand](https://www.npmjs.com/package/zustand) - for state management: `npm i zustand`
 - [jwt-decode](https://www.npmjs.com/package/jwt-decode) - for decoding JWT tokens: `npm install jwt-decode`
 - [React Date Picker](https://www.npmjs.com/package/react-datepicker) - for date selection functionality: `npm install react-date-picker`
-- [Axios](https://www.npmjs.com/package/axios) for making HTTP requests: ` npm install axios`
+- [Axios](https://www.npmjs.com/package/axios) for making HTTP requests: `npm install axios`
 - [Styled Components](https://www.npmjs.com/package/styled-components) - for styling components: `npm install styled-components`
