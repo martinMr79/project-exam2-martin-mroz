@@ -2,28 +2,47 @@ import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 import Button from "@mui/material/Button";
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
 import VenueUpdateForm from "./VenueUpdateForm";
 import VenueBookings from "./VenueBookings"; 
+import { Container, CardContainer } from "../styled";
+
+const MemoizedVenueBookings = React.memo(VenueBookings);
 
 const VenueItem = ({ venue, onDelete, onUpdate, accessToken }) => {
-  console.log("Venue object: ", venue);
-  
+
   return (
-    <div>
-      <h3>{venue.name}</h3>
-      <img
-        src={venue.media}
+    <Card 
+      key={venue.id}
+      sx={{ 
+        maxWidth: 345,
+        minHeight: 600
+      }}
+    >
+      <CardMedia
+        component="img"
+        image={venue.media}
         alt={venue.name}
-        width={80} 
-        height={80} 
+        sx={{
+          height: '300px',
+          width: '300px',
+          objectFit: 'cover',
+          m: '1.5rem'
+        }}
       />
-      <p>{venue.description}</p>
-      <Button onClick={() => onDelete(venue.id)}>Delete</Button>
-      <VenueUpdateForm venue={venue} onUpdate={onUpdate}/> 
-      <VenueBookings venueId={venue.id} accessToken={accessToken} />
-    </div>
+      <CardContent>
+        <h3>{venue.name}</h3>
+        <p>{venue.description}</p>
+        <Button onClick={() => onDelete(venue.id)}>Delete</Button>
+        <VenueUpdateForm venue={venue} onUpdate={onUpdate}/>
+        <VenueBookings venueId={venue.id} accessToken={accessToken} />
+      </CardContent>
+    </Card>
   );
 };
+
 
 const VenuesList = ({ accessToken, venues, setVenues, onUpdateVenue }) => { 
   const [error, setError] = useState(null);
@@ -44,18 +63,21 @@ const VenuesList = ({ accessToken, venues, setVenues, onUpdateVenue }) => {
   };
 
   return (
-    <div>
+    <Container>
       <h2>Managed Venues</h2>
       {error && <p>Error: {error}</p>}
-      {venues && venues.map((venue) => (
-            <VenueItem 
-                key={venue.id} 
-                venue={venue} 
-                onDelete={deleteVenue} 
-                onUpdate={onUpdateVenue} 
-            />
-      ))}
-    </div>
+      <CardContainer>
+        {venues && venues.map((venue) => (
+          <VenueItem 
+            key={venue.id} 
+            venue={venue} 
+            onDelete={deleteVenue} 
+            onUpdate={onUpdateVenue} 
+            accessToken={accessToken}
+          />
+        ))}
+      </CardContainer>
+    </Container>
   );
 };
 
