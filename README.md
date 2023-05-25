@@ -37,7 +37,7 @@ Gantt chart: ![Gantt Chart](src/assets/images/Gantt-Chart.PNG)
 
 ## Links
 
-- [Design Prototype](#)
+- [Design Prototype](https://xd.adobe.com/view/4e827619-cf92-4caf-9325-8d3966f16553-1bd1/)
 - [Kanban Project Board](https://trello.com/b/HckjTeWV/project-exam-2-holidaze)
 - [Repository Link](https://github.com/martinMr79/project-exam2-martin-mroz)
 - [Hosted Application Demo Link](https://master--fantastic-puppy-a523c3.netlify.app/)
