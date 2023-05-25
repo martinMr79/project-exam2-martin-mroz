@@ -2,6 +2,7 @@
 
 Holidaze is a modern, user-friendly accommodation booking site that connects users with their ideal holiday venues. With a sleek front end design, Holidaze offers seamless navigation and functionality, ensuring an enjoyable booking experience. The platform also includes an admin-facing side where registered users can manage venues and bookings efficiently. 
 
+
 ## Features
 
 Here are some of the main features that Holidaze provides:
@@ -29,7 +30,7 @@ For designing the user interface and user experience, i used Adobe XD
 
 Our project planning was carried out using Trello, a web-based Kanban-style list-making application. We used a Gantt chart for project timing.
 
-My Gantt chart: ![Gantt Chart](src/assets/images/Gantt-Chart.PNG)
+Gantt chart: ![Gantt Chart](src/assets/images/Gantt-Chart.PNG)
 
 
 ## Links
@@ -92,5 +93,5 @@ This project uses several dependencies for its functionality:
 - [Zustand](https://www.npmjs.com/package/zustand) - for state management: `npm i zustand`
 - [jwt-decode](https://www.npmjs.com/package/jwt-decode) - for decoding JWT tokens: `npm install jwt-decode`
 - [React Date Picker](https://www.npmjs.com/package/react-datepicker) - for date selection functionality: `npm install react-date-picker`
-- [Axios](https://www.npmjs.com/package/axios) for making HTTP requests: `npm install axios`
+- [Axios](https://www.npmjs.com/package/axios) - for making HTTP requests: `npm install axios`
 - [Styled Components](https://www.npmjs.com/package/styled-components) - for styling components: `npm install styled-components`
