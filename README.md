@@ -6,7 +6,7 @@ Holidaze is a modern, user-friendly accommodation booking site that connects use
 
 Here are some of the main features that Holidaze provides:
 
-- View a comprehensive list of venues.
+- View a list of venues.
 - Search functionality to find specific venues.
 - Detailed pages for each venue.
 - A calendar with available dates for each venue.
@@ -25,17 +25,18 @@ The application is hosted on Netlify, a popular static host known for its reliab
 
 ## Design and Planning Tools
 
-For designing the user interface and user experience, we used Figma, a popular design application that allows for interactive prototyping.
+For designing the user interface and user experience, i used Adobe XD
 
 Our project planning was carried out using Trello, a web-based Kanban-style list-making application. We used a Gantt chart for project timing.
 
+My Gantt chart: image.png
+
+
 ## Links
 
-- [Gantt Chart](#) for project timing
 - [Design Prototype](#)
-- [Style Guide](#)
-- [Kanban Project Board](#)
-- [Repository Link](#)
+- [Kanban Project Board](https://trello.com/b/HckjTeWV/project-exam-2-holidaze)
+- [Repository Link](https://github.com/martinMr79/project-exam2-martin-mroz)
 - [Hosted Application Demo Link](https://master--fantastic-puppy-a523c3.netlify.app/)
 
 ## Installation
@@ -56,7 +57,7 @@ The code in this project is licensed under MIT license.
 
 ---
 
-For any additional information, please reach out to our team.
+For any additional information, please reach out.
 
 ## Available Scripts and Dependencies
 
@@ -91,3 +92,5 @@ This project uses several dependencies for its functionality:
 - [Zustand](https://www.npmjs.com/package/zustand) - for state management: `npm i zustand`
 - [jwt-decode](https://www.npmjs.com/package/jwt-decode) - for decoding JWT tokens: `npm install jwt-decode`
 - [React Date Picker](https://www.npmjs.com/package/react-datepicker) - for date selection functionality: `npm install react-date-picker`
+- [Axios](https://www.npmjs.com/package/axios) for making HTTP requests: ` npm install axios`
+- [Styled Components](https://www.npmjs.com/package/styled-components) - for styling components: `npm install styled-components`
