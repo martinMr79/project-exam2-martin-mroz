@@ -113,104 +113,82 @@ const ManagerProfile = ({ handleLogout }) => {
     setVenues((prevVenues) => [...prevVenues, newVenue]);
   };
 
+  const updateVenue = async (venueId, updatedVenue) => {
+    try {
+      const response = await axios.put(`${baseURL}venues/${venueId}`, updatedVenue, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const updatedVenues = venues.map((venue) => 
+          venue.id === venueId ? response.data : venue
+        );
+        setVenues(updatedVenues);
+      }
+    } catch (error) {
+      console.error("Error updating venue:", error);
+    }
+};
+
+
   return (
     <ProfileContainer>
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <>
-          {decodedToken ? (
-            <>
-              <h1 style={{ marginBottom: "3rem" }}>Welcome {decodedToken.name}</h1>
+    {loading ? (
+      <CircularProgress />
+    ) : (
+      <>
+        {decodedToken ? (
+          <>
+            <h1 style={{ marginBottom: "3rem" }}>Welcome {decodedToken.name}</h1>
+            <Box sx={{ padding: 1, marginBottom: "3rem" }}>
+              <Button variant="contained" sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }} onClick={() => setActiveComponent("profile")}>Profile</Button>
+              <Button variant="contained" sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }} onClick={() => setActiveComponent("myVenues")}>My Venues</Button>
+              <Button variant="contained" sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }} onClick={() => setActiveComponent("addVenue")}>Add a Venue</Button>
+              <Button variant="contained" sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }} onClick={handleMyBookings}>My bookings</Button>
+            </Box>
 
-              
+            {activeComponent === "profile" && (
+              <AvatarUpdate
+                decodedToken={decodedToken}
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                setDecodedToken={setDecodedToken}
+                avatarURL={avatarURL}
+                setAvatarURL={setAvatarURL}            
+              />
+            )}
 
-              <Box sx={{ padding: 1, marginBottom: "3rem" }}>
-  <Button 
-    variant="contained" 
-    sx={{ 
-      margin: 1, 
-      width: { xs: '100%', sm: 'auto' }, 
-      marginBottom: { xs: 2, sm: 'auto' } 
-    }} 
-    onClick={() => setActiveComponent("profile")}
-  >
-    Profile
-  </Button>
-  <Button 
-    variant="contained" 
-    sx={{ 
-      margin: 1, 
-      width: { xs: '100%', sm: 'auto' }, 
-      marginBottom: { xs: 2, sm: 'auto' } 
-    }} 
-    onClick={() => setActiveComponent("myVenues")}
-  >
-    My Venues
-  </Button>
-  <Button 
-    variant="contained" 
-    sx={{ 
-      margin: 1, 
-      width: { xs: '100%', sm: 'auto' }, 
-      marginBottom: { xs: 2, sm: 'auto' } 
-    }} 
-    onClick={() => setActiveComponent("addVenue")}
-  >
-    Add a Venue
-  </Button>
-  <Button 
-    variant="contained" 
-    sx={{ 
-      margin: 1, 
-      width: { xs: '100%', sm: 'auto' }, 
-      marginBottom: { xs: 2, sm: 'auto' } 
-    }} 
-    onClick={handleMyBookings}
-  >
-    My bookings
-  </Button>
-</Box>
-              {activeComponent === "profile" && (
-                <AvatarUpdate
-                  decodedToken={decodedToken}
-                  accessToken={accessToken}
-                  setAccessToken={setAccessToken}
-                  setDecodedToken={setDecodedToken}
-                  avatarURL={avatarURL}
-                  setAvatarURL={setAvatarURL}            
-                />
-              )}
+            {activeComponent === "myBookings" && <ViewBookings bookings={bookings} />}
 
+            {activeComponent === "myVenues" && (
+              <VenuesList
+                venues={venues}
+                setVenues={setVenues}
+                accessToken={accessToken}
+                decodedToken={decodedToken}
+                onUpdateVenue={updateVenue}
+              />
+            )}
 
-              {activeComponent === "myBookings" && <ViewBookings bookings={bookings} />}
+            {activeComponent === "addVenue" && (
+              <VenueForm
+                accessToken={accessToken}
+                decodedToken={decodedToken}
+                addVenue={addVenue}
+              />
+            )}
 
-              {activeComponent === "myVenues" && (
-                <VenuesList
-                  venues={venues}
-                  setVenues={setVenues}
-                  accessToken={accessToken}
-                  decodedToken={decodedToken}
-                />
-              )}
-              
-              {activeComponent === "addVenue" && (
-                <VenueForm
-                  accessToken={accessToken}
-                  decodedToken={decodedToken}
-                  addVenue={addVenue}
-                />
-              )}
+            <Button variant="contained" style={{ marginTop: "10px" }} onClick={handleLogout}>Logout</Button>
 
-              <Button variant="contained" style={{ marginTop: "10px" }} onClick={handleLogout}>Logout</Button>
-
-            </>
-          ) : (
-            <div>You are not logged in.</div>
-          )}
-        </>
-      )}
-    </ProfileContainer>
+          </>
+        ) : (
+          <div>You are not logged in.</div>
+        )}
+      </>
+    )}
+  </ProfileContainer>
   );
 };
 

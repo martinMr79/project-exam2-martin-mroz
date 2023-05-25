@@ -27,6 +27,7 @@ const VenueItem = ({ venue, onDelete, onUpdate, accessToken }) => {
 
 const VenuesList = ({ accessToken, venues, setVenues, onUpdateVenue }) => { 
   const [error, setError] = useState(null);
+  
 
   const deleteVenue = async (venueId) => {
     try {
@@ -47,12 +48,12 @@ const VenuesList = ({ accessToken, venues, setVenues, onUpdateVenue }) => {
       <h2>Managed Venues</h2>
       {error && <p>Error: {error}</p>}
       {venues && venues.map((venue) => (
-        <VenueItem 
-          key={venue.id} 
-          venue={venue} 
-          onDelete={deleteVenue} 
-          onUpdate={onUpdateVenue}
-        />
+            <VenueItem 
+                key={venue.id} 
+                venue={venue} 
+                onDelete={deleteVenue} 
+                onUpdate={onUpdateVenue} 
+            />
       ))}
     </div>
   );

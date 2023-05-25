@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 const VenueUpdateForm = ({ venue, onUpdate }) => {
   const [updatedVenue, setUpdatedVenue] = useState(venue);
 
-  useEffect(() => {
-    setUpdatedVenue(venue);
-  }, [venue]);
-
   const handleChange = (event) => {
-    setUpdatedVenue({
-      ...updatedVenue,
-      [event.target.name]: event.target.value,
-    });
-  };
+    const { name, value } = event.target;
+    setUpdatedVenue((prevVenue) => ({
+        ...prevVenue,
+        [name]: name === 'price' ? parseFloat(value) : value,
+    }));
+};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,18 +20,26 @@ const VenueUpdateForm = ({ venue, onUpdate }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <p>Venue Name</p>
+
       <TextField
         name="name"
         value={updatedVenue.name}
         onChange={handleChange}
       />
-      <p>Venue Description</p>
       <TextField
         name="description"
         value={updatedVenue.description}
         onChange={handleChange}
       />
+
+      {/* New fields */}
+      <TextField
+        name="price"
+        value={updatedVenue.price}
+        onChange={handleChange}
+      />
+      {/* Add more fields as needed */}
+
       <Button type="submit">Update</Button>
     </form>
   );
