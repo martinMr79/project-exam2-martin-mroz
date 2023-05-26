@@ -11,6 +11,14 @@ import { baseURL } from "../../../utilities/constants";
 import ViewBookings from "../hooks/viewBookings"
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/system';
+
+const StyledButton = styled(Button)(({ theme, primary }) => ({
+  background: primary 
+    ? 'linear-gradient(45deg, #1976d2 30%, #21CBF3 90%)'
+    : 'linear-gradient(45deg, #757575 30%, #BDBDBD 90%)',
+  color: primary ? 'white' : 'black',
+}));
 
 const ManagerProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
@@ -143,10 +151,41 @@ const ManagerProfile = ({ handleLogout }) => {
           <>
             <h1 style={{ marginBottom: "3rem" }}>Welcome {decodedToken.name}</h1>
             <Box sx={{ padding: 1, marginBottom: "3rem" }}>
-              <Button variant="contained" sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }} onClick={() => setActiveComponent("profile")}>Profile</Button>
-              <Button variant="contained" sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }} onClick={() => setActiveComponent("myVenues")}>My Venues</Button>
-              <Button variant="contained" sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }} onClick={() => setActiveComponent("addVenue")}>Add a Venue</Button>
-              <Button variant="contained" sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }} onClick={handleMyBookings}>My bookings</Button>
+            <StyledButton
+  variant="contained"
+  primary={activeComponent === "profile"}
+  sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }}
+  onClick={() => setActiveComponent("profile")}
+>
+  Profile
+</StyledButton>
+
+<StyledButton
+  variant="contained"
+  primary={activeComponent === "myVenues"}
+  sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }}
+  onClick={() => setActiveComponent("myVenues")}
+>
+  My Venues
+</StyledButton>
+
+<StyledButton
+  variant="contained"
+  primary={activeComponent === "addVenue"}
+  sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }}
+  onClick={() => setActiveComponent("addVenue")}
+>
+  Add a Venue
+</StyledButton>
+
+<StyledButton
+  variant="contained"
+  primary={activeComponent === "myBookings"}
+  sx={{ margin: 1, width: { xs: '100%', sm: 'auto' }, marginBottom: { xs: 2, sm: 'auto' } }}
+  onClick={handleMyBookings}
+>
+  My bookings
+</StyledButton>
             </Box>
 
             {activeComponent === "profile" && (
