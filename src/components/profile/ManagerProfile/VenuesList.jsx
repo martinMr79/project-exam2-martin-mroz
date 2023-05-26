@@ -15,8 +15,8 @@ const VenueItem = ({ venue, onUpdate, onDelete, accessToken }) => {
       key={venue.id}
       sx={{ 
         maxWidth: 345,
-        minHeight: 600,
-       
+        minHeight: 600,       
+        marginTop: "1rem"
       }}
     >
       <CardMedia
@@ -30,7 +30,8 @@ const VenueItem = ({ venue, onUpdate, onDelete, accessToken }) => {
           m: '1.5rem'
         }}
       />
-      <CardContent>
+      <CardContent 
+      >
         <h3>{venue.name}</h3>
         <p>{venue.description}</p>
         <VenueUpdateForm 
