@@ -49,7 +49,8 @@ const AvatarUpdate = ({
         onChange={(e) => setAvatarURL(e.target.value)}
         fullWidth
         sx={{
-        my: "2rem"
+        my: "2rem",
+        maxWidth: "38rem"
         }}
       />
       <Button onClick={handleAvatarUpdate}>Update Avatar</Button>
