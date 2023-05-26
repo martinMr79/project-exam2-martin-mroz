@@ -18,7 +18,8 @@ const ViewBookings = ({ bookings }) => {
                             key={booking.id}
                             sx={{ 
                                 maxWidth: 345,
-                                minHeight: 600
+                                minHeight: 600,
+                                marginTop: "2rem"    
                             }}
                         >
                             <CardMedia

@@ -16,7 +16,7 @@ const VenueItem = ({ venue, onUpdate, onDelete, accessToken }) => {
       sx={{ 
         maxWidth: 345,
         minHeight: 600,       
-        marginTop: "1rem"
+        marginTop: "2rem"
       }}
     >
       <CardMedia
