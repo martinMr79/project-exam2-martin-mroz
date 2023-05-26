@@ -3,6 +3,11 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { ButtonContainer } from "../styled";
 import Grid from "@mui/material/Grid";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const VenueUpdateForm = ({ venue, onUpdate, onDelete }) => {
   const [updatedVenue, setUpdatedVenue] = useState(venue);
@@ -13,6 +18,18 @@ const VenueUpdateForm = ({ venue, onUpdate, onDelete }) => {
       ...prevVenue,
       [name]: name === 'price' || name === 'maxGuests' ? parseFloat(value) : value,
     }));
+  };
+
+  const [open, setOpen] = useState(false);
+  const handleOpenDialog = (venueId) => {
+    setOpen(true);
+  };
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
+  const handleDelete = (venueId) => {
+    onDelete(venueId);
+    setOpen(false);
   };
 
   const handleSubmit = (event) => {
@@ -61,9 +78,34 @@ const VenueUpdateForm = ({ venue, onUpdate, onDelete }) => {
 
 
 <ButtonContainer>
-    <Button onClick={() => onDelete(venue.id)}>Delete</Button>
     <Button type="submit">Update</Button>
+    <Button color="error" onClick={() => handleOpenDialog(venue.id)}>Delete</Button>
+
   </ButtonContainer>
+
+  <Dialog
+  open={open}
+  onClose={handleCloseDialog}
+  aria-labelledby="alert-dialog-title"
+  aria-describedby="alert-dialog-description"
+>
+  <DialogTitle id="alert-dialog-title">
+    {"Delete Venue Confirmation"}
+  </DialogTitle>
+  <DialogContent>
+    <DialogContentText id="alert-dialog-description">
+      Are you sure you want to delete this venue?
+    </DialogContentText>
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleCloseDialog}>
+      No
+    </Button>
+    <Button onClick={() => handleDelete(venue.id)} color="error" autoFocus>
+      Yes
+    </Button>
+  </DialogActions>
+</Dialog>
     </form>
   );
 };
