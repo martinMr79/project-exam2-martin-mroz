@@ -87,8 +87,7 @@ const UserProfile = ({ handleLogout }) => {
               Update Avatar
             </Button>
           </form>
-          <p>Venue Manager: {decodedToken.role === "venueManager" ? "Yes" : "No"}</p>
-          <Button onClick={handleLogout}>Logout</Button>
+
           {bookings.length > 0 && (
             <div>
               <h2>Your Bookings:</h2>

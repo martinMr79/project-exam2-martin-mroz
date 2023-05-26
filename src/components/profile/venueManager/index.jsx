@@ -20,7 +20,7 @@ const StyledButton = styled(Button)(({ theme, primary }) => ({
   color: primary ? 'white' : 'black',
 }));
 
-const ManagerProfile = ({ handleLogout }) => {
+const ManagerProfile = () => {
   const [avatarURL, setAvatarURL] = useState("");
   const { decodedToken, accessToken, setAccessToken, setDecodedToken } = useAuthStore();
   const history = useNavigate();
@@ -219,7 +219,7 @@ const ManagerProfile = ({ handleLogout }) => {
               />
             )}
 
-            <Button variant="contained" style={{ marginTop: "10px" }} onClick={handleLogout}>Logout</Button>
+
 
           </>
         ) : (
