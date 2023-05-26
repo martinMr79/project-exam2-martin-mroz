@@ -56,3 +56,9 @@ export const CardContainer = styled.div`
   }
 `
 
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;  
+  padding-top: 1rem;
+`;
+

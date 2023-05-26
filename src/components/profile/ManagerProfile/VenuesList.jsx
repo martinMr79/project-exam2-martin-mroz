@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
-import Button from "@mui/material/Button";
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -9,7 +8,7 @@ import VenueUpdateForm from "./VenueUpdateForm";
 import VenueBookings from "./VenueBookings"; 
 import { Container, CardContainer } from "../styled";
 
-const VenueItem = ({ venue, onDelete, onUpdate, accessToken }) => {
+const VenueItem = ({ venue, onUpdate, onDelete, accessToken }) => {
 
   return (
     <Card 
@@ -34,8 +33,11 @@ const VenueItem = ({ venue, onDelete, onUpdate, accessToken }) => {
       <CardContent>
         <h3>{venue.name}</h3>
         <p>{venue.description}</p>
-        <Button onClick={() => onDelete(venue.id)}>Delete</Button>
-        <VenueUpdateForm venue={venue} onUpdate={onUpdate}/>
+        <VenueUpdateForm 
+            venue={venue} 
+            onUpdate={onUpdate} 
+            onDelete={onDelete}
+        />
         <VenueBookings venueId={venue.id} accessToken={accessToken} />
       </CardContent>
     </Card>

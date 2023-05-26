@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { ButtonContainer } from "../styled";
 
-const VenueUpdateForm = ({ venue, onUpdate }) => {
+const VenueUpdateForm = ({ venue, onUpdate, onDelete }) => {
   const [updatedVenue, setUpdatedVenue] = useState(venue);
 
   const handleChange = (event) => {
@@ -45,7 +46,10 @@ const VenueUpdateForm = ({ venue, onUpdate }) => {
         type="number"
       />
 
-      <Button type="submit">Update</Button>
+<ButtonContainer>
+    <Button onClick={() => onDelete(venue.id)}>Delete</Button>
+    <Button type="submit">Update</Button>
+  </ButtonContainer>
     </form>
   );
 };
