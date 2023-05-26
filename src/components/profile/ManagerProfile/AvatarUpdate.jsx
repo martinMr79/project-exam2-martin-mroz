@@ -39,13 +39,19 @@ const AvatarUpdate = ({
       <Avatar
         alt={decodedToken.name}
         src={decodedToken.avatar}
-        sx={{ width: 200, height: 200 }}
+        sx={{ width: 200, height: 200, marginBottom: "1.5rem" }}
       />
+      <h2>User Name: {decodedToken.name}</h2>
+      <p>Email: {decodedToken.email}</p>
       <TextField
         label="New Avatar URL"
         value={avatarURL}
         onChange={(e) => setAvatarURL(e.target.value)}
         fullWidth
+        sx={{
+        my: "2rem",
+        maxWidth: "38rem"
+        }}
       />
       <Button onClick={handleAvatarUpdate}>Update Avatar</Button>
     </>

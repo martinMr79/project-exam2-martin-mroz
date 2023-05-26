@@ -1,12 +1,15 @@
 # Holidaze Accommodation Booking Site
 
-Holidaze is a modern, user-friendly accommodation booking site that connects users with their ideal holiday venues. With a sleek front end design, Holidaze offers seamless navigation and functionality, ensuring an enjoyable booking experience. The platform also includes an admin-facing side where registered users can manage venues and bookings efficiently. 
+Holidaze is a modern, user-friendly accommodation booking site that connects users with their ideal holiday venues. With a sleek front end design, Holidaze offers seamless navigation and functionality, ensuring an enjoyable booking experience. The platform also includes an admin-facing side where registered users can manage venues and bookings efficiently.
+<br/>  
+Use a stud.noroff.no e-mail adress to register a new user. 
+
 
 ## Features
 
 Here are some of the main features that Holidaze provides:
 
-- View a comprehensive list of venues.
+- View a list of venues.
 - Search functionality to find specific venues.
 - Detailed pages for each venue.
 - A calendar with available dates for each venue.
@@ -25,17 +28,18 @@ The application is hosted on Netlify, a popular static host known for its reliab
 
 ## Design and Planning Tools
 
-For designing the user interface and user experience, we used Figma, a popular design application that allows for interactive prototyping.
+For designing the user interface and user experience, i used Adobe XD
 
 Our project planning was carried out using Trello, a web-based Kanban-style list-making application. We used a Gantt chart for project timing.
 
+Gantt chart: ![Gantt Chart](src/assets/images/Gantt-Chart.PNG)
+
+
 ## Links
 
-- [Gantt Chart](#) for project timing
-- [Design Prototype](#)
-- [Style Guide](#)
-- [Kanban Project Board](#)
-- [Repository Link](#)
+- [Design Prototype](https://xd.adobe.com/view/4e827619-cf92-4caf-9325-8d3966f16553-1bd1/)
+- [Kanban Project Board](https://trello.com/b/HckjTeWV/project-exam-2-holidaze)
+- [Repository Link](https://github.com/martinMr79/project-exam2-martin-mroz)
 - [Hosted Application Demo Link](https://master--fantastic-puppy-a523c3.netlify.app/)
 
 ## Installation
@@ -48,7 +52,7 @@ Please note that you need Node.js installed on your machine to run this applicat
 
 ## Contribution
 
-We welcome contributions. If you want to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+If you want to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
 ## Licensing
 
@@ -56,7 +60,7 @@ The code in this project is licensed under MIT license.
 
 ---
 
-For any additional information, please reach out to our team.
+For any additional information, please reach out.
 
 ## Available Scripts and Dependencies
 
@@ -91,3 +95,5 @@ This project uses several dependencies for its functionality:
 - [Zustand](https://www.npmjs.com/package/zustand) - for state management: `npm i zustand`
 - [jwt-decode](https://www.npmjs.com/package/jwt-decode) - for decoding JWT tokens: `npm install jwt-decode`
 - [React Date Picker](https://www.npmjs.com/package/react-datepicker) - for date selection functionality: `npm install react-date-picker`
+- [Axios](https://www.npmjs.com/package/axios) - for making HTTP requests: `npm install axios`
+- [Styled Components](https://www.npmjs.com/package/styled-components) - for styling components: `npm install styled-components`

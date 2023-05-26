@@ -45,7 +45,7 @@ const VenueForm = ({ accessToken, onAddVenue }) => {
 ))}
 <Button onClick={addMediaInput}>Add Another Media URL</Button>
 </Grid>
-<Grid item xs={4}>
+<Grid item xs={6}>
 <TextField
   name="price"
   label="Price"
@@ -54,11 +54,47 @@ const VenueForm = ({ accessToken, onAddVenue }) => {
   fullWidth
 />
 </Grid>
-<Grid item xs={4}>
+<Grid item xs={6}>
 <TextField
   name="maxGuests"
   label="Max Guests"
   value={venue.maxGuests}
+  onChange={handleVenueChange}
+  fullWidth
+/>
+</Grid>
+<Grid item xs={12}>
+<TextField
+  name="location.address"
+  label="address"
+  value={venue.location.address}
+  onChange={handleVenueChange}
+  fullWidth
+/>
+</Grid>
+<Grid item xs={12}>
+<TextField
+  name="location.city"
+  label="city"
+  value={venue.location.city}
+  onChange={handleVenueChange}
+  fullWidth
+/>
+</Grid>
+<Grid item xs={6}>
+<TextField
+  name="location.zip"
+  label="zip"
+  value={venue.location.zip}
+  onChange={handleVenueChange}
+  fullWidth
+/>
+</Grid>
+<Grid item xs={6}>
+<TextField
+  name="location.country"
+  label="country"
+  value={venue.location.country} 
   onChange={handleVenueChange}
   fullWidth
 />
@@ -105,7 +141,6 @@ const VenueForm = ({ accessToken, onAddVenue }) => {
       }
       label="pets"
     />
-    {/* Add other checkbox fields here as needed */}
   </Grid>
   <Grid item xs={12}>
     <Button variant="contained" type="submit">

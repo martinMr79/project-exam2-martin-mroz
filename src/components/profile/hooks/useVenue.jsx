@@ -16,6 +16,14 @@ export const useVenue = (accessToken, onAddVenue) => {
       breakfast: false,
       pets: false,
     },
+    location: {
+      address: "",
+      city: "",
+      zip: "",
+      country: "",
+      continent: "",
+    },
+    
   };
 
   const [venue, setVenue] = useState(initialState);
