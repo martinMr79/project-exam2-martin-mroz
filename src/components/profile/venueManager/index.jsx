@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useAuthStore } from "../../../hooks/useAuthStore";
-import { ProfileContainer } from "../styled";
+import { BookingContainer } from "../styled";
 import AvatarUpdate from "../ManagerProfile/AvatarUpdate";
 import VenueForm from "../ManagerProfile/VenueForm";
 import VenuesList from "../ManagerProfile/VenuesList";
@@ -134,7 +134,7 @@ const ManagerProfile = ({ handleLogout }) => {
 
 
   return (
-    <ProfileContainer>
+    <BookingContainer>
     {loading ? (
       <CircularProgress />
     ) : (
@@ -188,7 +188,7 @@ const ManagerProfile = ({ handleLogout }) => {
         )}
       </>
     )}
-  </ProfileContainer>
+  </BookingContainer>
   );
 };
 

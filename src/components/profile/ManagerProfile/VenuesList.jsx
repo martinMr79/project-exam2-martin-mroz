@@ -9,8 +9,6 @@ import VenueUpdateForm from "./VenueUpdateForm";
 import VenueBookings from "./VenueBookings"; 
 import { Container, CardContainer } from "../styled";
 
-const MemoizedVenueBookings = React.memo(VenueBookings);
-
 const VenueItem = ({ venue, onDelete, onUpdate, accessToken }) => {
 
   return (
@@ -18,7 +16,8 @@ const VenueItem = ({ venue, onDelete, onUpdate, accessToken }) => {
       key={venue.id}
       sx={{ 
         maxWidth: 345,
-        minHeight: 600
+        minHeight: 600,
+       
       }}
     >
       <CardMedia

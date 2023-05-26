@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { baseURL } from "../../../utilities/constants";
-import { ProfileContainer } from "../styled"; 
+import { BookingContainer } from "../styled"; 
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css'
 
@@ -60,7 +60,7 @@ const VenueBooking = ({ venueId }) => {
   };
 
   return (
-    <ProfileContainer>
+    <BookingContainer>
     <form onSubmit={handleBooking}>
       <h2>Book a Venue</h2>
       {message && <p>{message}</p>}
@@ -106,7 +106,7 @@ const VenueBooking = ({ venueId }) => {
         Book
       </Button>
     </form>
-  </ProfileContainer>
+  </BookingContainer>
   );
 };
 
