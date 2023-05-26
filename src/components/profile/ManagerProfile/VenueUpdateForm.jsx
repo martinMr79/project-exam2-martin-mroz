@@ -41,40 +41,44 @@ const VenueUpdateForm = ({ venue, onUpdate, onDelete }) => {
     <form onSubmit={handleSubmit}>
 
 <Grid container spacing={2}>
-  <Grid item xs={12}>
-    <TextField
-      name="name"
-      value={updatedVenue.name}
-      onChange={handleChange}
-      sx={{ width: '100%' }}
-    />
-  </Grid>
-  <Grid item xs={12}>
-    <TextField
-      name="description"
-      value={updatedVenue.description}
-      onChange={handleChange}
-      sx={{ width: '100%' }}
-    />
-  </Grid>
-  <Grid item xs={6}>
-    <TextField
-      name="price"
-      value={updatedVenue.price}
-      onChange={handleChange}
-      sx={{ width: '100%' }}
-    />
-  </Grid>
-  <Grid item xs={6}>
-    <TextField
-      name="maxGuests"
-      value={updatedVenue.maxGuests}
-      onChange={handleChange}
-      type="number"
-      sx={{ width: '100%' }}
-    />
-  </Grid>
-</Grid>
+        <Grid item xs={12}>
+          <TextField
+            name="name"
+            value={updatedVenue.name}
+            onChange={handleChange}
+            label="Venue Name" 
+            sx={{ width: '100%' }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            name="description"
+            value={updatedVenue.description}
+            onChange={handleChange}
+            label="Description" 
+            sx={{ width: '100%' }}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            name="price"
+            value={updatedVenue.price}
+            onChange={handleChange}
+            label="Price" 
+            sx={{ width: '100%' }}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            name="maxGuests"
+            value={updatedVenue.maxGuests}
+            onChange={handleChange}
+            type="number"
+            label="Max Guests"
+            sx={{ width: '100%' }}
+          />
+        </Grid>
+      </Grid>
 
 
 <ButtonContainer>
