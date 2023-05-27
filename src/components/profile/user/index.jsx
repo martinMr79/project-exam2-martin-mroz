@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { baseURL } from "../../../utilities/constants";
 import { useAuthStore } from "../../../hooks/useAuthStore";
-import { ProfileContainer } from "../styled";
+import { ProfileContainer, TextFieldContainer } from "../styled";
 
 const UserProfile = ({ handleLogout }) => {
   const [avatarURL, setAvatarURL] = useState("");
@@ -66,26 +65,30 @@ const UserProfile = ({ handleLogout }) => {
     <ProfileContainer>
       {decodedToken ? (
         <>
-          <h2>Welcome user {decodedToken.name}</h2>
-
-          <p>Email: {decodedToken.email}</p>
+          <h1>Welcome {decodedToken.name}</h1>
+          
           <Avatar
             alt={decodedToken.name}
             src={decodedToken.avatar}
-            sx={{ width: 200, height: 200 }}
+            sx={{ width: 200, height: 200, mt: "2rem" }}
           />
+          <p>Email: {decodedToken.email}</p>
           <form onSubmit={handleAvatarUpdate}>
-            <TextField
-              type="text"
-              label="New Avatar URL"
-              value={avatarURL}
-              onChange={(e) => setAvatarURL(e.target.value)}
-              style={{ marginTop: "10px", marginBottom: "10px" }}
-            />
+          <TextFieldContainer>
+    <TextField
+      type="text"
+      label="New Avatar URL"
+      value={avatarURL}
+      onChange={(e) => setAvatarURL(e.target.value)}
+      fullWidth
+      sx={{
+        mt: "2rem",
+        width: "38rem"
+      }}
+    />
+</TextFieldContainer>
             <br />
-            <Button variant="contained" type="submit">
-              Update Avatar
-            </Button>
+            <Button  type="submit">Update Avatar</Button>
           </form>
 
           {bookings.length > 0 && (

@@ -62,3 +62,7 @@ export const ButtonContainer = styled.div`
   padding-top: 1rem;
 `;
 
+export const TextFieldContainer = styled.div`
+  width: 100%;
+  max-width: 38rem; 
+`;
