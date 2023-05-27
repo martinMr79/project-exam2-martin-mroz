@@ -103,18 +103,17 @@ const UserProfile = ({ handleLogout }) => {
               {bookings.map((booking) => {
                const fromDate = new Date(booking.dateFrom);
                const toDate = new Date(booking.dateTo);
-               const options = { year: 'numeric', month: 'long', day: 'numeric' };  // closing brace added here
+               const options = { year: 'numeric', month: 'long', day: 'numeric' };
                 return (
                     <Card 
                       key={booking.id}
                       sx={{ 
                         maxWidth: 345,
-                        minHeight: 600,       
+                        minHeight: 450,       
                         marginTop: "2rem"
                       }}
                     >
                       <CardContent>
-                        <h3>{booking.venue.name}</h3>
                         <CardMedia
                           component="img"
                           image={booking.venue.media} 
@@ -123,9 +122,9 @@ const UserProfile = ({ handleLogout }) => {
                             height: '300px',
                             width: '300px',
                             objectFit: 'cover',
-                            m: '1.5rem'
                           }}
                         />
+                        <h3>{booking.venue.name}</h3>
                         <p>
                           Check in: 15:00 {fromDate.toLocaleDateString(undefined, options)}
                         </p>
