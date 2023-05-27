@@ -8,9 +8,12 @@ import { BookingContainer } from "../styled";
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css'
 import Grid from "@mui/material/Grid";
+import Box from '@mui/material/Box';
+import { margin } from "@mui/system";
 
-
-const VenueBooking = ({ venueId }) => {
+const VenueBooking = ({ venueId, data }) => {
+  console.log("Venue data:", data);
+  console.log("Venue price:", data?.price);
  
   const { accessToken } = useAuthStore();
   const [dateFrom, setDateFrom] = useState(new Date());
@@ -63,10 +66,18 @@ const VenueBooking = ({ venueId }) => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
+      <Grid item xs={12} key={data?.id || Math.random()}>
         <BookingContainer>
+          <Box>
+          <h3>Available</h3>
+            <p style={{ color: '#D42819', fontSize: "50px", margin: "10px" }}>NOK {String(data?.price)}</p>
+            <p style={{ color: '#A9A9AC', fontSize: "" }}>PER NIGHT</p>
+            <p>Available rooms!</p>
+            <p>Book your stay now</p>
+
+          </Box>
           <form onSubmit={handleBooking}>
-            <h3>Select dates</h3>
+            <h4 style={{ color: '#29D419' }}>Select dates</h4>
             <DatePicker
               onChange={setDateFrom}
               value={dateFrom}
@@ -101,7 +112,7 @@ const VenueBooking = ({ venueId }) => {
                 value={guests}
                 onChange={(e) => setGuests(e.target.value)}
                 required
-                style={{ margin: "20px 0px" }}
+                style={{ margin: "20px 0px", width: "19.5rem"  }}
               />
             </Grid>
             <Grid item xs={12}>

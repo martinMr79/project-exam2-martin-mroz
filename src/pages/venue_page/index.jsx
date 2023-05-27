@@ -54,6 +54,7 @@ function VenuePage() {
   
   return (
     <Grid container spacing={2} justifyContent="center">
+      
       <Grid item xs={12} md={6}>
         {data && (
           <Card
@@ -62,6 +63,12 @@ function VenuePage() {
               minHeight: 600,  
               m: "1rem"
             }}
+          >
+          <Box 
+            display="flex" 
+            flexDirection="column" 
+            alignItems="center"
+            justifyContent="center"
           >
             <Typography variant="h2" key={data.id} sx={{ m: "1rem" }}>{data.name}</Typography>
             <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
@@ -82,7 +89,7 @@ function VenuePage() {
                         maxWidth: 400,
                         overflow: 'hidden',
                         width: '100%',
-                        margin: '0 auto' // Added margin auto to center the image
+                        margin: '0 auto'
                       }}
                       src={image}
                       alt={data.name}
@@ -138,11 +145,12 @@ function VenuePage() {
                 </Box>
               </CardContent>
             </Box>
+          </Box> 
           </Card>
         )}
       </Grid>
       <Grid item xs={12} md={6}>
-        <VenueBooking venueId={params.id} />
+       <VenueBooking venueId={params.id} data={data} />
       </Grid>
     </Grid>
   );
