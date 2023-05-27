@@ -15,7 +15,7 @@ const VenueItem = ({ venue, onUpdate, onDelete, accessToken }) => {
       key={venue.id}
       sx={{ 
         maxWidth: 345,
-        minHeight: 600,       
+        minHeight: 450,       
         marginTop: "2rem"
       }}
     >

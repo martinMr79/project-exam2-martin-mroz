@@ -10,7 +10,7 @@ export const ProfileContainer = styled.div`
   max-width: 90vw; 
 
   @media (min-width: 600px) {
-    max-width: 600px; 
+    max-width: 870px; 
   }
 `;
 
@@ -62,3 +62,7 @@ export const ButtonContainer = styled.div`
   padding-top: 1rem;
 `;
 
+export const TextFieldContainer = styled.div`
+  width: 100%;
+  max-width: 38rem; 
+`;
