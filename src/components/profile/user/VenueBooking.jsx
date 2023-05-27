@@ -62,7 +62,7 @@ const VenueBooking = ({ venueId }) => {
   return (
     <BookingContainer>
     <form onSubmit={handleBooking}>
-      <h2>Book Now</h2>
+      <h3>Select dates</h3>
       {message && <p>{message}</p>}
       <DatePicker
         onChange={setDateFrom}
