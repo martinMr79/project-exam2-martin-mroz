@@ -94,17 +94,21 @@ const VenueBooking = ({ venueId }) => {
               required
             />
             {message && <p>{message}</p>}
-            <TextField
-              type="number"
-              label="Guests"
-              value={guests}
-              onChange={(e) => setGuests(e.target.value)}
-              required
-              style={{ margin: "20px 0px" }}
-            />
-            <Button variant="contained" type="submit">
-              Book
-            </Button>
+            <Grid item xs={12}>
+              <TextField
+                type="number"
+                label="Guests"
+                value={guests}
+                onChange={(e) => setGuests(e.target.value)}
+                required
+                style={{ margin: "20px 0px" }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button variant="contained" type="submit">
+                Book
+              </Button>
+            </Grid>
           </form>
         </BookingContainer>
       </Grid>
