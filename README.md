@@ -97,3 +97,6 @@ This project uses several dependencies for its functionality:
 - [React Date Picker](https://www.npmjs.com/package/react-datepicker) - for date selection functionality: `npm install react-date-picker`
 - [Axios](https://www.npmjs.com/package/axios) - for making HTTP requests: `npm install axios`
 - [Styled Components](https://www.npmjs.com/package/styled-components) - for styling components: `npm install styled-components`
+- "react-swipeable-views": "^0.14.0",
+- "react-swipeable-views-utils": "^0.14.0",
+- "react-responsive-carousel": "^3.2.23",
