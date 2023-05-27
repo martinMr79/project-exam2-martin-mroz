@@ -7,6 +7,8 @@ import { baseURL } from "../../../utilities/constants";
 import { BookingContainer } from "../styled"; 
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css'
+import Grid from "@mui/material/Grid";
+
 
 const VenueBooking = ({ venueId }) => {
  
@@ -60,54 +62,54 @@ const VenueBooking = ({ venueId }) => {
   };
 
   return (
-    <BookingContainer>
-    <form onSubmit={handleBooking}>
-      <h3>Select dates</h3>
-      {message && <p>{message}</p>}
-      <DatePicker
-        onChange={setDateFrom}
-        value={dateFrom}
-        minDate={new Date()}
-        maxDate={new Date(Date.now() + 31536000000)}
-        tileDisabled={({ date, view }) =>
-        view === 'month' && 
-        bookedDates.some(bookedDate =>
-          bookedDate.getTime() <= date.getTime() &&
-          bookedDate.getTime() >= date.getTime()
-        )
-      }
-        required
-      />
-      <DatePicker
-        onChange={setDateTo}
-        value={dateTo}
-        minDate={dateFrom}
-        maxDate={new Date(Date.now() + 31536000000)}
-        tileDisabled={({ date, view }) =>
-        view === 'month' && 
-        bookedDates.some(bookedDate =>
-          bookedDate.getTime() <= date.getTime() &&
-          bookedDate.getTime() >= date.getTime()
-        )
-      }
-        required
-      />
-      <br />
-      <TextField
-        type="number"
-        label="Guests"
-        value={guests}
-        onChange={(e) => setGuests(e.target.value)}
-        required
-        style={{ margin: "20px 0px" }}
-      />
-      <br />
-      <Button variant="contained" type="submit">
-        Book
-      </Button>
-    </form>
-  </BookingContainer>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <BookingContainer>
+          <form onSubmit={handleBooking}>
+            <h3>Select dates</h3>
+            <DatePicker
+              onChange={setDateFrom}
+              value={dateFrom}
+              minDate={new Date()}
+              maxDate={new Date(Date.now() + 31536000000)}
+              tileDisabled={({ date, view }) =>
+              view === 'month' && 
+              bookedDates.some(bookedDate =>
+                bookedDate.getTime() <= date.getTime() &&
+                bookedDate.getTime() >= date.getTime()
+              )}
+              required
+            />
+            <DatePicker
+              onChange={setDateTo}
+              value={dateTo}
+              minDate={dateFrom}
+              maxDate={new Date(Date.now() + 31536000000)}
+              tileDisabled={({ date, view }) =>
+              view === 'month' && 
+              bookedDates.some(bookedDate =>
+                bookedDate.getTime() <= date.getTime() &&
+                bookedDate.getTime() >= date.getTime()
+              )}
+              required
+            />
+            {message && <p>{message}</p>}
+            <TextField
+              type="number"
+              label="Guests"
+              value={guests}
+              onChange={(e) => setGuests(e.target.value)}
+              required
+              style={{ margin: "20px 0px" }}
+            />
+            <Button variant="contained" type="submit">
+              Book
+            </Button>
+          </form>
+        </BookingContainer>
+      </Grid>
+    </Grid>
   );
-};
+}
 
 export default VenueBooking;

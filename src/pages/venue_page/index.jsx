@@ -15,6 +15,7 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import { useVenuePageStore } from "../../hooks/api";
 import { useSingleAPI } from "../../hooks/useSingleApi";
 import { baseURL } from "../../utilities/constants";
+import Grid from '@mui/material/Grid';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -52,24 +53,24 @@ function VenuePage() {
   }
   
   return (
-    <>
-      {data && (
-        <Card
-          sx={{ 
-            maxWidth: 745,
-            minHeight: 600,  
-            m: "1rem"
-          }}
-        >
-          <Typography variant="h2" key={data.id} sx={{ m: "1rem" }}>{data.name}</Typography>
-
-          <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-            <AutoPlaySwipeableViews
-              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-              index={activeStep}
-              onChangeIndex={handleStepChange}
-              enableMouseEvents
-            >
+    <Grid container spacing={2} justifyContent="center">
+      <Grid item xs={12} md={6}>
+        {data && (
+          <Card
+            sx={{ 
+              maxWidth: 645,
+              minHeight: 600,  
+              m: "1rem"
+            }}
+          >
+            <Typography variant="h2" key={data.id} sx={{ m: "1rem" }}>{data.name}</Typography>
+            <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+              <AutoPlaySwipeableViews
+                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                index={activeStep}
+                onChangeIndex={handleStepChange}
+                enableMouseEvents
+              >
               {data?.media?.length > 0 ? data.media.map((image, index) => (
                 <div key={index}>
                   {Math.abs(activeStep - index) <= 2 ? (
@@ -81,6 +82,7 @@ function VenuePage() {
                         maxWidth: 400,
                         overflow: 'hidden',
                         width: '100%',
+                        margin: '0 auto' // Added margin auto to center the image
                       }}
                       src={image}
                       alt={data.name}
@@ -88,64 +90,69 @@ function VenuePage() {
                   ) : null}
                 </div>
               )) : <Typography>No media available</Typography>}
-            </AutoPlaySwipeableViews>
-
-            <MobileStepper
-              steps={maxSteps}
-              position="static"
-              activeStep={activeStep}
-              nextButton={
-                <Button
-                  size="small"
-                  onClick={handleNext}
-                  disabled={activeStep === maxSteps - 1}
-                >
-                  Next
-                  {theme.direction === 'rtl' ? (
-                    <KeyboardArrowLeft />
-                  ) : (
-                    <KeyboardArrowRight />
-                  )}
-                </Button>
-              }
-              backButton={
-                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                  {theme.direction === 'rtl' ? (
-                    <KeyboardArrowRight />
-                  ) : (
-                    <KeyboardArrowLeft />
-                  )}
-                  Back
-                </Button>
-              }
-            />
-          </Box>
-
-          <CardContent>      
-            
-            <p>{data.price} Nok pr night</p>
-            <p>{data.maxGuests} Guests</p>
-            {data?.location?.city && <p>City: {data.location.city}</p>}
-            <hr />
-            <p>{data.description}</p>
-            <h3>Facilities</h3>
-            <hr />
-            <Box display="flex" flexDirection="row" justifyContent="space-around">
-              <p>Wifi: {data?.meta?.wifi?.toString()}</p>
-              <p>Breakfast: {data?.meta?.breakfast?.toString()}</p>
-              <p>Parking: {data?.meta?.parking?.toString()}</p>
-              <p>Pets: {data?.meta?.pets?.toString()}</p>
+              </AutoPlaySwipeableViews>
+              <MobileStepper
+                steps={maxSteps}
+                position="static"
+                activeStep={activeStep}
+                nextButton={
+                  <Button
+                    size="small"
+                    onClick={handleNext}
+                    disabled={activeStep === maxSteps - 1}
+                  >
+                    Next
+                    {theme.direction === 'rtl' ? (
+                      <KeyboardArrowLeft />
+                    ) : (
+                      <KeyboardArrowRight />
+                    )}
+                  </Button>
+                }
+                backButton={
+                  <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                    {theme.direction === 'rtl' ? (
+                      <KeyboardArrowRight />
+                    ) : (
+                      <KeyboardArrowLeft />
+                    )}
+                    Back
+                  </Button>
+                }
+              />
+              <CardContent>      
+                <Box display="flex" flexDirection="row" justifyContent="space-around">
+                  <p>{data.maxGuests} Guests</p>
+                  {data?.location?.city && <p>City: {data.location.city}</p>}
+                  {data?.location?.country && <p>Country: {data.location.country}</p>}
+                </Box>
+                <hr />
+                <p>{data.description}</p>
+                <h3>Facilities</h3>
+                <hr />
+                <Box display="flex" flexDirection="row" justifyContent="space-around">
+                  <p>Wifi: {data?.meta?.wifi?.toString()}</p>
+                  <p>Breakfast: {data?.meta?.breakfast?.toString()}</p>
+                  <p>Parking: {data?.meta?.parking?.toString()}</p>
+                  <p>Pets: {data?.meta?.pets?.toString()}</p>
+                </Box>
+              </CardContent>
             </Box>
-
-            <VenueBooking venueId={params.id} />  
-          </CardContent>
-        </Card>
-      )}
-    </>
+          </Card>
+        )}
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <VenueBooking venueId={params.id} />
+      </Grid>
+    </Grid>
   );
-}
+  
+    }
+    
+    export default VenuePage;
+              
+               
 
-export default VenuePage;
 
 
 
