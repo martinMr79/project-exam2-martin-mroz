@@ -10,7 +10,7 @@ export const ProfileContainer = styled.div`
   max-width: 90vw; 
 
   @media (min-width: 600px) {
-    max-width: 600px; 
+    max-width: 870px; 
   }
 `;
 
