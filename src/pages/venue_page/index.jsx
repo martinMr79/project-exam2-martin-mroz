@@ -5,10 +5,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { useVenuePageStore } from "../../hooks/api";
 import { useSingleAPI } from "../../hooks/useSingleApi";
+import { baseURL } from "../../utilities/constants";
 
 function VenuePage() {
   let params = useParams();
-  const { data, isLoading, hasError } = useSingleAPI(`https://api.noroff.dev/api/v1/holidaze/venues/${params.id}`, useVenuePageStore, [params.id]);  // added params.id as dependency
+  const { data, isLoading, hasError } = useSingleAPI(`${baseURL}venues/${params.id}`, useVenuePageStore, [params.id]); 
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -20,16 +21,20 @@ function VenuePage() {
 
     return (
       <>
+        
         {data && (
+          
           <Card
             sx={{ 
               maxWidth: 745,
-              minHeight: 600  
+              minHeight: 600,  
+              m: "1rem"
             }}
           >
+            <h2 key={data.id}>{data.name}</h2>
             {data && data.media && data.media.map((imageUrl, index) => (
               <CardMedia
-                key={index} // Use index as the key
+                key={index}
                 component="img"
                 image={imageUrl}
                 title={data.name}
@@ -37,11 +42,10 @@ function VenuePage() {
               />
             ))}
             <CardContent>      
-              <h2 key={data.id}>{data.name}</h2>        
+                      
               <p>{data.price} Nok pr night</p>
               <p>{data.description}</p>
-              
-              {/* use destructured id directly */}
+
               <VenueBooking venueId={params.id} />  
             </CardContent>
           </Card>
