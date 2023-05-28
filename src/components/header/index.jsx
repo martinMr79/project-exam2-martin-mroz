@@ -33,22 +33,15 @@ function Nav({ decodedToken }) {
         <Link to="/">
           <div>Holidaze</div>
         </Link>
-        
       </div>
-      <div>
-      {decodedToken && (
-  <Link to="/profile" className="nav-link">
-    Profile
-  </Link>
-)}
-      </div>
-
-      <MenuIcon className="menu-icon" />
+      <MenuIcon className="menu-icon" style={{ color: 'white' }} />
       <div className="right">
         {accessToken ? (
           <div className="avatar-container">
             {decodedToken && decodedToken.avatar && (
-              <Avatar alt="User Avatar" src={decodedToken.avatar} />
+              <Link to="/profile">
+                <Avatar alt="User Avatar" src={decodedToken.avatar} />
+              </Link>
             )}
             <Button onClick={handleLogout}   
               sx={{
@@ -73,11 +66,10 @@ function Nav({ decodedToken }) {
             <Menu
               id="create-account-menu"
               anchorEl={anchorEl}
-              open={open}
+              open={open} 
               onClose={handleClose}
               MenuListProps={{
                 'aria-labelledby': 'create-account-button',
-                
               }}
             >
               <MenuItem component={Link} to="/register" onClick={handleClose}>User</MenuItem>
@@ -90,5 +82,5 @@ function Nav({ decodedToken }) {
     </StyledNav>
   );
 }
-  
+
 export { Nav };
