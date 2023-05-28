@@ -52,7 +52,7 @@ Please note that you need Node.js installed on your machine to run this applicat
 
 ## Contribution
 
-If you want to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+If you want to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome, but will not be accepted untill the project have been graded. 
 
 ## Licensing
 
@@ -91,12 +91,12 @@ For advanced configuration and control over the project setup, you can use this 
 This project uses several dependencies for its functionality:
 
 - [React Router DOM](https://reactrouter.com/) - for handling routing: `npm install react-router-dom`
-- [Material UI](https://mui.com/) - for UI components: `npm install @mui/material @mui/styled-engine-sc styled-components`
-- [Zustand](https://www.npmjs.com/package/zustand) - for state management: `npm i zustand`
+- [Material UI](https://mui.com/) - for UI components: `npm install @mui/material @emotion/react @emotion/styled`
+- [Zustand](https://www.npmjs.com/package/zustand) - for state management: `npm install zustand`
 - [jwt-decode](https://www.npmjs.com/package/jwt-decode) - for decoding JWT tokens: `npm install jwt-decode`
 - [React Date Picker](https://www.npmjs.com/package/react-datepicker) - for date selection functionality: `npm install react-date-picker`
 - [Axios](https://www.npmjs.com/package/axios) - for making HTTP requests: `npm install axios`
 - [Styled Components](https://www.npmjs.com/package/styled-components) - for styling components: `npm install styled-components`
-- "react-swipeable-views": "^0.14.0",
-- "react-swipeable-views-utils": "^0.14.0",
-- "react-responsive-carousel": "^3.2.23",
+- [React Swipeable Views](https://react-swipeable-views.com/) - for mobile-friendly view swiping: `npm install react-swipeable-views`
+- [React Swipeable Views Utils](https://www.npmjs.com/package/react-swipeable-views-utils) - additional utilities for react-swipeable-views: `npm install react-swipeable-views-utils`
+- [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel) - for creating responsive carousels: `npm install react-responsive-carousel`
