@@ -17,6 +17,7 @@ import { useSingleAPI } from "../../hooks/useSingleApi";
 import { baseURL } from "../../utilities/constants";
 import Grid from '@mui/material/Grid';
 
+
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 function VenuePage() {

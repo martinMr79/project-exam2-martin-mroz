@@ -9,7 +9,7 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css'
 import Grid from "@mui/material/Grid";
 import Box from '@mui/material/Box';
-
+import './CustomDatePicker.css'
 
 const VenueBooking = ({ venueId, data }) => {
   console.log("Venue data:", data);
@@ -29,10 +29,10 @@ const VenueBooking = ({ venueId, data }) => {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
   
-        const dates = response.data.bookings.flatMap(booking => [
-          new Date(booking.dateFrom),
-          new Date(booking.dateTo),
-        ]);
+        const dates = response.data.bookings.map(booking => ({
+          dateFrom: new Date(booking.dateFrom),
+          dateTo: new Date(booking.dateTo),
+        }));
         setBookedDates(dates);
       } catch (error) {
         console.error('Failed to fetch booked dates:', error);
@@ -87,10 +87,11 @@ const VenueBooking = ({ venueId, data }) => {
             <p style={{ color: '#A9A9AC', fontSize: "" }}>PER NIGHT</p>
             <p>Available rooms!</p>
             <p style={{ marginBottom: "85px" }}>Book your stay now</p>
-        </Box>
+            </Box>
             <form onSubmit={handleBooking}>
               <h4 style={{ color: '#29D419' }}>Select dates</h4>
               <DatePicker
+                className="my-custom-datepicker"
                 onChange={setDateFrom}
                 value={dateFrom}
                 minDate={new Date()}
@@ -98,9 +99,11 @@ const VenueBooking = ({ venueId, data }) => {
                 tileDisabled={({ date, view }) =>
                 view === 'month' && 
                 bookedDates.some(bookedDate =>
-                  bookedDate.getTime() <= date.getTime() &&
-                  bookedDate.getTime() >= date.getTime()
-                )}
+                  date.getTime() >= bookedDate.dateFrom.getTime() && 
+                  date.getTime() <= bookedDate.dateTo.getTime()
+                )
+              }
+              
                 required
               />
               <DatePicker
@@ -109,11 +112,11 @@ const VenueBooking = ({ venueId, data }) => {
                 minDate={dateFrom}
                 maxDate={new Date(Date.now() + 31536000000)}
                 tileDisabled={({ date, view }) =>
-                view === 'month' && 
-                bookedDates.some(bookedDate =>
-                  bookedDate.getTime() <= date.getTime() &&
-                  bookedDate.getTime() >= date.getTime()
-                )}
+                  view === 'month' && bookedDates.some(bookedDate =>
+                    date.getTime() >= bookedDate.dateFrom.getTime() && 
+                    date.getTime() <= bookedDate.dateTo.getTime()
+                    
+                  )}
                 required
               />
               {message && <p>{message}</p>}
@@ -141,3 +144,4 @@ const VenueBooking = ({ venueId, data }) => {
 }
 
 export default VenueBooking;
+
