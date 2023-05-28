@@ -78,7 +78,6 @@ export const useVenue = (accessToken, onAddVenue) => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("Venue added:", response.data);
       onAddVenue(response.data);
       setVenue(initialState);
       setMedia(null);

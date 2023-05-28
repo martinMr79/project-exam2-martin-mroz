@@ -23,14 +23,13 @@ const LoginForm = () => {
         email,
         password,
       });
-      console.log(response);
+     
       const { email: userEmail, accessToken } = response.data;
       setEmail(userEmail);
       setAccessToken(accessToken);
       localStorage.setItem("accessToken", accessToken);
       const decodedToken = jwt_decode(accessToken);
       setDecodedToken(decodedToken);
-      console.log("Decoded token:", decodedToken);
       navigate("/");
     } catch (error) {
       setError(`Log in failed: ${error.response.data.message}`);

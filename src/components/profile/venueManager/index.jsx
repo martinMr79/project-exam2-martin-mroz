@@ -90,7 +90,6 @@ const ManagerProfile = () => {
   }, [accessToken, history]);
 
   useEffect(() => {
-    console.log(activeComponent);
   }, [activeComponent]);
 
   useEffect(() => {
