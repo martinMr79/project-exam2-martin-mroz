@@ -53,15 +53,16 @@ function VenuePage() {
   }
   
   return (
-    <Grid container spacing={2} justifyContent="center">
+    <Grid container spacing={2} direction="row" alignItems="center" justifyContent="center" flexWrap="wrap">
       
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={5}>
         {data && (
           <Card
             sx={{ 
               maxWidth: 645,
               minHeight: 600,  
-              m: "1rem"
+              m: "1rem",
+              boxShadow: 'none',
             }}
           >
           <Box 
@@ -70,7 +71,7 @@ function VenuePage() {
             alignItems="center"
             justifyContent="center"
           >
-            <Typography variant="h2" key={data.id} sx={{ m: "1rem" }}>{data.name}</Typography>
+            <Typography variant="h3" key={data.id} sx={{ m: "1rem", marginBottom: "2rem" }}>{data.name}</Typography>
             <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
               <AutoPlaySwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -84,7 +85,7 @@ function VenuePage() {
                     <Box
                       component="img"
                       sx={{
-                        height: 255,
+                        height: 355,
                         display: 'block',
                         maxWidth: 400,
                         overflow: 'hidden',

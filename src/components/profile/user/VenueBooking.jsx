@@ -9,7 +9,7 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css'
 import Grid from "@mui/material/Grid";
 import Box from '@mui/material/Box';
-import { margin } from "@mui/system";
+
 
 const VenueBooking = ({ venueId, data }) => {
   console.log("Venue data:", data);
@@ -65,63 +65,76 @@ const VenueBooking = ({ venueId, data }) => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} key={data?.id || Math.random()}>
-        <BookingContainer>
-          <Box>
-          <h3>Available</h3>
-            <p style={{ color: '#D42819', fontSize: "50px", margin: "10px" }}>NOK {String(data?.price)}</p>
+    <Grid 
+      container 
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={8} key={data?.id || Math.random()}>
+          <BookingContainer>
+          <Box style={{ 
+              border: "1px solid black", 
+              display: "flex", 
+              flexDirection: "column", 
+              alignItems: "center", 
+              justifyContent: "center"
+            }}
+          >
+            <h3 style={{ marginTop: "55px" }}>Available</h3>
+            <p style={{ color: '#D42819', fontSize: "50px", margin: "45px 85px" }}>NOK {String(data?.price)}</p>
             <p style={{ color: '#A9A9AC', fontSize: "" }}>PER NIGHT</p>
             <p>Available rooms!</p>
-            <p>Book your stay now</p>
-
-          </Box>
-          <form onSubmit={handleBooking}>
-            <h4 style={{ color: '#29D419' }}>Select dates</h4>
-            <DatePicker
-              onChange={setDateFrom}
-              value={dateFrom}
-              minDate={new Date()}
-              maxDate={new Date(Date.now() + 31536000000)}
-              tileDisabled={({ date, view }) =>
-              view === 'month' && 
-              bookedDates.some(bookedDate =>
-                bookedDate.getTime() <= date.getTime() &&
-                bookedDate.getTime() >= date.getTime()
-              )}
-              required
-            />
-            <DatePicker
-              onChange={setDateTo}
-              value={dateTo}
-              minDate={dateFrom}
-              maxDate={new Date(Date.now() + 31536000000)}
-              tileDisabled={({ date, view }) =>
-              view === 'month' && 
-              bookedDates.some(bookedDate =>
-                bookedDate.getTime() <= date.getTime() &&
-                bookedDate.getTime() >= date.getTime()
-              )}
-              required
-            />
-            {message && <p>{message}</p>}
-            <Grid item xs={12}>
-              <TextField
-                type="number"
-                label="Guests"
-                value={guests}
-                onChange={(e) => setGuests(e.target.value)}
+            <p style={{ marginBottom: "85px" }}>Book your stay now</p>
+        </Box>
+            <form onSubmit={handleBooking}>
+              <h4 style={{ color: '#29D419' }}>Select dates</h4>
+              <DatePicker
+                onChange={setDateFrom}
+                value={dateFrom}
+                minDate={new Date()}
+                maxDate={new Date(Date.now() + 31536000000)}
+                tileDisabled={({ date, view }) =>
+                view === 'month' && 
+                bookedDates.some(bookedDate =>
+                  bookedDate.getTime() <= date.getTime() &&
+                  bookedDate.getTime() >= date.getTime()
+                )}
                 required
-                style={{ margin: "20px 0px", width: "19.5rem"  }}
               />
-            </Grid>
-            <Grid item xs={12}>
-              <Button variant="contained" type="submit">
-                Book
-              </Button>
-            </Grid>
-          </form>
-        </BookingContainer>
+              <DatePicker
+                onChange={setDateTo}
+                value={dateTo}
+                minDate={dateFrom}
+                maxDate={new Date(Date.now() + 31536000000)}
+                tileDisabled={({ date, view }) =>
+                view === 'month' && 
+                bookedDates.some(bookedDate =>
+                  bookedDate.getTime() <= date.getTime() &&
+                  bookedDate.getTime() >= date.getTime()
+                )}
+                required
+              />
+              {message && <p>{message}</p>}
+              <Grid item xs={12}>
+                <TextField
+                  type="number"
+                  label="Guests"
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                  required
+                  style={{ margin: "20px 0px", width: "19.5rem"  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" type="submit">
+                  Book Now
+                </Button>
+              </Grid>
+            </form>
+          </BookingContainer>
+        </Grid>
       </Grid>
     </Grid>
   );
