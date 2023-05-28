@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 
 const ViewBookings = ({ bookings }) => {
     return (
-        <Container>
+        <Container style={{ padding: "0px"  }}>
             <h2>Your Bookings:</h2>
             <CardContainer>
                 {bookings.map((booking) => {
@@ -31,7 +31,7 @@ const ViewBookings = ({ bookings }) => {
                                     height: '300px',
                                     width: '300px',
                                     objectFit: 'cover',
-                                    m: '1.5rem'
+                                    marginTop: '1.5rem'
                                 }}
                             />
                             <CardContent>

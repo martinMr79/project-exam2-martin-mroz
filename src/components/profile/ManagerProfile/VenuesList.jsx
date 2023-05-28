@@ -27,7 +27,7 @@ const VenueItem = ({ venue, onUpdate, onDelete, accessToken }) => {
           height: '300px',
           width: '300px',
           objectFit: 'cover',
-          m: '1.5rem'
+          marginTop: '1.5rem'
         }}
       />
       <CardContent 
@@ -65,7 +65,7 @@ const VenuesList = ({ accessToken, venues, setVenues, onUpdateVenue }) => {
   };
 
   return (
-    <Container>
+    <Container style={{ padding: "0" }}>
       <h2>Managed Venues</h2>
       {error && <p>Error: {error}</p>}
       <CardContainer>
