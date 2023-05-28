@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../utilities/constants";
 import { FormContainer } from "./styled";
-
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import useAuthStore from "../../hooks/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 const RegisterCustomerForm = () => {
+  const setAccessToken = useAuthStore((state) => state.setAccessToken);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [avatar, setAvatar] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,18 +36,31 @@ const RegisterCustomerForm = () => {
         }
       );
       console.log(response.data);
-      setError("Registration successful!");
+
+      // Log in the user
+      const loginResponse = await axios.post(`${baseURL}auth/login`, {
+        email: email,
+        password: password,
+      });
+        
+      if (loginResponse.status === 200) {
+        setAccessToken(loginResponse.data.accessToken);
+        navigate("/"); // Navigate to the home page
+      } else {
+        setError("Login failed");
+      }
+
     } catch (error) {
       setError(`Registration failed: ${error.response.data.message}`);
     }
   };
+
 
   return (
     <FormContainer>
     
       {error && <Alert severity="error">{error}</Alert>}
       <form onSubmit={handleSubmit}>
-        
     
           <TextField type="text" label="Name" value={name} onChange={(e) => setName(e.target.value)} style={{ marginBottom: '10px' }} />
         <br />
