@@ -52,40 +52,42 @@ function Nav({ decodedToken }) {
             </Button>
           </div>
         ) : (
-          <Link to="/login">Log in</Link>
+          <>
+            <Link to="/login">Log in</Link>
+            <Link to="/register">Register</Link>
+          </>
         )}
 
-<Menu
-  id="create-account-menu"
-  anchorEl={anchorEl}
-  open={open} 
-  onClose={handleClose}
-  MenuListProps={{
-    'aria-labelledby': 'create-account-button',
-  }}
-  transformOrigin={{
-    vertical: 'top',
-    horizontal: 'right',
-  }}
->
-  {accessToken ? (
-    <>
-      <MenuItem component={Link} to="/profile" onClick={handleClose}>Profile</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-    </>
-  ) : (
-    <>
-      <MenuItem onClick={handleClose} component={Link} to="/login">Log In</MenuItem>
-      <MenuItem component={Link} to="/register" onClick={handleClose}>User</MenuItem>
-      <MenuItem component={Link} to="/registerManager" onClick={handleClose}>Venue Manager</MenuItem>
-    </>
-  )}
-</Menu>
-
+        <Menu
+          id="create-account-menu"
+          anchorEl={anchorEl}
+          open={open} 
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'create-account-button',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          {accessToken ? (
+            <>
+              <MenuItem component={Link} to="/profile" onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </>
+          ) : (
+            <>
+              <MenuItem component={Link} to="/register" onClick={handleClose}>Register</MenuItem>
+              <MenuItem component={Link} to="/login" onClick={handleClose}>Log In</MenuItem>
+            </>
+          )}
+        </Menu>
       </div>
     </StyledNav>
   );
 }
 
 export { Nav };
+
 
