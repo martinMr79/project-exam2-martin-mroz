@@ -6,8 +6,6 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import { useVenue } from "../hooks/useVenue";
 
-
-
 const VenueForm = ({ accessToken, onAddVenue }) => {
   const { venue, handleVenueChange, handleAddVenue, addMediaInput, handleMediaChange } = useVenue(accessToken, onAddVenue);
   
