@@ -37,7 +37,7 @@ const RegisterVenueManagerForm = () => {
       );
       console.log(response.data);
 
-      // Log in the user
+      
       const loginResponse = await axios.post(`${baseURL}auth/login`, {
         email: email,
         password: password,
@@ -45,7 +45,7 @@ const RegisterVenueManagerForm = () => {
 
       if (loginResponse.status === 200) {
         setAccessToken(loginResponse.data.accessToken);
-        navigate("/"); // Navigate to the home page
+        navigate("/"); 
       } else {
         setError("Login failed");
       }
