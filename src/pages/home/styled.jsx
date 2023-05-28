@@ -45,7 +45,7 @@ export const CardContainer = styled.div`
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  @media (min-width: 1380px) {
+  @media (min-width: 1400px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 `;
