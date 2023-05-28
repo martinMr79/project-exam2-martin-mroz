@@ -4,12 +4,12 @@
 
 .react-calendar__tile--enable > button {
     opacity: 1 !important;
-    color: -internal-light-dark(black, white) !important;  /* Adjust as needed */
+    color: -internal-light-dark(black, white) !important;  
     background-color: transparent !important;
     border-color: transparent !important;
 }
 
 .my-custom-datepicker .react-calendar {
-    opacity: 1 !important; /* Override opacity */
-    /* Other styles */
+    opacity: 1 !important; 
+  
   }
