@@ -75,6 +75,7 @@ function Nav({ decodedToken }) {
     </>
   ) : (
     <>
+      <MenuItem onClick={handleClose} component={Link} to="/login">Log In</MenuItem>
       <MenuItem component={Link} to="/register" onClick={handleClose}>User</MenuItem>
       <MenuItem component={Link} to="/registerManager" onClick={handleClose}>Venue Manager</MenuItem>
     </>
@@ -87,3 +88,4 @@ function Nav({ decodedToken }) {
 }
 
 export { Nav };
+
