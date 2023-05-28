@@ -55,6 +55,7 @@ function Nav({ decodedToken }) {
           <>
             <Link to="/login">Log in</Link>
             <Link to="/register">Register</Link>
+            <Link to="/registerManager">Register as Manager</Link>
           </>
         )}
 
@@ -79,6 +80,7 @@ function Nav({ decodedToken }) {
           ) : (
             <>
               <MenuItem component={Link} to="/register" onClick={handleClose}>Register</MenuItem>
+              <MenuItem component={Link} to="/registerManager" onClick={handleClose}>Register as Manager</MenuItem>
               <MenuItem component={Link} to="/login" onClick={handleClose}>Log In</MenuItem>
             </>
           )}
@@ -89,5 +91,6 @@ function Nav({ decodedToken }) {
 }
 
 export { Nav };
+
 
 

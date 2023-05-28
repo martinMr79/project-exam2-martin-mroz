@@ -11,7 +11,6 @@ import User from "./components/profile/user";
 import ManagerProfile from "./components/profile/venueManager";
 import useAuthStore from "./hooks/useAuthStore";
 
-
 function App() {
   const { decodedToken, clearAccessToken } = useAuthStore();
 
@@ -24,7 +23,7 @@ function App() {
     if (!decodedToken) {
       return <LoginPage />;
     }
-  
+
     return decodedToken.venueManager ? (
       <ManagerProfile decodedToken={decodedToken} handleLogout={handleLogout} />
     ) : (
@@ -36,15 +35,16 @@ function App() {
     <BrowserRouter>
       <Nav decodedToken={decodedToken} />
       <Routes>
-        <Route index element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="venues/:id" element={<VenuePage />} />
-        <Route path="register/" element={<RegisterCustomerForm />} />
-        <Route path="registerManager/" element={<RegisterVenueManagerForm />} />
-        <Route path="login/" element={<LoginPage />} />
-        <Route path="profile/" element={renderProfile()} />
+        <Route path="register" element={<RegisterCustomerForm />} />
+        <Route path="registerManager" element={<RegisterVenueManagerForm />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="profile" element={renderProfile()} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
