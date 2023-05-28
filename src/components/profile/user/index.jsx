@@ -85,7 +85,7 @@ const UserProfile = ({ handleLogout }) => {
                 fullWidth
                 sx={{
                   mt: "2rem",
-                  width: "38rem"
+                  maxWidth: "38rem"
                 }}
               />
             </TextFieldContainer>

@@ -37,15 +37,15 @@ export const CardContainer = styled.div`
   z-index: 1;
   margin-top: 2rem;
 
-  @media (min-width: 640px) {
+  @media (min-width: 680px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1050px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1380px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 `;

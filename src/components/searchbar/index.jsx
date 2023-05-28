@@ -71,7 +71,7 @@ const SearchBar = () => {
               borderRadius: 5, 
               maxWidth: "100%", 
               width: "100%", 
-              '@media (min-width: 500px)': { 
+              '@media (min-width: 700px)': { 
                 width: '30rem', 
               },
             }}
