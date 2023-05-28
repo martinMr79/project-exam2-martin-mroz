@@ -12,8 +12,6 @@ import Box from '@mui/material/Box';
 import './CustomDatePicker.css'
 
 const VenueBooking = ({ venueId, data }) => {
-  console.log("Venue data:", data);
-  console.log("Venue price:", data?.price);
  
   const { accessToken } = useAuthStore();
   const [dateFrom, setDateFrom] = useState(new Date());

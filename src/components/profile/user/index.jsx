@@ -99,7 +99,6 @@ const UserProfile = ({ handleLogout }) => {
             <Container>
               <h2>Your Bookings:</h2>
               <CardContainer>
-                {console.log(bookings)}
               {bookings.map((booking) => {
                const fromDate = new Date(booking.dateFrom);
                const toDate = new Date(booking.dateTo);

@@ -89,9 +89,16 @@ const ManagerProfile = () => {
     }
   }, [accessToken, history]);
 
-  useEffect(() => {
-    console.log(activeComponent);
-  }, [activeComponent]);
+useEffect(() => {
+  if (activeComponent === "myVenues") {
+    const initialiseVenues = async () => {
+      const fetchedVenues = await fetchVenues();
+      setVenues(fetchedVenues);
+    };
+
+    initialiseVenues();
+  }
+}, [activeComponent, fetchVenues]); 
 
   useEffect(() => {
     const fetchBookings = async () => {

@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../utilities/constants";
 import { FormContainer } from "./styled";
-
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import useAuthStore from "../../hooks/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
-  const RegisterVenueManagerForm = () => {
+const RegisterVenueManagerForm = () => {
+  const setAccessToken = useAuthStore((state) => state.setAccessToken);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [avatar, setAvatar] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const submitForm = async (event) => {
     event.preventDefault();
@@ -33,7 +36,20 @@ import Button from '@mui/material/Button';
         }
       );
       console.log(response.data);
-      setError("Registration successful!");
+
+      
+      const loginResponse = await axios.post(`${baseURL}auth/login`, {
+        email: email,
+        password: password,
+      });
+
+      if (loginResponse.status === 200) {
+        setAccessToken(loginResponse.data.accessToken);
+        navigate("/"); 
+      } else {
+        setError("Login failed");
+      }
+
     } catch (error) {
       setError(`Registration failed: ${error.response.data.message}`);
     }
