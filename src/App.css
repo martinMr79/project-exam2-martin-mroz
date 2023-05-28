@@ -3,7 +3,16 @@
   src: url('../public/fonts/Trade_Gothic_Font/Trade Gothic LT.ttf') format('truetype');
 }
 
-p, a, button {
+@font-face {
+  font-family: 'Clarendon-Regular';
+  src: url('../public/fonts/Clarendon-Regular.ttf') format('truetype');
+}
+
+p, a, h2, h3, h4, button {
   font-family: 'Trade Gothic', sans-serif;
 } 
 
+h1 {
+
+  font-family: 'Clarendon-Regular', serif;
+}
