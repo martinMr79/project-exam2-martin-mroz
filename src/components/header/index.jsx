@@ -34,7 +34,7 @@ function Nav({ decodedToken }) {
           <div>Holidaze</div>
         </Link>
       </div>
-      <MenuIcon className="menu-icon" style={{ color: 'white' }} />
+      <MenuIcon className="menu-icon" style={{ color: 'white' }} onClick={handleClick}/>
       <div className="right">
         {accessToken ? (
           <div className="avatar-container">
@@ -52,32 +52,35 @@ function Nav({ decodedToken }) {
             </Button>
           </div>
         ) : (
-          <>
-            <Link to="/login">Log in</Link>
-            <Button 
-              id="create-account-button"
-              sx={{
-                color: 'white'
-              }}
-              onClick={handleClick}
-            >
-              Create account
-            </Button>
-            <Menu
-              id="create-account-menu"
-              anchorEl={anchorEl}
-              open={open} 
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'create-account-button',
-              }}
-            >
-              <MenuItem component={Link} to="/register" onClick={handleClose}>User</MenuItem>
-              <MenuItem component={Link} to="/registerManager" onClick={handleClose}>Venue Manager</MenuItem>
-
-            </Menu>
-          </>
+          <Link to="/login">Log in</Link>
         )}
+
+<Menu
+  id="create-account-menu"
+  anchorEl={anchorEl}
+  open={open} 
+  onClose={handleClose}
+  MenuListProps={{
+    'aria-labelledby': 'create-account-button',
+  }}
+  transformOrigin={{
+    vertical: 'top',
+    horizontal: 'right',
+  }}
+>
+  {accessToken ? (
+    <>
+      <MenuItem component={Link} to="/profile" onClick={handleClose}>Profile</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+    </>
+  ) : (
+    <>
+      <MenuItem component={Link} to="/register" onClick={handleClose}>User</MenuItem>
+      <MenuItem component={Link} to="/registerManager" onClick={handleClose}>Venue Manager</MenuItem>
+    </>
+  )}
+</Menu>
+
       </div>
     </StyledNav>
   );
