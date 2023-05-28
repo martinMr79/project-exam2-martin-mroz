@@ -10,6 +10,8 @@ import { Nav } from "./components/header";
 import User from "./components/profile/user";
 import ManagerProfile from "./components/profile/venueManager";
 import useAuthStore from "./hooks/useAuthStore";
+import './App.css';
+
 
 function App() {
   const { decodedToken, clearAccessToken } = useAuthStore();
