@@ -33,22 +33,15 @@ function Nav({ decodedToken }) {
         <Link to="/">
           <div>Holidaze</div>
         </Link>
-        
       </div>
-      <div>
-      {decodedToken && (
-  <Link to="/profile" className="nav-link">
-    Profile
-  </Link>
-)}
-      </div>
-
-      <MenuIcon className="menu-icon" />
+      <MenuIcon className="menu-icon" style={{ color: 'white' }} onClick={handleClick}/>
       <div className="right">
         {accessToken ? (
           <div className="avatar-container">
             {decodedToken && decodedToken.avatar && (
-              <Avatar alt="User Avatar" src={decodedToken.avatar} />
+              <Link to="/profile">
+                <Avatar alt="User Avatar" src={decodedToken.avatar} />
+              </Link>
             )}
             <Button onClick={handleLogout}   
               sx={{
@@ -61,34 +54,40 @@ function Nav({ decodedToken }) {
         ) : (
           <>
             <Link to="/login">Log in</Link>
-            <Button 
-              id="create-account-button"
-              sx={{
-                color: 'white'
-              }}
-              onClick={handleClick}
-            >
-              Create account
-            </Button>
-            <Menu
-              id="create-account-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'create-account-button',
-                
-              }}
-            >
-              <MenuItem component={Link} to="/register" onClick={handleClose}>User</MenuItem>
-              <MenuItem component={Link} to="/registerManager" onClick={handleClose}>Venue Manager</MenuItem>
-
-            </Menu>
+            <Link to="/register">Register</Link>
           </>
         )}
+
+        <Menu
+          id="create-account-menu"
+          anchorEl={anchorEl}
+          open={open} 
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'create-account-button',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          {accessToken ? (
+            <>
+              <MenuItem component={Link} to="/profile" onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </>
+          ) : (
+            <>
+              <MenuItem component={Link} to="/register" onClick={handleClose}>Register</MenuItem>
+              <MenuItem component={Link} to="/login" onClick={handleClose}>Log In</MenuItem>
+            </>
+          )}
+        </Menu>
       </div>
     </StyledNav>
   );
 }
-  
+
 export { Nav };
+
+

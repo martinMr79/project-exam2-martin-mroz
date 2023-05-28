@@ -53,7 +53,7 @@ export const StyledNav = styled.nav`
     }
   }
 }
-
+ 
 .nav-link {
       color: white; 
       font-family: 'Trade Gothic LT', sans-serif;

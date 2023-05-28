@@ -71,7 +71,7 @@ export function Home() {
                       height: '300px',
                       width: '300px',
                       objectFit: 'cover',
-                      m: '1.5rem'
+                      marginTop: '1.5rem'
                     }}
                   />
 <CardContent>      

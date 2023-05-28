@@ -44,7 +44,7 @@ import Button from '@mui/material/Button';
     
     <FormContainer>
       
-      <h1>Become a Holidaze partner today</h1>
+      <h1 style={{ margin: "0.5rem" }}>Become a Holidaze partner today</h1>
 
       {error && <Alert severity="error">{error}</Alert>}
       <form onSubmit={submitForm}>
