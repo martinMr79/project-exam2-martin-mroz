@@ -55,7 +55,7 @@ const VenueBooking = ({ venueId, data }) => {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
-     
+      console.log(response);
       setMessage(`Booking successful! You have booked the venue from ${dateFrom} to ${dateTo} for ${guests} guests.`);
     } catch (error) {
       setMessage(`Booking failed: ${error.response.data.message}`);

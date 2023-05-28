@@ -32,6 +32,7 @@ const RegisterCustomerForm = () => {
           venueManager: false,
         }
       );
+      console.log(response.data);
       setError("Registration successful!");
     } catch (error) {
       setError(`Registration failed: ${error.response.data.message}`);
