@@ -1,6 +1,6 @@
 # Holidaze Accommodation Booking Site
 
-![Front Page](src/assets/images/Gantt-Chart.PNG)
+![Front Page](src/assets/images/Holidaze.PNG)
 
 Holidaze is a modern, user-friendly accommodation booking site that connects users with their ideal holiday venues. With a sleek front end design, Holidaze offers seamless navigation and functionality, ensuring an enjoyable booking experience. The platform also includes an admin-facing side where registered users can manage venues and bookings efficiently.
 <br/>  
