@@ -77,18 +77,20 @@ const SearchBar = () => {
             }}
           />
           {searchResults.length ? (
-            <StyledResults>
-              <ul>
-                {searchResults.map((venue) => (
-                  <li key={venue.id}>
-                    <div>
-                    <img src={venue.media[0]} alt={`${venue.name}`} />
-                      <Link to={`/venues/${venue.id}`}>{venue.name}</Link>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </StyledResults>
+  <StyledResults>
+  <ul>
+    {searchResults
+      .filter((venue) => venue.media && venue.media.length > 0) 
+      .map((venue) => (
+        <li key={venue.id}>
+          <div>
+            <img src={venue.media[0]} alt={`${venue.name}`} />
+            <Link to={`/venues/${venue.id}`}>{venue.name}</Link>
+          </div>
+        </li>
+      ))}
+  </ul>
+</StyledResults>
           ) : (
             searchTerm.length >= 2 && <div>No results found</div>
           )}
