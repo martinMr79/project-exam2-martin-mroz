@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { styled } from '@mui/system';
-import { SearchBarWrapper } from './styled';
+import { SearchBarWrapper, StyledResults } from './styled';
 import { useHomeStore } from '../../hooks/api'; 
 import { baseURL } from '../../utilities/constants';
 
@@ -52,8 +52,8 @@ const SearchBar = () => {
     <ParentContainer>
       <SearchBarWrapper>
         <Box
-          sx={{ 
-            backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+          sx={{
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
             px: "3rem",
             py: "2rem",
             borderRadius: 5,
@@ -68,25 +68,28 @@ const SearchBar = () => {
             sx={{
               color: "black",
               backgroundColor: 'white',
-              borderRadius: 5, 
-              maxWidth: "100%", 
-              width: "100%", 
-              '@media (min-width: 700px)': { 
-                width: '30rem', 
+              borderRadius: 5,
+              maxWidth: "100%",
+              width: "100%",
+              '@media (min-width: 700px)': {
+                width: '30rem',
               },
             }}
           />
           {searchResults.length ? (
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              {searchResults.map((venue) => (
-                <li key={venue.id}>
-                  <Link to={`/venues/${venue.id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                    {venue.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (             
+            <StyledResults>
+              <ul>
+                {searchResults.map((venue) => (
+                  <li key={venue.id}>
+                    <div>
+                    <img src={venue.media[0]} alt={`${venue.name}`} />
+                      <Link to={`/venues/${venue.id}`}>{venue.name}</Link>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </StyledResults>
+          ) : (
             searchTerm.length >= 2 && <div>No results found</div>
           )}
         </Box>
