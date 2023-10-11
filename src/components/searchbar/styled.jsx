@@ -10,21 +10,16 @@ export const SearchBarWrapper = styled.div`
 
 export const StyledResults = styled.div `
 
-container {
-    display: flex; 
-    align-items: center;
-    justify-content: center; 
-}
 
 div {
     background-color: #F2F2F2;
     height: 100px;
-    width: 300px;
+    width: 400px;
     padding: 15px; 
     margin-right: 40px;
     display: flex; 
     align-items: center;
-    margin-top: -17px;
+    margin-top: -16px;
     border: 2px solid grey;
     z-index: 99;
 }
@@ -33,6 +28,7 @@ div {
     text-decoration: none; 
     display: inline-block;
     list-style-type: none;
+    padding: 0; 
 };
     
 
@@ -45,7 +41,8 @@ div {
 
 img {
     height: 60px;
-    padding-right: 5px;
+    width: 60px;
+    padding-right: 15px;
    
 }
 
