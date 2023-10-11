@@ -16,7 +16,6 @@ div {
     height: 100px;
     width: 400px;
     padding: 15px; 
-    margin-right: 40px;
     display: flex; 
     align-items: center;
     margin-top: -12px;
