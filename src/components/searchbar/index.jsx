@@ -84,12 +84,14 @@ const SearchBar = () => {
     {searchResults
       .filter((venue) => venue.media && venue.media.length > 0) 
       .map((venue) => (
+        <Link to={`/venues/${venue.id}`} >    
         <li key={venue.id}>
           <div>
             <img src={venue.media[0]} alt={`${venue.name}`} />
-            <Link to={`/venues/${venue.id}`}>{venue.name}</Link>
+            {venue.name} {venue.price} Nok
           </div>
         </li>
+        </Link>
       ))}
   </ul>
 </StyledResults>
