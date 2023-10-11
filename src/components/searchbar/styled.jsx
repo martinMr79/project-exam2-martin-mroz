@@ -19,9 +19,10 @@ div {
     margin-right: 40px;
     display: flex; 
     align-items: center;
-    margin-top: -16px;
+    margin-top: -12px;
     border: 2px solid grey;
     z-index: 99;
+    
 }
 
  ul {
@@ -50,6 +51,7 @@ a {
     color: black;
     text-decoration: none; 
     list-style-type: none;
+    
 }
 
 `

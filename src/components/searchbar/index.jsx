@@ -72,7 +72,7 @@ const SearchBar = () => {
               maxWidth: "100%",
               width: "100%",
               '@media (min-width: 700px)': {
-                width: '30rem',
+                width: '27rem',
               },
             }}
           />
