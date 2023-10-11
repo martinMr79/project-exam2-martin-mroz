@@ -11,9 +11,9 @@ const ParentContainer = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center', 
   minHeight: '180px',
   width: '60rem', 
+
 });
 
 

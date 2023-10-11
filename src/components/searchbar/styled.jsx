@@ -12,15 +12,21 @@ export const SearchContainer = styled.div`
 
 
 export const StyledResults = styled.div `
-
-position: absolute;  /* Added this */
-  top: 100%;  /* Positioned right below the search bar */
-  width: 100%;  /* Take the full width of the parent */
-  z-index: 100;  /* To ensure it's above other content */
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0; 
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  box-sizing: border-box;
+   
+  
+  
 
 div {
     background-color: #F2F2F2;
-    height: 100px;
+    height: 90px;
     width: 100%; 
     padding: 15px; 
     display: flex; 
@@ -30,21 +36,28 @@ div {
     
 }
 
- ul {
-    text-decoration: none; 
-    display: inline-block;
+ul {
+    width: 100%;
     list-style-type: none;
-    padding: 0; 
-    margin-top: -28px;
-};
-    
-
-  li {  
-    font-size: 1.1em;
-    display: flex; 
+    padding: 0;
+    margin: 0;  
+    box-sizing: border-box;
+  }
+  
+  li {
+    width: 100%;
+    display: flex;
     align-items: center;
+    box-sizing: border-box;
     
-}
+    & > div {
+      width: 100%;
+      
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+    }
+  }
 
 img {
     height: 60px;
@@ -57,7 +70,6 @@ a {
     color: black;
     text-decoration: none; 
     list-style-type: none;
-    
 }
 
 `
