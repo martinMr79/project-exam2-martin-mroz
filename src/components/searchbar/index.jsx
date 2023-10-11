@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { styled } from '@mui/system';
-import { SearchBarWrapper, StyledResults } from './styled';
+import { SearchContainer, StyledResults } from './styled';
 import { useHomeStore } from '../../hooks/api'; 
 import { baseURL } from '../../utilities/constants';
 
@@ -11,9 +11,11 @@ const ParentContainer = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  justifyContent: 'center', 
   minHeight: '180px',
   width: '60rem', 
 });
+
 
 const SearchBar = () => {
   const { data, isLoading, isError, fetchData } = useHomeStore();
@@ -50,7 +52,7 @@ const SearchBar = () => {
 
   return (
     <ParentContainer>
-      <SearchBarWrapper>
+      <SearchContainer>
         <Box
           sx={{
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -68,7 +70,7 @@ const SearchBar = () => {
             sx={{
               color: "black",
               backgroundColor: 'white',
-              borderRadius: 5,
+              borderRadius: 2,
               maxWidth: "100%",
               width: "100%",
               '@media (min-width: 700px)': {
@@ -95,7 +97,7 @@ const SearchBar = () => {
             searchTerm.length >= 2 && <div>No results found</div>
           )}
         </Box>
-      </SearchBarWrapper>
+        </SearchContainer>
     </ParentContainer>
   );
 }
