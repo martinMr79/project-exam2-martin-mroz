@@ -70,7 +70,7 @@ const VenueBooking = ({ venueId, data }) => {
       alignItems="center"
     >
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={6} key={data?.id || Math.random()}>
+        <Grid item xs={12} sm={12} md={12} lg={6} key={data?.id || Math.random()}>
           <BookingContainer>
           <Box style={{ 
               border: "1px solid black", 
