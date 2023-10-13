@@ -59,7 +59,7 @@ export function Home() {
                 <Card 
                   sx={{ 
                     maxWidth: 345,
-                    minHeight: 600
+                    minHeight: 550
                   }}
                 >
                   <CardMedia
@@ -74,14 +74,14 @@ export function Home() {
                       marginTop: '1.5rem'
                     }}
                   />
-<CardContent>      
-  <h2 key={venue.id}>{venue.name}</h2>
-  <p>{venue.location.city} {venue.location.country}</p>
-  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-    <p>{venue.price} Nok pr night</p>
-    <p>Max Guests: {venue.maxGuests}</p>
-  </div>
-</CardContent>
+                  <CardContent>      
+                    <h2 key={venue.id}>{venue.name}</h2>
+                    <p>{venue.location.city} {venue.location.country}</p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <p>{venue.price} Nok pr night</p>
+                      <p>Max Guests: {venue.maxGuests}</p>
+                    </div>
+                  </CardContent>
                 </Card>
               </Link>
             );

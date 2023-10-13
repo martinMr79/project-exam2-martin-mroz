@@ -56,7 +56,7 @@ function VenuePage() {
   return (
     <Grid container spacing={2} direction="row" alignItems="center" justifyContent="center" flexWrap="wrap">
       
-      <Grid item xs={12} md={5}>
+      <Grid item xs={12} sm={6} md={6}>
         {data && (
           <Card
             sx={{ 
@@ -151,7 +151,7 @@ function VenuePage() {
           </Card>
         )}
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} sm={6} md={6}>
        <VenueBooking venueId={params.id} data={data} />
       </Grid>
     </Grid>
