@@ -70,7 +70,7 @@ const VenueBooking = ({ venueId, data }) => {
       alignItems="center"
     >
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={8} key={data?.id || Math.random()}>
+        <Grid item xs={12} sm={6} md={6} key={data?.id || Math.random()}>
           <BookingContainer>
           <Box style={{ 
               border: "1px solid black", 
@@ -118,7 +118,7 @@ const VenueBooking = ({ venueId, data }) => {
                 required
               />
               {message && <p>{message}</p>}
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6} md={6}>
                 <TextField
                   type="number"
                   label="Guests"
@@ -128,7 +128,7 @@ const VenueBooking = ({ venueId, data }) => {
                   style={{ margin: "20px 0px", width: "19.5rem"  }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6} md={6}>
                 <Button variant="contained" type="submit">
                   Book Now
                 </Button>
